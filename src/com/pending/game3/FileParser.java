@@ -600,6 +600,7 @@ class FileParser {
                                                 return true;
                                         }
                                 }
+                                recipes.add(craftingRecipe);
                         }
                 } else {
                         System.out.println("Crafting Recipes must be a JSON array.");

@@ -83,8 +83,8 @@ class Game3 {
         return instance.npcs;
     }
 
-    public static CraftingRecipe[] getCraftingRecipes() {
-        return (CraftingRecipe[])instance.fileParser.recipes.toArray();
+    public static List<CraftingRecipe> getCraftingRecipes() {
+        return instance.fileParser.recipes;
     }
 
 
@@ -147,19 +147,23 @@ class Game3 {
             }
             //if any NPC doesn't match required tags, false
             boolean npcsCheck = true;
-            for (Npc npc : ec.npcReq){
-                for(String tagName : npc.getFlags().keySet()){
-                    if(!npc.getFlags().containsKey(tagName)){
-                        npcsCheck = false;
-                        break;
+            if(ec.npcReq != null) {
+                for (Npc npc : ec.npcReq) {
+                    for (String tagName : npc.getFlags().keySet()) {
+                        if (!npc.getFlags().containsKey(tagName)) {
+                            npcsCheck = false;
+                            break;
+                        }
                     }
                 }
             }
             //if any item not in inventory, false
             boolean itemsCheck = true;
-            for(String item : ec.itemReq){
-                if(!inventory.contains(item)){
-                    itemsCheck = false;
+            if(ec.itemReq != null) {
+                for (String item : ec.itemReq) {
+                    if (!inventory.contains(item)) {
+                        itemsCheck = false;
+                    }
                 }
             }
             if (roomCheck && npcsCheck && itemsCheck){
@@ -170,6 +174,7 @@ class Game3 {
                 }
                 //TODO: add EndCondition text here.
                 System.out.println();
+                return true;
             }
         }
         return false;
