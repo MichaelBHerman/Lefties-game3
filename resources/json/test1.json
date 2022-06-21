@@ -1,0 +1,712 @@
+{
+  "Rooms": [
+    {
+      "Name": "Examination Room",
+      "Display Name": "Examination Room",
+      "Effect Tags": [
+        {
+          "Tag Name": "",
+          "Tag Data": []
+        }
+      ],
+      "Description": "What appears to be an examination room with three walls, one of which is curved outward and has a door in it. In this hospital-like room you also notice some advanced looking medical equipment. \nNext to the examination table you woke up on is a surgical instrument trolley with a keycard on it, and some type of body scanning device. In the cabinets on the wall there is something that resembles medicine",
+      "Items": ["Key Card", "Body-Scanning Device", "Medicine", "Greenprints projector do-hickey", "Surgical Instrument Trolley"],
+      "Connected Rooms": [
+        {
+          "Outward": "Hallway1"
+        }
+      ]
+    },
+    {
+      "Name": "Engine Room",
+      "Display Name": "Engine Room",
+      "Effect Tags": [
+        {
+          "Tag Name": "",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "A large space with a multi-colored glow, the walls are full of electronics arrays, there are tanks around the room filled with some type of fluid. \nThere are two piping loops that link together for some reason.",
+      "Items": ["Spectrographic protoplasm", "Power Control Panel", "Advanced Electronic Panels", "Coolant Tanks", "Hand-wavium fusion/fission reactor loop"],
+      "Connected Rooms": [
+        {
+          "Outward": "Hallway2"
+        }
+      ]
+    },
+    {
+      "Name": "Bridge",
+      "Display Name": "Bridge",
+      "Effect Tags": [
+        {
+          "Tag Name": "",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "A room that appears to be where the ship is steered from. There are a few instrument panels that look like they may be used for navigation. One area appears to be dedicated to piloting a ship, \nit has a comfy chair, extra electronic arrays around it and what appears to be controls for piloting the ship.",
+      "Items": ["Navigation Console", "Pilot Chair"],
+      "Connected Rooms": [
+        {
+          "Outward": "Hallway3"
+        }
+      ]
+    },
+    {
+      "Name": "Waste Excretion Facility",
+      "Display Name": "Waste Excretion Facility",
+      "Effect Tags": [
+        {
+          "Tag Name": "",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "This room resembles a bathroom in some ways. Though more advanced and oddly a bit more dangerous",
+      "Items": ["Excrement Purge Vessels", "Sanitation Vessels", "Communication buffer GUI", "Sterilization Facility"],
+      "Connected Rooms": [
+        {
+          "Inward": "Hallway4"
+        }
+      ]
+    },
+    {
+      "Name": "Nutrient Paste Dispensary",
+      "Display Name": "Nutrient Paste Dispensary",
+      "Effect Tags": [
+        {
+          "Tag Name": "",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "A large Cafeteria-style room, there is one large oval shaped station with 2 types of dispensing machines. The room has a band, and vending machines, and something that clearly resembles a bar.",
+      "Items": ["Alien Cow Milk Dispenser", "Alien Vending Machine", "Alien band playing music", "Alien Bar" ],
+      "Connected Rooms": [
+        {
+          "Inward": "Hallway4"
+        }
+      ]
+    },
+    {
+      "Name": "Specimen Storage",
+      "Display Name": "Specimen Storage",
+      "Effect Tags": [
+        {
+          "Tag Name": "",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "A room full of tanks filled with green goop with what can contain different life-forms, some familiar, some unfamiliar",
+      "Items": ["Specimen Tanks", "Springy Thingy"],
+      "Connected Rooms": [
+        {"Inward" :  "Hallway1"}
+      ]
+    },
+    {
+      "Name": "Crews Quarters",
+      "Display Name": "Crews Quarters",
+      "Effect Tags": [
+        {
+          "Tag Name": "Crafting",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "A cramped room with columns of sleep pods stacked 3 high lining the walls. There are storage lockers in-between each column that appear to house personal belongings. \nThere is a single vid-screen along one of the walls squeezed between sleep pod columns and a small work bench of some kind squeezed into the only leftover space in the room.",
+      "Items": ["Foot-lockers", "Sleep-Pods", "Vid-Screen", "Nanofactory"],
+      "Connected Rooms": [
+        {
+          "Inward": "Hallway1"
+        }
+      ]
+    },
+    {
+      "Name": "Officers Quarters",
+      "Display Name": "Officers Quarters",
+      "Effect Tags": [
+        {
+          "Tag Name": "",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "A larger room with 2 sleep pods, 2 desks, and 2 vid-screens. The overall quality of this room seems better.",
+      "Items": ["Foot-lockers", "Sleep-Pods", "Vid-Screen", "Arcanospanner"],
+      "Connected Rooms": [
+        {
+          "Inward": "Hallway2"
+        }
+      ]
+    },
+    {
+      "Name": "Shuttle Bay",
+      "Display Name": "Shuttle Bay",
+      "Effect Tags": [
+        {
+          "Tag Name": "",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "A large open cargo-bay like space. There are smaller, shiny spacecraft in here. There are robots moving around cargo stacking some kind of containers, and maintaining the spacecraft. \nOn the far end of the hangar there is a Control Panel with a lot of lights.",
+      "Items": ["Shiny Spacecraft", "Unicorn Fart fuel cells", "Space Crates", "Robot Workers", "Control Panel"],
+      "Connected Rooms": [
+        {
+          "Inward left": "Hallway2"
+        },
+        {
+          "Inward right": "Hallway3"
+        }
+      ]
+    },
+
+    {
+      "Name": "Hallway1",
+      "Display Name": "Hallway",
+      "Effect Tags": [
+        {
+          "Tag Name": "Locked",
+          "Tag Data": ["Key1"]
+        }
+        ],
+      "Description": "An empty hallway",
+      "Connected Rooms": [
+        {
+          "Clockwise": "Hallway2"
+        },
+        {
+          "Counter-Clockwise": "Hallway4"
+        },
+        {
+          "inward": "Examination Room"
+        },
+        {
+          "outward right": "Crews Quarters"
+        },
+        {
+          "outward left": "Specimen Storage"
+        }
+      ]
+    },
+    {
+      "Name": "Hallway2",
+      "Display Name": "Hallway",
+      "Description": "An empty hallway",
+      "Connected Rooms": [
+        {
+          "Clockwise": "Hallway3"
+        },
+        {
+          "Counter-Clockwise": "Hallway1"
+        },
+        {
+          "Inward": "Engine Room"
+        },
+        {
+          "Outward left": "Officers Quarters"
+        },
+        {
+          "Outward right": "Shuttle Bay"
+        }
+      ]
+    },
+    {
+      "Name": "Hallway3",
+      "Display Name": "Hallway",
+      "Description": "An empty hallway",
+      "Connected Rooms": [
+        {
+          "Clockwise": "Hallway4"
+        },
+        {
+          "Counter-Clockwise": "Hallway2"
+        },
+        {
+          "Inward": "Bridge"
+        },
+        {
+          "Outward": "Shuttle Bay"
+        }
+      ]
+    },
+    {
+      "Name": "Hallway4",
+      "Display Name": "Hallway",
+      "Description": "An empty hallway",
+
+      "Connected Rooms": [
+        {
+          "Clockwise": "Hallway1"
+        },
+        {
+          "Counter-Clockwise": "Hallway3"
+        },
+        {
+          "Outward left": "Waste Excretion Facility"
+        },
+        {
+          "Outward right": "Nutrient Paste Dispensary"
+        }
+      ]
+    }
+  ],
+  "Items": [
+    {
+      "Name": "Surgical Instrument Trolley",
+      "Effect Tags": [
+        {
+          "Tag Name": "Decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "A cart that should have had surgical instruments on it. In their place lies a Body-Scanning Device and a Key Card."
+    },
+    {
+      "Name": "Body-Scanning Device",
+      "Effect Tags": [
+        {
+          "Tag Name": "",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "You think this devices is intended for anatomical scanning, but it looks really similar to a nightstick. You could probably bash some head with it."
+    },
+    {
+      "Name": "Medicine",
+      "Effect Tags": [
+        {
+          "Tag Name": "",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "This looks like an assortment of medicines, probably shouldn't use any until you find out what they do."
+    },
+    {
+      "Name": "key card",
+      "Effect Tags": [
+        {
+          "Tag Name": "Key",
+          "Tag Data": ["Key1"]
+        }
+      ],
+      "Description": "This looks an awful lot like a key-card from one of them new-fangled SYE-FIE shows"
+    },
+    {
+      "Name": "Spectrographic Protoplasm",
+      "Effect Tags": [
+        {
+          "Tag Name": "decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "looks like it might be some kind of energy source. Its the same stuff that is running through the loops. Its a silver glitter-like substance that emits a rainbow mist into the clear tubes. \nI think I'll call it Unicorn Farts from now on."
+    },
+    {
+      "Name": "Power Control Panel",
+      "Effect Tags": [
+        {
+          "Tag Name": "Decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "Has different arrays of graphs and indications in foreign text. These look like important indications for the power source"
+    },
+    {
+      "Name": "Advanced Electronic Panels",
+      "Effect Tags": [
+        {
+          "Tag Name": "Decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "These electronic panels have a low humming sound to them. They probably get information for the power source."
+    },
+    {
+      "Name": "Coolant Tanks",
+      "Effect Tags": [
+        {
+          "Tag Name": "decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "These tanks are huge. They must be at least 20 feet in diameter. They seem to be helping control the fuel burning process."
+    },
+    {
+      "Name": "Hand-wavium fusion/fission loop",
+      "Effect Tags": [
+        {
+          "Tag Name": "decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "Takes the output power from one loop and then supplies the other. The glitter turns into rainbow mist and returns back to glitter"
+    },
+    {
+      "Name": "Navigation Console",
+      "Effect Tags": [
+        {
+          "Tag Name": "decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "An assortment of what look like maps and charts except they are made out of light. I wonder what would happen if i touched it."
+    },
+    {
+      "Name": "Pilot Chair",
+      "Effect Tags": [
+        {
+          "Tag Name": "decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "A super comfy looking chair with clusters of instruments to look at."
+    },
+    {
+      "Name": "Tanks filled with green goop and various organisms",
+      "Effect Tags": [
+        {
+          "Tag Name": "decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "The specimen are suspended in the green goop. I wonder if I got a hold of it what else it could be used for."
+    },
+    {
+      "Name": "Shiny Spacecraft",
+      "Effect Tags": [
+        {
+          "Tag Name": "decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "A smaller looking spaceship. I wonder if I could teach myself to fly one."
+    },
+    {
+      "Name": "Unicorn Fart fuel cells",
+      "Effect Tags": [
+        {
+          "Tag Name": "decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "A container full of the some glitter-like material. I wonder why it is in here. "
+    },
+    {
+      "Name": "Space Crates",
+      "Effect Tags": [
+        {
+          "Tag Name": "decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "Super heavy duty crates made of some polymer. The robots are pushing them around. I wonder whats in them."
+    },
+    {
+      "Name": "Control Panel with Lots of Lights",
+      "Effect Tags": [
+        {
+          "Tag Name": "decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "A control Panel with lots of flashing lights on it. Some of these buttons look important. I wonder if these control access to this room. I probably shouldn't mess with these since I can't read."
+    },
+    {
+      "Name": "Robot Workers",
+      "Effect Tags": [
+        {
+          "Tag Name": "decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "large robots with track-like tires, they keep moving things around and fixing up the shiny spacecraft. They just making a beeping and whirring sound as they work."
+    },
+    {
+      "Name": "Alien Cow Milk Dispenser",
+      "Effect Tags": [
+        {
+          "Tag Name": "decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "A large tank that dispenses a blue milk-like substance."
+    },
+    {
+      "Name": "Control Panel",
+      "Effect Tags": [
+        {
+          "Tag Name": "Decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "This is probably used to control the doors to let the shuttles in and out. Too bad you can't read any of the controls."
+    },
+    {
+      "Name": "nanofactory",
+      "Effect Tags": [
+        {
+          "Tag Name": "Decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "You watch in amazement as this thing seems to build stuff from nothing."
+    },
+    {
+      "Name": "vid-screen",
+      "Effect Tags": [
+        {
+          "Tag Name": "Decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "These floating screens look really fancy. Too fancy for you to figure out."
+    },
+    {
+      "Name": "sleep-pods",
+      "Effect Tags": [
+        {
+          "Tag Name": "Decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "You're willing to wager money that these are beds, but you have no clue how to get into one."
+    },
+    {
+      "Name": "foot-lockers",
+      "Effect Tags": [
+        {
+          "Tag Name": "Decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "You guess these small pod-looking things are storage, but you don't know how to open them."
+    },
+    {
+      "Name": "specimen tanks",
+      "Effect Tags": [
+        {
+          "Tag Name": "Decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "These creepy looking tanks have an assortment of bizarre creatures suspended in some sort of fluid."
+    },
+    {
+      "Name": "Alien Vending Machine",
+      "Effect Tags": [
+        {
+          "Tag Name": "decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "A vending machine filled with various organisms and intergalactic snacks, some of them are still wriggling."
+    },
+    {
+      "Name": "Alien Band Playing Music",
+      "Effect Tags": [
+        {
+          "Tag Name": "decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "An eclectic group of humanoid-looking aliens playing requests"
+    },
+    {
+      "Name": "Alien Bar",
+      "Effect Tags": [
+        {
+          "Tag Name": "decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "Even in space this is easily recognizeable as a bar based on the atmosphere and the culture surrounding it. I probably should avoid the bar for right now. I don't want to poison myself."
+    },
+    {
+      "Name": "Multi-Lingual Neural Mechanical Translator (MLNMT)",
+      "Effect Tags": [
+        {
+          "Tag Name": "Craftable",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "A translator object that would allow you to communicate with any species anywhere."
+    },
+    {
+      "Name": "Arcanospanner",
+      "Effect Tags": [
+        {
+          "Tag Name": "",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "An item used for crafting."
+    },
+    {
+      "Name": "Greenprints projector do-hickey",
+      "Effect Tags": [
+        {
+          "Tag Name": "",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "This says that you will need an Arcanospanner, a Communication buffer GUI, and a Springy Thingy to make a universal translator."
+    },
+    {
+      "Name": "Communication buffer GUI",
+      "Effect Tags": [
+        {
+          "Tag Name": "",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "An item used for crafting."
+    },
+    {
+      "Name": "Springy Thingy",
+      "Effect Tags": [
+        {
+          "Tag Name": "",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "An item used for crafting."
+    },
+    {
+      "Name": "hand-wavium fusion/fission reactor loop",
+      "Effect Tags": [
+        {
+          "Tag Name": "Decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "This device appears to generate power by transferring a sparkly, multi-colored gas between two reactors. The stuff looks like what you'd expect unicorn farts to look like."
+    },
+    {
+      "Name": "excrement purge vessels",
+      "Effect Tags": [
+        {
+          "Tag Name": "Decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "This looks like it's made to contain and extract bodily waste so it doesn't float around."
+    },
+    {
+      "Name": "sanitation vessels",
+      "Effect Tags": [
+        {
+          "Tag Name": "Decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "You guess these three sea shells are for cleaning your hands, but you don't know how they work."
+    },
+    {
+      "Name": "excrement purge vessels",
+      "Effect Tags": [
+        {
+          "Tag Name": "Decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "This looks like it's made to contain and extract bodily waste so it doesn't float around."
+    },
+    {
+      "Name": "sterilization facility",
+      "Effect Tags": [
+        {
+          "Tag Name": "Decor",
+          "Tag Data": [""]
+        }
+      ],
+      "Description": "This archway makes you feel fuzzy and your teeth feel really weird every time you walk through it."
+    }
+  ],
+  "NPCs": [
+    {
+      "Name": "Alien1",
+      "Effect Tags": [
+        {
+          "Tag Name": "Translator",
+          "Tag Data": [""]
+        }
+      ],
+      "Dialogue": "Ack Ack Ack Ack Ack",
+      "Alternate Dialogue": ["Hello? Woah! Wait, you can talk?","Sorry, we didn't know human beings on Earth were intelligent lifeforms. We usually don't pick up intelligent life.", "This is both exciting and terrifying. We found new intelligent life.", "This is an HR nightmare"]
+    },
+    {
+      "Name": "Alien2",
+      "Effect Tags": [
+        {
+          "Tag Name": "Translator",
+          "Tag Data": [""]
+        }
+      ],
+      "Dialogue": "Ack Ack Ack Ack Ack",
+      "Alternate Dialogue": ["Heeeeeeeey","Hey, terribly sorry about the whole abducting you thing, while you're aboard feel free to get some food from the nutrient paste dispensary. I think it will be safe for humans.","I am surprised you figured out how to use the greenprints to make the translator.","The Intergalactic Federation of Taxonomic Regulations for Intelligent Life is going to have a field day with this", "You scared the sniglforks out of Phil in Observation, he grabbed his medical equipment and ran as fast as he could. HAHAHA, I cant believe he forgot his key card."]
+    },
+    {
+      "Name": "Alien3",
+      "Effect Tags": [
+        {
+          "Tag Name": "Translator",
+          "Tag Data": [""]
+        }
+      ],
+      "Dialogue": "Ack Ack Ack Ack Ack",
+      "Alternate Dialogue": ["Hey, I guess we are going to have to get permission to re-reoute and get you home. Sorry about the mix-up.","Feel free to look around the ship while we head back towards earth, just stay out of anywhere that requires DG-16 Clearance on it, its written on the door, you can't miss it.", "I would avoid eating anything out of the vending machine for now, Phil didn't get to complete a scan of your digestive system."]
+    },
+    {
+      "Name": "Alien4",
+      "Effect Tags": [
+        {
+          "Tag Name": "Translator",
+          "Tag Data": [""]
+        }
+      ],
+      "Dialogue": "Ack Ack Ack Ack Ack",
+      "Alternate Dialogue": ["I wonder if they will give you the standard memory erase or something more thorough." , "Well, looks like we might have to contact some people about faking another Roswell"]
+    },
+    {
+      "Name": "Alien5",
+      "Effect Tags": [
+        {
+          "Tag Name": "Translator",
+          "Tag Data": [""]
+        }
+      ],
+      "Dialogue": "Ack Ack Ack Ack Ack",
+      "Alternate Dialogue": ["Wow, an Intelligent human! I never would have guessed we would have one of these onboard.","I have a million questions to ask you", "When will you guys figure out how to galaxy jump", "What are your thoughts on basic quantum entanglement", "Will humans ever get rid of that dinosaur space house rotating in your planets orbit?", "What is your favorite human food?"]
+    }
+  ],
+  "Starting Room": "Examination Room",
+  "Starting Inventory": [],
+  "Splash Text": ["Collect the parts to make a translation device so you can convince the aliens to take you home!"],
+  "Synonym Dictionary": {
+
+    "Info": ["help", "status", "check"],
+    "Go": ["walk", "run", "move", "travel"],
+    "Inspect": ["view", "look", "examine"],
+    "Take": ["pick-up", "lift", "grab", "loot"],
+    "Open": ["unlock"],
+    "Craft": ["build", "make"],
+    "Interact": ["get", "search"],
+    "Quit": ["exit", "leave"],
+    "Replay": ["reset", "retry", "restart"],
+    "Drop": ["leave", "throw", "toss", "put-down"]
+
+  },
+  "Crafting Recipes": [
+    {
+      "Result": "Multi-Lingual Neural Mechanical Translator (MLNMT)",
+      "Ingredients": [
+        "Springy Thingy",
+        "Communication buffer GUI",
+        "Greenprints projector do-hickey",
+        "Arcanospanner"
+      ]
+    }
+  ],
+  "End Conditions": [
+    {
+      "Win": true,
+      "Room Requirement": "Bridge",
+      "Item Requirements": ["Multi-Lingual Neural Mechanical Translator (MLNMT)"]
+    }
+  ]
+}
