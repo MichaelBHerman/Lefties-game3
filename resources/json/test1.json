@@ -9,8 +9,9 @@
           "Tag Data": []
         }
       ],
-      "Description": "What appears to be an examination room with three walls, one of which is curved outward and has a door in it. In this hospital-like room you also notice some advanced looking medical equipment. \nNext to the examination table you woke up on is a surgical instrument trolley with a keycard on it, and some type of body scanning device. In the cabinets on the wall there is something that resembles medicine",
-      "Items": ["Key Card", "Body-Scanning Device", "Medicine", "Greenprints projector do-hickey", "Surgical Instrument Trolley"],
+      "Description": "What appears to be an examination room with three walls, one of which is curved outward and has a door in it. In this hospital-like room you also notice some advanced looking medical equipment. \nNext to the examination table you woke up on is a surgical instrument trolley with a keycard on it, and some type of body scanning device. In the cabinets on the wall there is something that resembles medicine.",
+      "Items": ["Key Card", "Body-Scanning Device", "Medicine", "Greenprints projector do-hickey"],
+      "Npcs" : ["alien1", "alien3"],
       "Connected Rooms": [
         {
           "Outward": "Hallway1"
@@ -27,7 +28,7 @@
         }
       ],
       "Description": "A large space with a multi-colored glow, the walls are full of electronics arrays, there are tanks around the room filled with some type of fluid. \nThere are two piping loops that link together for some reason.",
-      "Items": ["Spectrographic protoplasm", "Power Control Panel", "Advanced Electronic Panels", "Coolant Tanks", "Hand-wavium fusion/fission reactor loop"],
+      "Items": ["Spectrographic protoplasm", "Coolant Tanks"],
       "Connected Rooms": [
         {
           "Outward": "Hallway2"
@@ -44,7 +45,8 @@
         }
       ],
       "Description": "A room that appears to be where the ship is steered from. There are a few instrument panels that look like they may be used for navigation. One area appears to be dedicated to piloting a ship, \nit has a comfy chair, extra electronic arrays around it and what appears to be controls for piloting the ship.",
-      "Items": ["Navigation Console", "Pilot Chair"],
+      "Items": [],
+      "Npcs" : ["alien5"],
       "Connected Rooms": [
         {
           "Outward": "Hallway3"
@@ -60,8 +62,8 @@
           "Tag Data": [""]
         }
       ],
-      "Description": "This room resembles a bathroom in some ways. Though more advanced and oddly a bit more dangerous",
-      "Items": ["Excrement Purge Vessels", "Sanitation Vessels", "Communication buffer GUI", "Sterilization Facility"],
+      "Description": "This room resembles a bathroom in some ways. Though more advanced and oddly a bit more dangerous. You see a sanitation vessel and three sea shells.  You guess they are for cleaning your hands, but you don't know how they work.",
+      "Items": ["Communication buffer GUI"],
       "Connected Rooms": [
         {
           "Inward": "Hallway4"
@@ -78,7 +80,7 @@
         }
       ],
       "Description": "A large Cafeteria-style room, there is one large oval shaped station with 2 types of dispensing machines. The room has a band, and vending machines, and something that clearly resembles a bar.",
-      "Items": ["Alien Cow Milk Dispenser", "Alien Vending Machine", "Alien band playing music", "Alien Bar" ],
+      "Items": [],
       "Connected Rooms": [
         {
           "Inward": "Hallway4"
@@ -95,7 +97,7 @@
         }
       ],
       "Description": "A room full of tanks filled with green goop with what can contain different life-forms, some familiar, some unfamiliar",
-      "Items": ["Specimen Tanks", "Springy Thingy"],
+      "Items": ["Springy Thingy"],
       "Connected Rooms": [
         {"Inward" :  "Hallway1"}
       ]
@@ -109,8 +111,9 @@
           "Tag Data": [""]
         }
       ],
-      "Description": "A cramped room with columns of sleep pods stacked 3 high lining the walls. There are storage lockers in-between each column that appear to house personal belongings. \nThere is a single vid-screen along one of the walls squeezed between sleep pod columns and a small work bench of some kind squeezed into the only leftover space in the room.",
-      "Items": ["Foot-lockers", "Sleep-Pods", "Vid-Screen", "Nanofactory"],
+      "Description": "A cramped room with columns of sleep pods stacked 3 high lining the walls. There are storage lockers in-between each column that appear to house personal belongings. \nThere is a single vid-screen along one of the walls squeezed between sleep pod columns and a small work bench of some kind squeezed into the only leftover space in the room.  \nPerhaps I can use the workbench to craft something...",
+      "Items": [],
+      "Npcs" : ["alien2"],
       "Connected Rooms": [
         {
           "Inward": "Hallway1"
@@ -127,7 +130,7 @@
         }
       ],
       "Description": "A larger room with 2 sleep pods, 2 desks, and 2 vid-screens. The overall quality of this room seems better.",
-      "Items": ["Foot-lockers", "Sleep-Pods", "Vid-Screen", "Arcanospanner"],
+      "Items": ["Arcanospanner"],
       "Connected Rooms": [
         {
           "Inward": "Hallway2"
@@ -144,7 +147,8 @@
         }
       ],
       "Description": "A large open cargo-bay like space. There are smaller, shiny spacecraft in here. There are robots moving around cargo stacking some kind of containers, and maintaining the spacecraft. \nOn the far end of the hangar there is a Control Panel with a lot of lights.",
-      "Items": ["Shiny Spacecraft", "Unicorn Fart fuel cells", "Space Crates", "Robot Workers", "Control Panel"],
+      "Items": ["Unicorn Fart fuel cells"],
+      "Npcs" : ["alien4"],
       "Connected Rooms": [
         {
           "Inward left": "Hallway2"
@@ -163,7 +167,7 @@
           "Tag Name": "Locked",
           "Tag Data": ["Key1"]
         }
-        ],
+      ],
       "Description": "An empty hallway",
       "Connected Rooms": [
         {
@@ -619,7 +623,7 @@
   ],
   "NPCs": [
     {
-      "Name": "Alien1",
+      "Name": "alien1",
       "Effect Tags": [
         {
           "Tag Name": "Translator",
@@ -630,7 +634,7 @@
       "Alternate Dialogue": ["Hello? Woah! Wait, you can talk?","Sorry, we didn't know human beings on Earth were intelligent lifeforms. We usually don't pick up intelligent life.", "This is both exciting and terrifying. We found new intelligent life.", "This is an HR nightmare"]
     },
     {
-      "Name": "Alien2",
+      "Name": "alien2",
       "Effect Tags": [
         {
           "Tag Name": "Translator",
@@ -641,7 +645,7 @@
       "Alternate Dialogue": ["Heeeeeeeey","Hey, terribly sorry about the whole abducting you thing, while you're aboard feel free to get some food from the nutrient paste dispensary. I think it will be safe for humans.","I am surprised you figured out how to use the greenprints to make the translator.","The Intergalactic Federation of Taxonomic Regulations for Intelligent Life is going to have a field day with this", "You scared the sniglforks out of Phil in Observation, he grabbed his medical equipment and ran as fast as he could. HAHAHA, I cant believe he forgot his key card."]
     },
     {
-      "Name": "Alien3",
+      "Name": "alien3",
       "Effect Tags": [
         {
           "Tag Name": "Translator",
@@ -652,7 +656,7 @@
       "Alternate Dialogue": ["Hey, I guess we are going to have to get permission to re-reoute and get you home. Sorry about the mix-up.","Feel free to look around the ship while we head back towards earth, just stay out of anywhere that requires DG-16 Clearance on it, its written on the door, you can't miss it.", "I would avoid eating anything out of the vending machine for now, Phil didn't get to complete a scan of your digestive system."]
     },
     {
-      "Name": "Alien4",
+      "Name": "alien4",
       "Effect Tags": [
         {
           "Tag Name": "Translator",
@@ -663,7 +667,7 @@
       "Alternate Dialogue": ["I wonder if they will give you the standard memory erase or something more thorough." , "Well, looks like we might have to contact some people about faking another Roswell"]
     },
     {
-      "Name": "Alien5",
+      "Name": "alien5",
       "Effect Tags": [
         {
           "Tag Name": "Translator",
@@ -676,7 +680,7 @@
   ],
   "Starting Room": "Examination Room",
   "Starting Inventory": [],
-  "Splash Text": ["Collect the parts to make a translation device so you can convince the aliens to take you home!"],
+  "Splash Text": ["Collect the parts to make a translation device so you can convince the aliens to take you home! If you get stuck, [inspect]ing items can give some useful information..."],
   "Synonym Dictionary": {
 
     "Info": ["help", "status", "check"],
@@ -685,7 +689,7 @@
     "Take": ["pick-up", "lift", "grab", "loot"],
     "Open": ["unlock"],
     "Craft": ["build", "make"],
-    "Interact": ["get", "search"],
+    "Interact": ["get", "search", "talk"],
     "Quit": ["exit", "leave"],
     "Replay": ["reset", "retry", "restart"],
     "Drop": ["leave", "throw", "toss", "put-down"]
@@ -710,3 +714,4 @@
     }
   ]
 }
+

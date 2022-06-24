@@ -74,11 +74,14 @@ class FileParser {
                 return false;
         }
 
+        // Grab inventory data from JSON
         private boolean parseStartingInventory() {
+                // Check to see if the "Starting inventory key exists in the JSON file
                 if (!jsonObject.containsKey("Starting Inventory")){
                         System.out.println("Key value \"Starting Inventory\" does not exist in base JSON Object.");
                         return true;
                 }
+                // If "Starting Inventory" exists save it to a variable
                 startingInventory = parseStringList(jsonObject.get("Starting Inventory"));
                 if (startingInventory == null){
                         System.out.println("Starting Inventory.");
@@ -378,6 +381,7 @@ class FileParser {
         }
 
         private List<String> parseStringList(Object input) {
+                //
                 List<String> toReturn = new ArrayList<>();
                 if (input == null) {
                         System.out.print("Null when Array of String was expected at: ");
@@ -393,7 +397,7 @@ class FileParser {
                                 }
                                 else toReturn.add(string);
                         }
-                }else {
+                } else {
                         System.out.print("Incorrect Data Type when Array of String was expected at: ");
                         return null;
                 }
@@ -522,7 +526,7 @@ class FileParser {
                                         return true;
                                 }
                                 List<String> alternativeDialogue = new ArrayList<>();
-                                if(npcJsonObj.containsKey("Alternative Dialogue")){
+                                if(npcJsonObj.containsKey("Alternate Dialogue")){
 
 
                                         alternativeDialogue =
