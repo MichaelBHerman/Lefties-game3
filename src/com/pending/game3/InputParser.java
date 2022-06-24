@@ -94,6 +94,7 @@ class InputParser {
     private void interact(String target) {
         //if the NPC exists and is in this room
         if(Game3.getNpcs().containsKey(target) && Game3.getCurrentRoom().getNpcs().contains(target)) {
+            System.out.println("So far so good........");
             Npc npc = Game3.getNpcs().get(target);
             //if the NPC has the "Translator" tag
             if (npc.getFlags().containsKey("Translator")) {
