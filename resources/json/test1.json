@@ -9,8 +9,8 @@
           "Tag Data": []
         }
       ],
-      "Description": "What appears to be an examination room with three walls, one of which is curved outward and has a door in it. In this hospital-like room you also notice some advanced looking medical equipment. \nNext to the examination table you woke up on is a surgical instrument trolley with a keycard on it, and some type of body scanning device. In the cabinets on the wall there is something that resembles medicine",
-      "Items": ["Key Card", "Body-Scanning Device", "Medicine", "Greenprints projector do-hickey", "Surgical Instrument Trolley"],
+      "Description": "What appears to be an examination room with three walls, one of which is curved outward and has a door in it. In this hospital-like room you also notice some advanced looking medical equipment. \nNext to the examination table you woke up on is a surgical instrument trolley with a keycard on it, and some type of body scanning device. In the cabinets on the wall there is something that resembles medicine.",
+      "Items": ["Key Card", "Body-Scanning Device", "Medicine", "Greenprints projector do-hickey"],
       "Npcs" : ["alien1", "alien3"],
       "Connected Rooms": [
         {
@@ -28,7 +28,7 @@
         }
       ],
       "Description": "A large space with a multi-colored glow, the walls are full of electronics arrays, there are tanks around the room filled with some type of fluid. \nThere are two piping loops that link together for some reason.",
-      "Items": ["Spectrographic protoplasm", "Power Control Panel", "Advanced Electronic Panels", "Coolant Tanks", "Hand-wavium fusion/fission reactor loop"],
+      "Items": ["Spectrographic protoplasm", "Coolant Tanks"],
       "Connected Rooms": [
         {
           "Outward": "Hallway2"
@@ -45,7 +45,7 @@
         }
       ],
       "Description": "A room that appears to be where the ship is steered from. There are a few instrument panels that look like they may be used for navigation. One area appears to be dedicated to piloting a ship, \nit has a comfy chair, extra electronic arrays around it and what appears to be controls for piloting the ship.",
-      "Items": ["Navigation Console", "Pilot Chair"],
+      "Items": [],
       "Npcs" : ["alien5"],
       "Connected Rooms": [
         {
@@ -62,8 +62,8 @@
           "Tag Data": [""]
         }
       ],
-      "Description": "This room resembles a bathroom in some ways. Though more advanced and oddly a bit more dangerous",
-      "Items": ["Excrement Purge Vessels", "Sanitation Vessels", "Communication buffer GUI", "Sterilization Facility"],
+      "Description": "This room resembles a bathroom in some ways. Though more advanced and oddly a bit more dangerous. You see a sanitation vessel and three sea shells.  You guess they are for cleaning your hands, but you don't know how they work.",
+      "Items": ["Communication buffer GUI"],
       "Connected Rooms": [
         {
           "Inward": "Hallway4"
@@ -80,7 +80,7 @@
         }
       ],
       "Description": "A large Cafeteria-style room, there is one large oval shaped station with 2 types of dispensing machines. The room has a band, and vending machines, and something that clearly resembles a bar.",
-      "Items": ["Alien Cow Milk Dispenser", "Alien Vending Machine", "Alien band playing music", "Alien Bar" ],
+      "Items": [],
       "Connected Rooms": [
         {
           "Inward": "Hallway4"
@@ -97,7 +97,7 @@
         }
       ],
       "Description": "A room full of tanks filled with green goop with what can contain different life-forms, some familiar, some unfamiliar",
-      "Items": ["Specimen Tanks", "Springy Thingy"],
+      "Items": ["Springy Thingy"],
       "Connected Rooms": [
         {"Inward" :  "Hallway1"}
       ]
@@ -111,8 +111,8 @@
           "Tag Data": [""]
         }
       ],
-      "Description": "A cramped room with columns of sleep pods stacked 3 high lining the walls. There are storage lockers in-between each column that appear to house personal belongings. \nThere is a single vid-screen along one of the walls squeezed between sleep pod columns and a small work bench of some kind squeezed into the only leftover space in the room.",
-      "Items": ["Foot-lockers", "Sleep-Pods", "Vid-Screen", "Nanofactory"],
+      "Description": "A cramped room with columns of sleep pods stacked 3 high lining the walls. There are storage lockers in-between each column that appear to house personal belongings. \nThere is a single vid-screen along one of the walls squeezed between sleep pod columns and a small work bench of some kind squeezed into the only leftover space in the room.  \nPerhaps I can use the workbench to craft something...",
+      "Items": [],
       "Npcs" : ["alien2"],
       "Connected Rooms": [
         {
@@ -130,7 +130,7 @@
         }
       ],
       "Description": "A larger room with 2 sleep pods, 2 desks, and 2 vid-screens. The overall quality of this room seems better.",
-      "Items": ["Foot-lockers", "Sleep-Pods", "Vid-Screen", "Arcanospanner"],
+      "Items": ["Arcanospanner"],
       "Connected Rooms": [
         {
           "Inward": "Hallway2"
@@ -147,7 +147,7 @@
         }
       ],
       "Description": "A large open cargo-bay like space. There are smaller, shiny spacecraft in here. There are robots moving around cargo stacking some kind of containers, and maintaining the spacecraft. \nOn the far end of the hangar there is a Control Panel with a lot of lights.",
-      "Items": ["Shiny Spacecraft", "Unicorn Fart fuel cells", "Space Crates", "Robot Workers", "Control Panel"],
+      "Items": ["Unicorn Fart fuel cells"],
       "Npcs" : ["alien4"],
       "Connected Rooms": [
         {
@@ -167,7 +167,7 @@
           "Tag Name": "Locked",
           "Tag Data": ["Key1"]
         }
-        ],
+      ],
       "Description": "An empty hallway",
       "Connected Rooms": [
         {
@@ -714,3 +714,4 @@
     }
   ]
 }
+
