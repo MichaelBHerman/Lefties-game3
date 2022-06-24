@@ -1,5 +1,9 @@
 package com.pending.game3;
 
+import com.swing.MyFrame;
+import com.swing.panels.GamePanel;
+import com.swing.panels.InventoryPanel;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -26,6 +30,11 @@ class Game3 {
     private HashMap<String, Item> items;
     private HashMap<String, Npc> npcs;
     private Scanner reader;
+
+    // Temporary method that only runs the UI
+    public static void runGUI() {
+        MyFrame frame = new MyFrame();
+    }
 
     //singleton
     private static Game3 instance;
@@ -87,7 +96,6 @@ class Game3 {
         return instance.fileParser.recipes;
     }
 
-
     //method for starting the game
     private void run() {
         System.out.println(mainSplash);//splash screen
@@ -129,6 +137,7 @@ class Game3 {
     private void mainLoop() {
         while (true) {
             displayRoom();
+            displayRoomGUI();
             if(inputParser.getInput(reader)) {
                 break;
             }
@@ -189,6 +198,19 @@ class Game3 {
         System.out.print("Movement options: ");
         for(String direction : currentRoom.getConnections().keySet()) {
             System.out.print("\"" + direction + "\" ");
+        }
+        System.out.println();
+    }
+
+    private void displayRoomGUI() {
+        GamePanel.updateOutputTextArea("\n" + getCurrentRoom().description);
+        GamePanel.updateOutputTextArea("\nItems: " + getCurrentRoom().getItems());
+        GamePanel.updateOutputTextArea("\nInventory: " + getInventory());
+        InventoryPanel.updateInventoryGUI(getInventory());
+        GamePanel.updateOutputTextArea("\nNPCs: " + getCurrentRoom().getNpcs());
+        GamePanel.updateOutputTextArea("\nMovement options: ");
+        for(String direction : currentRoom.getConnections().keySet()) {
+            GamePanel.updateOutputTextArea("\"" + direction + "\" ");
         }
         System.out.println();
     }
