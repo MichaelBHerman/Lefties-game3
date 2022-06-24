@@ -522,7 +522,7 @@ class FileParser {
                                         return true;
                                 }
                                 List<String> alternativeDialogue = new ArrayList<>();
-                                if(npcJsonObj.containsKey("Alternative Dialogue")){
+                                if(npcJsonObj.containsKey("Alternate Dialogue")){
 
 
                                         alternativeDialogue =
