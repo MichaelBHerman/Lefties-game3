@@ -14,7 +14,7 @@
       "Npcs" : ["alien1", "alien3"],
       "Connected Rooms": [
         {
-          "Outward": "Hallway1"
+          "North": "Hallway1"
         }
       ]
     },
@@ -111,7 +111,7 @@
           "Tag Data": [""]
         }
       ],
-      "Description": "A cramped room with columns of sleep pods stacked 3 high lining the walls. There are storage lockers in-between each column that appear to house personal belongings. \nThere is a single vid-screen along one of the walls squeezed between sleep pod columns and a small work bench of some kind squeezed into the only leftover space in the room.",
+      "Description": "A cramped room with columns of sleep pods stacked 3 high lining the walls. There are storage lockers in-between each column that appear to house personal belongings. \nThere is a single vid-screen along one of the walls squeezed between sleep pod columns and a small crafting table of some kind squeezed into the only leftover space in the room. Maybe you can use this crafting table...",
       "Items": ["Foot-lockers", "Sleep-Pods", "Vid-Screen", "Nanofactory"],
       "Npcs" : ["alien2"],
       "Connected Rooms": [

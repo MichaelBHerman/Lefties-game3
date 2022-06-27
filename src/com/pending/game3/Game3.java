@@ -191,13 +191,20 @@ class Game3 {
 
     // method that show the user the current room, items in the room, and their inventory
     private void displayRoom() {
+        System.out.println("--------------");
+        System.out.println(getCurrentRoom().name);
+        System.out.println("--------------");
         System.out.println(getCurrentRoom().description);
+        System.out.println("--------------");
         System.out.println("Items: " + getCurrentRoom().getItems());
+        System.out.println("--------------");
         System.out.println("Inventory: " + getInventory());
+        System.out.println("--------------");
         System.out.println("NPCs: " + getCurrentRoom().getNpcs());
+        System.out.println("--------------");
         System.out.print("Movement options: ");
         for(String direction : currentRoom.getConnections().keySet()) {
-            System.out.print("\"" + direction + "\" ");
+            System.out.print("\"" + direction + " -> " +  currentRoom.getConnections().get(direction) + "\"");
         }
         System.out.println();
     }
