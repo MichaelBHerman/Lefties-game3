@@ -3,7 +3,7 @@ package com.pending.game3;
 import java.util.HashMap;
 import java.util.List;
 
-class Item {
+public class Item {
     final String description;
     final String name;
     private HashMap<String, List<String>> flags;

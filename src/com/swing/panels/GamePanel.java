@@ -8,6 +8,10 @@ import java.awt.*;
 public class GamePanel {
     private static JTextArea outputTextArea;
     private static JScrollPane outputScrollWindow;
+    private static JPanel roomItemsPanel;
+    private static JPanel roomNpcsPanel;
+    private static JPanel gameInfoPanel;
+    private static JPanel mainGamePanel;
 
     GamePanel() {
 
@@ -17,13 +21,21 @@ public class GamePanel {
         outputTextArea = createOutputTextArea();
         JTextField textInputField = createTextInputField(border, outputTextArea);
         JScrollPane outputScrollWindow = createOutputScrollWindow(border, outputTextArea);
+        roomItemsPanel = PickUpPanel.create(border);
+        roomNpcsPanel = TalkPanel.create(border);
+        gameInfoPanel = createGameInfoPanel(border,textInputField, outputScrollWindow);
 
-        return createGamePanel(border, textInputField, outputScrollWindow);
+        mainGamePanel = new JPanel(new CardLayout());
+        mainGamePanel.add(gameInfoPanel);
+        mainGamePanel.add(roomItemsPanel);
+        mainGamePanel.add(roomNpcsPanel);
+
+        return mainGamePanel;
     }
 
     private static JTextField createTextInputField(Border border, JTextArea outputTextArea) {
         JTextField textField = new JTextField();
-        textField.setPreferredSize(new Dimension(300, 40));
+        textField.setPreferredSize(new Dimension(200, 40));
         textField.setBackground(Color.BLACK);
         textField.setForeground(Color.green);
         textField.setCaretColor(Color.green);
@@ -32,6 +44,7 @@ public class GamePanel {
         // Adding event listener to save the output text within the text field to the outputTextArea
         textField.addActionListener(e -> {
             outputTextArea.append("\n>" + e.getActionCommand());
+            outputTextArea.setCaretPosition(outputTextArea.getDocument().getLength());
             outputTextArea.revalidate();
             textField.setText("");
         });
@@ -39,9 +52,8 @@ public class GamePanel {
         return textField;
     }
 
-    private static JPanel createGamePanel(Border border, JTextField textField, JScrollPane outputScrollWindow) {
+    private static JPanel createGameInfoPanel(Border border, JTextField textField, JScrollPane outputScrollWindow) {
         JPanel gamePanel = new JPanel(new BorderLayout());
-        gamePanel.setBorder(BorderFactory.createTitledBorder("Game Window"));
         gamePanel.add(textField, BorderLayout.PAGE_END);
         gamePanel.setBackground(Color.black);
         gamePanel.setBorder(BorderFactory.createTitledBorder(border, "Game Window", 0, 2, null, Color.green));
@@ -96,4 +108,33 @@ public class GamePanel {
         });
         return outputScrollWindow;
     }
+
+    public static void setMainGamePanel(String option) {
+        if(option.equalsIgnoreCase("take")) {
+            gameInfoPanel.setVisible(false);
+            roomItemsPanel.setVisible(true);
+            roomNpcsPanel.setVisible(false);
+//            useItemPanel.setVisible(false);
+            System.out.println("Changing to take mode.");
+        } else if (option.equalsIgnoreCase("talk")) {
+            gameInfoPanel.setVisible(false);
+            roomItemsPanel.setVisible(false);
+            roomNpcsPanel.setVisible(true);
+//            useItemPanel.setVisible(false);
+            System.out.println("Changing to talk mode.");
+        } else if (option.equalsIgnoreCase("back")) {
+            gameInfoPanel.setVisible(true);
+            roomItemsPanel.setVisible(false);
+            roomNpcsPanel.setVisible(false);
+//            useItemPanel.setVisible(false);
+            System.out.println("Going back.");
+        } else if (option.equalsIgnoreCase("confirm selected")) {
+            gameInfoPanel.setVisible(true);
+            roomItemsPanel.setVisible(false);
+            roomNpcsPanel.setVisible(false);
+            System.out.println("Confirmed user choice");
+        }
+
+    }
+
 }

@@ -9,42 +9,39 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.util.List;
 
-public class InventoryPanel {
 
-    private static JPanel inventoryScrollPanel;
-    private static JPanel inventory;
+public class TalkPanel {
 
-    InventoryPanel() {
-
-    }
+    private static JPanel roomItemsScrollPanel;
+    private static JPanel roomItems;
 
     public static JPanel create(Border border) {
-        inventoryScrollPanel = new JPanel(new BorderLayout());
-        inventoryScrollPanel.setPreferredSize(new Dimension(0, 250));
-        inventoryScrollPanel.setBorder(BorderFactory.createTitledBorder(border, "Inventory", 0,2, null, Color.green));
-        inventoryScrollPanel.setBackground(Color.black);
 
-        JScrollPane inventoryScrollPane = createInventoryScrollPane(border);
+        roomItemsScrollPanel = new JPanel(new BorderLayout());
+        //RoomItemsScrollPanel.setPreferredSize(new Dimension(0, 250));
+        roomItemsScrollPanel.setBorder(BorderFactory.createTitledBorder(border, "Room NPCs (Talk)", 0,2, null, Color.green));
+        roomItemsScrollPanel.setBackground(Color.black);
 
-        inventoryScrollPanel.add(inventoryScrollPane);
+        JScrollPane roomScrollPane = createRoomItemsScrollPane(border);
 
-        return inventoryScrollPanel;
+        roomItemsScrollPanel.add(roomScrollPane);
+
+        return roomItemsScrollPanel;
     }
 
-    public static void updateInventoryGUI(List<String> playerInventory) {
-        inventory.removeAll();
-        for (String item : playerInventory) {
-            inventory.add(ButtonFactory.createRadioButton(item));
-        }
+//    public static void updateInventoryGUI(List<String> playerInventory) {
+//        inventory.removeAll();
+//        for (String item : playerInventory) {
+//            inventory.add(ButtonFactory.createRadioButton(item));
+//        }
+//
+//        InventoryScrollPanel.validate();
+//    }
 
-        inventoryScrollPanel.validate();
-//        InventoryScrollPanel.repaint();
-    }
-
-    private static JScrollPane createInventoryScrollPane(Border border) {
-        inventory = new JPanel(new WrapLayout(WrapLayout.LEADING));
-        inventory.setBackground(Color.black);
-        JScrollPane inventoryScrollPane = new JScrollPane(inventory);
+    private static JScrollPane createRoomItemsScrollPane(Border border) {
+        roomItems = new JPanel(new WrapLayout(WrapLayout.LEADING));
+        roomItems.setBackground(Color.black);
+        JScrollPane inventoryScrollPane = new JScrollPane(roomItems);
         inventoryScrollPane.setBackground(Color.black);
         inventoryScrollPane.setBorder(null);
 

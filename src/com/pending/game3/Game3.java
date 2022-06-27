@@ -3,6 +3,7 @@ package com.pending.game3;
 import com.swing.MyFrame;
 import com.swing.panels.GamePanel;
 import com.swing.panels.InventoryPanel;
+import com.swing.panels.PickUpPanel;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,6 +13,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static com.swing.panels.PickUpPanel.*;
 
 class Game3 {
     public static final String jsonDir = "resources/json";
@@ -207,6 +210,7 @@ class Game3 {
         GamePanel.updateOutputTextArea("\nItems: " + getCurrentRoom().getItems());
         GamePanel.updateOutputTextArea("\nInventory: " + getInventory());
         InventoryPanel.updateInventoryGUI(getInventory());
+        PickUpPanel.renderRoomItems(getCurrentRoom().getItems());
         GamePanel.updateOutputTextArea("\nNPCs: " + getCurrentRoom().getNpcs());
         GamePanel.updateOutputTextArea("\nMovement options: ");
         for(String direction : currentRoom.getConnections().keySet()) {
