@@ -13,7 +13,8 @@ public class ActionPanel {
     }
 
     public static JPanel create(Border border) {
-        JPanel actionPanel = new JPanel(new GridLayout(3,2,5,5));
+        JPanel actionPanel = new JPanel(new GridLayout(3,2,7,7));
+        actionPanel.setPreferredSize(new Dimension(450,0));
 
         actionPanel.add(ButtonFactory.createButton("Pick Up", border));
         actionPanel.add(ButtonFactory.createButton("Talk", border));

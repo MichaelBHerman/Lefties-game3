@@ -23,7 +23,7 @@ public class GamePanel {
 
     private static JTextField createTextInputField(Border border, JTextArea outputTextArea) {
         JTextField textField = new JTextField();
-        textField.setPreferredSize(new Dimension(300, 40));
+        textField.setPreferredSize(new Dimension(200, 40));
         textField.setBackground(Color.BLACK);
         textField.setForeground(Color.green);
         textField.setCaretColor(Color.green);
@@ -41,7 +41,6 @@ public class GamePanel {
 
     private static JPanel createGamePanel(Border border, JTextField textField, JScrollPane outputScrollWindow) {
         JPanel gamePanel = new JPanel(new BorderLayout());
-        gamePanel.setBorder(BorderFactory.createTitledBorder("Game Window"));
         gamePanel.add(textField, BorderLayout.PAGE_END);
         gamePanel.setBackground(Color.black);
         gamePanel.setBorder(BorderFactory.createTitledBorder(border, "Game Window", 0, 2, null, Color.green));
@@ -96,4 +95,5 @@ public class GamePanel {
         });
         return outputScrollWindow;
     }
+
 }
