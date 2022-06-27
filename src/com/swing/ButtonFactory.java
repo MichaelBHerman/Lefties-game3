@@ -3,8 +3,6 @@ package com.swing;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ButtonFactory {
 
@@ -33,32 +31,18 @@ public class ButtonFactory {
             }
         });
 
-        if (btnName.equalsIgnoreCase("Pick up")) {
-            return pickUp(button);
+        if (btnName.equalsIgnoreCase("take")) {
+            return take(button);
         } else if (btnName.equalsIgnoreCase("talk")) {
             return talk(button);
+        } else if (btnName.equalsIgnoreCase("drop")) {
+            return drop(button);
+        } else if (btnName.equalsIgnoreCase("back")) {
+            return back(button);
+        } else if (btnName.equalsIgnoreCase("confirm selected")) {
+            System.out.println("Confirmed selected items.");
+            return confirm(button);
         }
-
-        return button;
-    }
-
-    private static JButton pickUp(JButton button) {
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                MyFrame.setGameWindow("take");
-            }
-        });
-        return button;
-    }
-
-    private static JButton talk(JButton button) {
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                MyFrame.setGameWindow("talk");
-            }
-        });
         return button;
     }
 
@@ -71,18 +55,41 @@ public class ButtonFactory {
         imgButton.setVerticalTextPosition(JRadioButton.BOTTOM);
         imgButton.setHorizontalTextPosition(JRadioButton.CENTER);
         imgButton.setIconTextGap(-5);
-        imgButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println(imgButton.isSelected());
-                if (imgButton.isSelected()) {
-                    imgButton.setBackground(Color.GREEN);
-                } else {
-                    imgButton.setBackground(Color.black);
-                }
+        imgButton.addActionListener(e -> {
+            System.out.println(imgButton.isSelected());
+            if (imgButton.isSelected()) {
+                imgButton.setBackground(Color.GREEN);
+            } else {
+                imgButton.setBackground(Color.black);
             }
         });
         imgButton.setBackground(Color.black);
         return imgButton;
     }
+
+    private static JButton take(JButton button) {
+        button.addActionListener(e -> MyFrame.updateFrameWindow("take"));
+        return button;
+    }
+
+    private static JButton talk(JButton button) {
+        button.addActionListener(e -> MyFrame.updateFrameWindow("talk"));
+        return button;
+    }
+
+    private static JButton drop(JButton button) {
+        button.addActionListener(e -> MyFrame.updateFrameWindow("drop"));
+        return button;
+    }
+
+    private static JButton back(JButton button) {
+        button.addActionListener(e -> MyFrame.updateFrameWindow("back"));
+        return button;
+    }
+
+    private static JButton confirm(JButton button) {
+        button.addActionListener(e -> MyFrame.updateFrameWindow("confirm selected"));
+        return button;
+    }
+
 }

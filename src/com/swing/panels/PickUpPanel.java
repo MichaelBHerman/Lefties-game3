@@ -9,17 +9,15 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.util.List;
 
-import static com.swing.MyFrame.gamePanel;
 
 public class PickUpPanel {
 
-    private static JPanel roomItemsScrollPanel;
     private static JPanel roomItems;
+    private static JPanel roomItemsScrollPanel;
 
     public static JPanel create(Border border) {
 
         roomItemsScrollPanel = new JPanel(new BorderLayout());
-        //RoomItemsScrollPanel.setPreferredSize(new Dimension(0, 250));
         roomItemsScrollPanel.setBorder(BorderFactory.createTitledBorder(border, "Room Items (Pick Up)", 0,2, null, Color.green));
         roomItemsScrollPanel.setBackground(Color.black);
 
@@ -30,24 +28,15 @@ public class PickUpPanel {
         return roomItemsScrollPanel;
     }
 
-//    public static void updateInventoryGUI(List<String> playerInventory) {
-//        inventory.removeAll();
-//        for (String item : playerInventory) {
-//            inventory.add(ButtonFactory.createRadioButton(item));
-//        }
-//
-//        InventoryScrollPanel.validate();
-//    }
-
     private static JScrollPane createRoomItemsScrollPane(Border border) {
         roomItems = new JPanel(new WrapLayout(WrapLayout.LEADING));
         roomItems.setBackground(Color.black);
-        JScrollPane inventoryScrollPane = new JScrollPane(roomItems);
-        inventoryScrollPane.setBackground(Color.black);
-        inventoryScrollPane.setBorder(null);
+        JScrollPane roomScrollPane = new JScrollPane(roomItems);
+        roomScrollPane.setBackground(Color.black);
+        roomScrollPane.setBorder(null);
 
-        inventoryScrollPane.getVerticalScrollBar().setBackground(Color.BLACK);
-        inventoryScrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+        roomScrollPane.getVerticalScrollBar().setBackground(Color.BLACK);
+        roomScrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
             protected void configureScrollBarColors() {
                 this.thumbColor = Color.GREEN;
@@ -71,7 +60,17 @@ public class PickUpPanel {
             }
         });
 
-        return inventoryScrollPane;
+        return roomScrollPane;
+    }
+
+    public static void renderRoomItems(List<String> currentRoomItems){
+        roomItems.removeAll();
+        for (String item : currentRoomItems) {
+            roomItems.add(ButtonFactory.createRadioButton(item));
+        }
+
+        roomItemsScrollPanel.validate();
+//        InventoryScrollPanel.repaint();
     }
 
 }

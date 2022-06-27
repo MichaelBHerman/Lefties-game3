@@ -9,7 +9,6 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.util.List;
 
-import static com.swing.MyFrame.gamePanel;
 
 public class TalkPanel {
 
