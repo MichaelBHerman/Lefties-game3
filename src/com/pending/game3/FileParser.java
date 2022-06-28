@@ -14,7 +14,7 @@ import java.util.List;
 
 class FileParser {
         String startingRoom;
-        List<String> startingInventory;
+        HashMap<String, Item> startingInventory;
         HashMap<String, Room> roomsAtStart;
         HashMap<String, Item> itemsAtStart;
         HashMap<String, Npc> npcsAtStart;
@@ -75,23 +75,75 @@ class FileParser {
         }
 
         // Grab inventory data from JSON
+
+
+        // TODO verify that this method will no longer be needed after rebuilding to a HashMap...
+
+
+//        private boolean parseStartingInventory() {
+//                // Check to see if the "Starting inventory key exists in the JSON file
+//                if (!jsonObject.containsKey("Starting Inventory")){
+//                        System.out.println("Key value \"Starting Inventory\" does not exist in base JSON Object.");
+//                        return true;
+//                }
+//                // If "Starting Inventory" exists save it to a variable
+//                startingInventory = parseStringList(jsonObject.get("Starting Inventory"));
+//                if (startingInventory == null){
+//                        System.out.println("Starting Inventory.");
+//                        return true;
+//                }
+//                for (String item : startingInventory.keySet()){
+//                        if(itemsAtStart.containsKey(item)) continue;
+//                        System.out.println("Starting Inventory item " + item + " does not exist in Items.");
+//                        return true;
+//                }
+//                return false;
+//        }
+
         private boolean parseStartingInventory() {
-                // Check to see if the "Starting inventory key exists in the JSON file
-                if (!jsonObject.containsKey("Starting Inventory")){
-                        System.out.println("Key value \"Starting Inventory\" does not exist in base JSON Object.");
+                startingInventory = new HashMap<String, Item>();
+                if(!jsonObject.containsKey("Starting Inventory")) {
+                        System.out.println("Key value \"Starting Inventory\" does not exist in base JSON Object");
                         return true;
                 }
-                // If "Starting Inventory" exists save it to a variable
-                startingInventory = parseStringList(jsonObject.get("Starting Inventory"));
-                if (startingInventory == null){
-                        System.out.println("Starting Inventory.");
-                        return true;
-                }
-                for (String item : startingInventory){
-                        if(itemsAtStart.containsKey(item)) continue;
-                        System.out.println("Starting Inventory item " + item + " does not exist in Items.");
-                        return true;
-                }
+                Object obj = jsonObject.get("Starting Inventory");
+                JSONArray jsonInventory = (JSONArray) obj;
+                // TODO starting inventory can be empty.
+
+//                if(obj != null && JSONArray.class.equals(obj.getClass())) {
+//                        if(jsonInventory.size() == 0) {
+//                                System.out.println("Starting Inventory array must not be empty.");
+//                                return true;
+//                        }
+                        for (Object inventoryObj : jsonInventory) {
+                                if(inventoryObj == null || !JSONObject.class.equals(inventoryObj.getClass())) {
+                                        System.out.println("All entries in Starting Inventory must be JSON Objects");
+                                        return true;
+                                }
+                                JSONObject inventoryJsonObj = (JSONObject) inventoryObj;
+                                if(!inventoryJsonObj.containsKey("Name")) {
+                                        System.out.println("Key value \"Name\" does not exist in Starting Inventory JSON Object");
+                                        return true;
+                                }
+                                String name = parseString(inventoryJsonObj.get("Name"));
+                                if(name == null) {
+                                        System.out.println("Item name");
+                                        return true;
+                                }
+                                if(name.equals("")) {
+                                        System.out.println("Item name cannot be an empty string.");
+                                }
+                                if (!inventoryJsonObj.containsKey("Description")) {
+                                        System.out.println("Key value \"Description\" does not exist in Item " +
+                                                name + " JSON Object");
+                                        return true;
+                                }
+                                String description = parseString(inventoryJsonObj.get("Description"));
+                                if(description == null) {
+                                        System.out.println("Item " + name + " Description.");
+                                        return true;
+                                }
+                        }
                 return false;
         }
 
@@ -548,6 +600,12 @@ class FileParser {
 
         private boolean parseCraftingRecipes(){
                 recipes = new ArrayList<>();
+                String recipeRes;
+                List<String> ingredients;
+                CraftingRecipe craftingRecipe;
+                String recipeName;
+                String recipeDescription;
+
                 if(!jsonObject.containsKey("Crafting Recipes")){
                         return false;
                 }
@@ -569,41 +627,82 @@ class FileParser {
                                 }
 
 
-
-                                CraftingRecipe craftingRecipe = new CraftingRecipe();
-
-                                craftingRecipe.result = parseString(craftingRecipeJsonObj.get("Result"));
-                                if (craftingRecipe.result == null) {
+                                recipeRes = parseString(craftingRecipeJsonObj.get("Result"));
+                                if (recipeRes == null) {
                                         System.out.println("Crafting Recipe Result.");
                                         return true;
                                 }
-                                craftingRecipe.result = craftingRecipe.result.toLowerCase();
-                                if(!itemsAtStart.containsKey(craftingRecipe.result)){
-                                        System.out.println("Item " + craftingRecipe.result + " in Crafting Recipe " +
+                                recipeRes = recipeRes.toLowerCase();
+                                if(!itemsAtStart.containsKey(recipeRes)){
+                                        System.out.println("Item " + recipeRes + " in Crafting Recipe " +
                                                 "Result is not defined in Items.");
                                         return true;
                                 }
 
                                 if (!craftingRecipeJsonObj.containsKey("Ingredients")){
                                         System.out.println("Key \"Ingredients\" does not exist in " +
-                                                craftingRecipe.result + " Crafting Recipe.");
+                                                recipeRes + " Crafting Recipe.");
                                         return true;
                                 }
-                                craftingRecipe.ingredients = parseStringList(craftingRecipeJsonObj.get("Ingredients"));
-                                if(craftingRecipe.ingredients == null) {
+                                ingredients = parseStringList(craftingRecipeJsonObj.get("Ingredients"));
+                                if(ingredients == null) {
                                         System.out.println("Crafting Recipe Ingredients");
                                         return true;
                                 }
 
-                                for (int i = 0; i < craftingRecipe.ingredients.size(); i++) {
-                                        String item = craftingRecipe.ingredients.get(i).toLowerCase();
-                                        craftingRecipe.ingredients.set(i, item);
+                                for (int i = 0; i < ingredients.size(); i++) {
+                                        String item = ingredients.get(i).toLowerCase();
+                                        ingredients.set(i, item);
                                         if(!itemsAtStart.containsKey(item)){
                                                 System.out.println("Item " + item + " in Crafting Recipe Ingredients " +
                                                         "is not defined in Items.");
                                                 return true;
                                         }
                                 }
+                                if (!craftingRecipeJsonObj.containsKey("Name")){
+                                        System.out.println("Key \"Name\" does not exist in a Crafting Recipes " +
+                                                "entry.");
+                                        return true;
+                                }
+
+
+                                recipeName = parseString(craftingRecipeJsonObj.get("Name"));
+                                if (recipeName == null) {
+                                        System.out.println("Crafting Recipe Name.");
+                                        return true;
+                                }
+
+                                // TODO this portion looks for recipe name instead of the name of the item recipe is for
+
+//                                recipeName = recipeName.toLowerCase();
+//                                if(!itemsAtStart.containsKey(recipeName)){
+//                                        System.out.println("Item " + recipeName + " in Crafting Recipe " +
+//                                                "Name is not defined in Items.");
+//                                        return true;
+//                                }
+                                // parse description
+                                if (!craftingRecipeJsonObj.containsKey("Description")){
+                                        System.out.println("Key \"Description\" does not exist in a Crafting Recipes " +
+                                                "entry.");
+                                        return true;
+                                }
+
+
+                                recipeDescription = parseString(craftingRecipeJsonObj.get("Description"));
+                                if (recipeDescription == null) {
+                                        System.out.println("Crafting Recipe Description.");
+                                        return true;
+                                }
+
+                                // TODO figure out this portion... Recipe is not an Item in the same sense as starting items
+//                                recipeDescription = recipeDescription.toLowerCase();
+//                                if(!itemsAtStart.containsKey(recipeDescription)){
+//                                        System.out.println("Item " + recipeDescription + " in Crafting Recipe " +
+//                                                "Result is not defined in Items.");
+//                                        return true;
+//                                }
+
+                                craftingRecipe = new CraftingRecipe(recipeName, recipeDescription, ingredients, recipeRes);
                                 recipes.add(craftingRecipe);
                         }
                 } else {

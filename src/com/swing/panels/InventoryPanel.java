@@ -1,9 +1,12 @@
 package com.swing.panels;
 
+import com.pending.game3.Item;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class InventoryPanel {
@@ -22,7 +25,7 @@ public class InventoryPanel {
         return inventoryPanel;
     }
 
-    public static void updateInventoryGUI(List<String> inventory) {
+    public static void updateInventoryGUI(HashMap<String, Item> inventory) {
         System.out.println(inventory);
 //        for (String item : inventory) {
 //            new JPanel()

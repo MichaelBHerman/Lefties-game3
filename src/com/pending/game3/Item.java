@@ -3,10 +3,15 @@ package com.pending.game3;
 import java.util.HashMap;
 import java.util.List;
 
-class Item {
+public class Item {
     final String description;
     final String name;
     private HashMap<String, List<String>> flags;
+
+    Item(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
     Item(String name, String description, HashMap<String, List<String>> flags) {
         this.description = description;
@@ -20,5 +25,14 @@ class Item {
 
     HashMap<String, List<String>> editFlags() {
         return flags;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "description='" + description + '\'' +
+                ", name='" + name + '\'' +
+                ", flags=" + flags +
+                '}';
     }
 }

@@ -24,7 +24,7 @@ class Game3 {
             "Or is it?";
     private FileParser fileParser;
     private InputParser inputParser;
-    private List<String> inventory;
+    private HashMap<String, Item> inventory;
     private Room currentRoom;
     private HashMap<String, Room> rooms;
     private HashMap<String, Item> items;
@@ -52,9 +52,9 @@ class Game3 {
     //end singleton
 
     //accessors
-    static void setInventory(List<String> newInventory){
-        instance.inventory = newInventory;
-    }
+//    static void setInventory(List<String> newInventory){
+//        instance.inventory = newInventory;
+//    }
 
     static void setCurrentRoom(Room newCurrentRoom){
         instance.currentRoom = newCurrentRoom;
@@ -72,7 +72,7 @@ class Game3 {
         instance.npcs = newNpcs;
     }
 
-    static List<String> getInventory(){
+    static HashMap<String, Item> getInventory(){
         return instance.inventory;
     }
 
@@ -170,7 +170,7 @@ class Game3 {
             boolean itemsCheck = true;
             if(ec.itemReq != null) {
                 for (String item : ec.itemReq) {
-                    if (!inventory.contains(item)) {
+                    if (!inventory.containsKey(item)) {
                         itemsCheck = false;
                     }
                 }

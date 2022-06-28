@@ -99,7 +99,9 @@
       "Description": "A room full of tanks filled with green goop with what can contain different life-forms, some familiar, some unfamiliar",
       "Items": ["Springy Thingy"],
       "Connected Rooms": [
-        {"Inward" :  "Hallway1"}
+        {
+          "Inward" :  "Hallway1"
+        }
       ]
     },
     {
@@ -703,7 +705,9 @@
         "Communication buffer GUI",
         "Greenprints projector do-hickey",
         "Arcanospanner"
-      ]
+      ],
+      "Name" : "Translator Recipe",
+      "Description" : "A recipe for making a language translator for talk to aliens."
     }
   ],
   "End Conditions": [
