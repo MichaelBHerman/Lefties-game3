@@ -2,6 +2,7 @@ package com.pending.game3;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class Item {
     final String description;
@@ -16,7 +17,7 @@ public class Item {
     Item(String name, String description, HashMap<String, List<String>> flags) {
         this.description = description;
         this.flags = flags;
-        this.name = name;
+        this.name = name.toLowerCase();
     }
 
     HashMap<String, List<String>> getFlags() {

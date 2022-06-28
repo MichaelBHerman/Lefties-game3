@@ -282,7 +282,7 @@
       "Effect Tags": [
         {
           "Tag Name": "Key",
-          "Tag Data": ["Key1"]
+          "Tag Data": ["Key1", "Translator"]
         }
       ],
       "Description": "This looks an awful lot like a key-card from one of them new-fangled SYE-FIE shows"
@@ -522,7 +522,7 @@
       "Effect Tags": [
         {
           "Tag Name": "Craftable",
-          "Tag Data": [""]
+          "Tag Data": ["Translator"]
         }
       ],
       "Description": "A translator object that would allow you to communicate with any species anywhere."
@@ -701,7 +701,7 @@
         "Greenprints projector do-hickey",
         "Arcanospanner"
       ],
-      "Name" : "Translator Recipe",
+      "Name" : "multi-lingual neural mechanical translator (mlnmt)",
       "Description" : "A recipe for making a language translator for talk to aliens."
     }
   ],
@@ -709,7 +709,7 @@
     {
       "Win": true,
       "Room Requirement": "Bridge",
-      "Item Requirements": ["Multi-Lingual Neural Mechanical Translator (MLNMT)"]
+      "Item Requirements": ["multi-lingual neural mechanical translator (mlnmt)"]
     }
   ]
 }
