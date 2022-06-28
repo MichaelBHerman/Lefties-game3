@@ -153,10 +153,7 @@
       "Npcs" : ["alien4"],
       "Connected Rooms": [
         {
-          "Inward left": "Hallway2"
-        },
-        {
-          "Inward right": "Hallway3"
+          "Inward": "Hallway2"
         }
       ]
     },
@@ -224,10 +221,8 @@
         },
         {
           "Inward": "Bridge"
-        },
-        {
-          "Outward": "Shuttle Bay"
         }
+
       ]
     },
     {
