@@ -21,8 +21,8 @@ public class GamePanel {
         outputTextArea = createOutputTextArea();
         JTextField textInputField = createTextInputField(border, outputTextArea);
         JScrollPane outputScrollWindow = createOutputScrollWindow(border, outputTextArea);
-        roomItemsPanel = PickUpPanel.create(border);
-        roomNpcsPanel = TalkPanel.create(border);
+        roomItemsPanel = RoomItemsPanel.create(border);
+        roomNpcsPanel = NPCPanel.create(border);
         gameInfoPanel = createGameInfoPanel(border,textInputField, outputScrollWindow);
 
         mainGamePanel = new JPanel(new CardLayout());
@@ -126,6 +126,7 @@ public class GamePanel {
             gameInfoPanel.setVisible(true);
             roomItemsPanel.setVisible(false);
             roomNpcsPanel.setVisible(false);
+
 //            useItemPanel.setVisible(false);
             System.out.println("Going back.");
         } else if (option.equalsIgnoreCase("confirm selected")) {

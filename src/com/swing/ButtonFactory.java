@@ -1,8 +1,16 @@
 package com.swing;
 
+import com.pending.game3.Item;
+import com.swing.panels.RoomItemsPanel;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ButtonFactory {
 
@@ -46,19 +54,22 @@ public class ButtonFactory {
         return button;
     }
 
-    public static JRadioButton createRadioButton(String itemName) {
+    public static JRadioButton createRadioButton(String item) {
         ImageIcon healingIcon = new ImageIcon("resources/redPotion.png");
         healingIcon.setImage(healingIcon.getImage().getScaledInstance(100,85, Image.SCALE_DEFAULT));
         JRadioButton imgButton = new JRadioButton();
         imgButton.setIcon(healingIcon);
-        imgButton.setText(itemName);
+        imgButton.setText(item);
         imgButton.setVerticalTextPosition(JRadioButton.BOTTOM);
         imgButton.setHorizontalTextPosition(JRadioButton.CENTER);
         imgButton.setIconTextGap(-5);
         imgButton.addActionListener(e -> {
             System.out.println(imgButton.isSelected());
+
             if (imgButton.isSelected()) {
                 imgButton.setBackground(Color.GREEN);
+                System.out.println(imgButton.getActionCommand());
+                // TODO: System.out.println(imgButton.setActionCommand( item name + " " + itemId)); Set the btn to use the item id instead.
             } else {
                 imgButton.setBackground(Color.black);
             }

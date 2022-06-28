@@ -3,20 +3,17 @@ package com.pending.game3;
 import com.swing.MyFrame;
 import com.swing.panels.GamePanel;
 import com.swing.panels.InventoryPanel;
-import com.swing.panels.PickUpPanel;
+import com.swing.panels.RoomItemsPanel;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.swing.panels.PickUpPanel.*;
-
-class Game3 {
+public class Game3 {
     public static final String jsonDir = "resources/json";
     public static final String mainSplash = "So, you want to play an adventure game?\n" +
             "Too bad, this is just an engine for adventure games.\n" +
@@ -25,10 +22,10 @@ class Game3 {
             "your friends can modify or even create new game worlds to play in this engine.\n" +
             "The sky is the limit!\n\n\n\n" +
             "Or is it?";
-    private FileParser fileParser;
+    private static FileParser fileParser;
     private InputParser inputParser;
-    private HashMap<String, Item> inventory;
-    private Room currentRoom;
+    private static HashMap<String, Item> inventory;
+    private static Room currentRoom;
     private HashMap<String, Room> rooms;
     private HashMap<String, Item> items;
     private HashMap<String, Npc> npcs;
@@ -119,7 +116,9 @@ class Game3 {
         for (String line : fileParser.splashText){
             System.out.println(line);
         }
-        mainLoop();
+        //mainLoop();
+        displayConsoleGUI();
+        updateGUI();
     }
     // method to run the main menu
     private boolean mainMenu() {
@@ -150,7 +149,12 @@ class Game3 {
         }
     }
 
-    private boolean checkEndCondition() {
+    public static void updateGUI() {
+        checkEndCondition();
+        displayRoomGUI();
+    }
+
+    private static boolean checkEndCondition() {
         for(EndCondition ec : fileParser.endConditions) {
             //if in the correct room, true
             boolean roomCheck = false;
@@ -212,12 +216,26 @@ class Game3 {
         System.out.println();
     }
 
-    private void displayRoomGUI() {
-        GamePanel.updateOutputTextArea("\n" + getCurrentRoom().description);
-        GamePanel.updateOutputTextArea("\nItems: " + getCurrentRoom().getItems());
-        GamePanel.updateOutputTextArea("\nInventory: " + getInventory());
+    private static void displayRoomGUI() {
+//        GamePanel.updateOutputTextArea("\nCURRENT ROOM: " + getCurrentRoom().name);
+//        GamePanel.updateOutputTextArea("\nDESCRIPTION: " + getCurrentRoom().description);
+//        GamePanel.updateOutputTextArea("\nITEMS: " + getCurrentRoom().getItems());
+//        GamePanel.updateOutputTextArea("\nInventory: " + getInventory());
         InventoryPanel.updateInventoryGUI(getInventory());
-        PickUpPanel.renderRoomItems(getCurrentRoom().getItems());
+        RoomItemsPanel.renderRoomItems(getCurrentRoom().getItems());
+//        GamePanel.updateOutputTextArea("\nNPCs: " + getCurrentRoom().getNpcs());
+//        GamePanel.updateOutputTextArea("\nMovement options: ");
+//        for(String direction : currentRoom.getConnections().keySet()) {
+//            GamePanel.updateOutputTextArea("\"" + direction + "\" ");
+//        }
+        System.out.println();
+    }
+
+    private static void displayConsoleGUI() {
+        GamePanel.updateOutputTextArea("\nCURRENT ROOM: " + getCurrentRoom().name);
+        GamePanel.updateOutputTextArea("\nDESCRIPTION: " + getCurrentRoom().description);
+        GamePanel.updateOutputTextArea("\nITEMS: " + getCurrentRoom().getItems());
+        GamePanel.updateOutputTextArea("\nInventory: " + getInventory());
         GamePanel.updateOutputTextArea("\nNPCs: " + getCurrentRoom().getNpcs());
         GamePanel.updateOutputTextArea("\nMovement options: ");
         for(String direction : currentRoom.getConnections().keySet()) {
@@ -225,6 +243,7 @@ class Game3 {
         }
         System.out.println();
     }
+
     // method to prompt user to load JSON file
     private boolean promptUserForFile(Scanner reader, List<Path> files) {
 

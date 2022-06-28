@@ -10,7 +10,7 @@ import java.awt.*;
 import java.util.List;
 
 
-public class TalkPanel {
+public class NPCPanel {
 
     private static JPanel roomItemsScrollPanel;
     private static JPanel roomItems;
