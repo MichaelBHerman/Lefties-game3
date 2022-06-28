@@ -24,13 +24,12 @@ public class Game3 {
             "Or is it?";
     private static FileParser fileParser;
     private InputParser inputParser;
-    private static List<String> inventory;
+    private static HashMap<String, Item> inventory;
     private static Room currentRoom;
     private HashMap<String, Room> rooms;
     private HashMap<String, Item> items;
     private HashMap<String, Npc> npcs;
     private Scanner reader;
-    public static String playerAction;
 
     // Temporary method that only runs the UI
     public static void runGUI() {
@@ -53,9 +52,9 @@ public class Game3 {
     //end singleton
 
     //accessors
-    static void setInventory(List<String> newInventory){
-        instance.inventory = newInventory;
-    }
+//    static void setInventory(List<String> newInventory){
+//        instance.inventory = newInventory;
+//    }
 
     static void setCurrentRoom(Room newCurrentRoom){
         instance.currentRoom = newCurrentRoom;
@@ -73,7 +72,7 @@ public class Game3 {
         instance.npcs = newNpcs;
     }
 
-    static List<String> getInventory(){
+    static HashMap<String, Item> getInventory(){
         return instance.inventory;
     }
 
@@ -178,7 +177,7 @@ public class Game3 {
             boolean itemsCheck = true;
             if(ec.itemReq != null) {
                 for (String item : ec.itemReq) {
-                    if (!inventory.contains(item)) {
+                    if (!inventory.containsKey(item)) {
                         itemsCheck = false;
                     }
                 }
@@ -198,14 +197,21 @@ public class Game3 {
     }
 
     // method that show the user the current room, items in the room, and their inventory
-    private static void displayRoom() {
+    private void displayRoom() {
+        System.out.println("--------------");
+        System.out.println(getCurrentRoom().name);
+        System.out.println("--------------");
         System.out.println(getCurrentRoom().description);
+        System.out.println("--------------");
         System.out.println("Items: " + getCurrentRoom().getItems());
+        System.out.println("--------------");
         System.out.println("Inventory: " + getInventory());
+        System.out.println("--------------");
         System.out.println("NPCs: " + getCurrentRoom().getNpcs());
+        System.out.println("--------------");
         System.out.print("Movement options: ");
         for(String direction : currentRoom.getConnections().keySet()) {
-            System.out.print("\"" + direction + "\" ");
+            System.out.print("\"" + direction + " -> " +  currentRoom.getConnections().get(direction) + "\"");
         }
         System.out.println();
     }

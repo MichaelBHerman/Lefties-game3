@@ -188,7 +188,7 @@ public class InputParser {
             if (npc.getFlags().containsKey("Translator")) {
                 List<String> translatorFlagData = npc.getFlags().get("Translator");
                 //if the player has an item with the translator tag and the translator tag has a matching ID
-                for (String itemName : Game3.getInventory()) {
+                for (String itemName : Game3.getInventory().keySet()) {
                     HashMap<String, List<String>> itemFlags = Game3.getItems().get(itemName).getFlags();
                     if (itemFlags.containsKey("Translator")
                             && itemFlags.get("Translator").contains(translatorFlagData.get(0))) {
@@ -220,7 +220,7 @@ public class InputParser {
             List<CraftingRecipe> availableRecipes = new ArrayList<>();
             for (CraftingRecipe recipe : Game3.getCraftingRecipes()) {
                 for(String item : recipe.ingredients){
-                    if(!Game3.getInventory().contains(item)){
+                    if(!Game3.getInventory().keySet().contains(item)){
                         break;
                     }
                 }
@@ -242,7 +242,7 @@ public class InputParser {
                     for (String item : selectedRecipe.ingredients){
                         Game3.getInventory().remove(item);
                     }
-                    Game3.getInventory().add(selectedRecipe.result);
+                    Game3.getInventory().put(selectedRecipe.name, selectedRecipe);
                     System.out.println("Successfully crafted " + selectedRecipe.result);
                     break;
                 } catch (Exception e) {
@@ -257,7 +257,7 @@ public class InputParser {
             List<CraftingRecipe> availableRecipes = new ArrayList<>();
             for (CraftingRecipe recipe : Game3.getCraftingRecipes()) {
                 for(String item : recipe.ingredients){
-                    if(!Game3.getInventory().contains(item)){
+                    if(!Game3.getInventory().keySet().contains(item)){
                         break;
                     }
                 }
@@ -279,7 +279,7 @@ public class InputParser {
                     for (String item : selectedRecipe.ingredients){
                         Game3.getInventory().remove(item);
                     }
-                    Game3.getInventory().add(selectedRecipe.result);
+                    Game3.getInventory().put(selectedRecipe.name, selectedRecipe);
                     System.out.println("Successfully crafted " + selectedRecipe.result);
                     break;
                 } catch (Exception e) {
@@ -316,7 +316,7 @@ public class InputParser {
     }
 
     private static boolean keyCheck(String keyId) {
-        for (String itemName : Game3.getInventory()){
+        for (String itemName : Game3.getInventory().keySet()){
             if(Game3.getItems().containsKey(itemName)){
                 Item item = Game3.getItems().get(itemName);
                 HashMap<String, List<String>> itemFlags = item.getFlags();

@@ -1,5 +1,6 @@
 package com.swing;
 
+import com.pending.game3.Item;
 import com.swing.panels.RoomItemsPanel;
 
 import javax.swing.*;
@@ -53,12 +54,12 @@ public class ButtonFactory {
         return button;
     }
 
-    public static JRadioButton createRadioButton(String itemName) {
+    public static JRadioButton createRadioButton(String item) {
         ImageIcon healingIcon = new ImageIcon("resources/redPotion.png");
         healingIcon.setImage(healingIcon.getImage().getScaledInstance(100,85, Image.SCALE_DEFAULT));
         JRadioButton imgButton = new JRadioButton();
         imgButton.setIcon(healingIcon);
-        imgButton.setText(itemName);
+        imgButton.setText(item);
         imgButton.setVerticalTextPosition(JRadioButton.BOTTOM);
         imgButton.setHorizontalTextPosition(JRadioButton.CENTER);
         imgButton.setIconTextGap(-5);

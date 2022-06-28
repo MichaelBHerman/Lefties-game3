@@ -2,6 +2,7 @@ package com.swing.panels;
 
 import com.pending.game3.Game3;
 import com.pending.game3.InputParser;
+import com.pending.game3.Item;
 import com.swing.ButtonFactory;
 import com.swing.WrapLayout;
 
@@ -10,6 +11,8 @@ import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,10 +40,10 @@ public class InventoryPanel {
         return inventoryScrollPanel;
     }
 
-    public static void updateInventoryGUI(List<String> playerInventory) {
+    public static void updateInventoryGUI(HashMap<String, Item> playerInventory) {
         inventory.removeAll();
         inventoryItemsList.clear();
-        for (String item : playerInventory) {
+        for (String item : playerInventory.keySet()) {
             JRadioButton newBtn = ButtonFactory.createRadioButton(item);
             inventory.add(newBtn);
             inventoryItemsList.add(newBtn);

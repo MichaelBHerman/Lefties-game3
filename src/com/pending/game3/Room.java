@@ -1,7 +1,5 @@
 package com.pending.game3;
 
-import com.swing.panels.InventoryPanel;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,14 +60,14 @@ class Room {
 
     void takeItem(String itemToTake) {
         if (items.contains(itemToTake)) {
-            Game3.getInventory().add(itemToTake);
-            //InventoryPanel.addItem(itemToTake); // Added for GUI
+            HashMap<String, Item> itemsList = Game3.getItems();
+            Game3.getInventory().put(itemToTake, itemsList.get(itemToTake));
             items.remove(itemToTake);
         }
     }
 
     void dropItem(String itemToDrop) {
-        if (Game3.getInventory().contains(itemToDrop)) {
+        if (Game3.getInventory().containsKey(itemToDrop)) {
             Game3.getInventory().remove(itemToDrop);
             items.add(itemToDrop);
         }
