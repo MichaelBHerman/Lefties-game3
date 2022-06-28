@@ -1,5 +1,6 @@
 package com.swing.panels;
 
+import com.pending.game3.Item;
 import com.swing.ButtonFactory;
 import com.swing.WrapLayout;
 
@@ -7,6 +8,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class InventoryPanel {
@@ -31,12 +34,18 @@ public class InventoryPanel {
         return inventoryScrollPanel;
     }
 
-    public static void updateInventoryGUI(List<String> playerInventory) {
+//    public static void updateInventoryGUI(HashMap<String, Item> inventory) {
+//        System.out.println(inventory);
+//        for (String item : inventory) {
+//            new JPanel()
+//        }
+        //JLabel image = new JLabel()
+//    }
+    public static void updateInventoryGUI(HashMap<String, Item> playerInventory) {
         inventory.removeAll();
-        for (String item : playerInventory) {
+        for (String item : playerInventory.keySet()) {
             inventory.add(ButtonFactory.createRadioButton(item));
         }
-
         inventoryScrollPanel.validate();
 //        InventoryScrollPanel.repaint();
     }
