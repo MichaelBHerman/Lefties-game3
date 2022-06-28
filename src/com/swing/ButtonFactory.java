@@ -1,8 +1,15 @@
 package com.swing;
 
+import com.swing.panels.RoomItemsPanel;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ButtonFactory {
 
@@ -57,8 +64,11 @@ public class ButtonFactory {
         imgButton.setIconTextGap(-5);
         imgButton.addActionListener(e -> {
             System.out.println(imgButton.isSelected());
+
             if (imgButton.isSelected()) {
                 imgButton.setBackground(Color.GREEN);
+                System.out.println(imgButton.getActionCommand());
+                // TODO: System.out.println(imgButton.setActionCommand( item name + " " + itemId)); Set the btn to use the item id instead.
             } else {
                 imgButton.setBackground(Color.black);
             }

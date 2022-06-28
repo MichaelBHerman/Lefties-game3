@@ -1,5 +1,7 @@
 package com.swing.panels;
 
+import com.pending.game3.Game3;
+import com.pending.game3.InputParser;
 import com.swing.ButtonFactory;
 import com.swing.WrapLayout;
 
@@ -7,12 +9,16 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InventoryPanel {
 
     private static JPanel inventoryScrollPanel;
     private static JPanel inventory;
+
+    public static ArrayList<JRadioButton> inventoryItemsList = new ArrayList<JRadioButton>();
 
     InventoryPanel() {
 
@@ -33,12 +39,15 @@ public class InventoryPanel {
 
     public static void updateInventoryGUI(List<String> playerInventory) {
         inventory.removeAll();
+        inventoryItemsList.clear();
         for (String item : playerInventory) {
-            inventory.add(ButtonFactory.createRadioButton(item));
+            JRadioButton newBtn = ButtonFactory.createRadioButton(item);
+            inventory.add(newBtn);
+            inventoryItemsList.add(newBtn);
         }
 
         inventoryScrollPanel.validate();
-//        InventoryScrollPanel.repaint();
+        inventoryScrollPanel.repaint();
     }
 
     private static JScrollPane createInventoryScrollPane(Border border) {
@@ -74,6 +83,21 @@ public class InventoryPanel {
         });
 
         return inventoryScrollPane;
+    }
+
+    static void dropSelectedItems() {
+        List<JRadioButton> filteredItemsList = inventoryItemsList.stream().filter(btn -> btn.isSelected()).collect(Collectors.toList());
+
+        System.out.println(inventoryItemsList);
+
+        for (JRadioButton btn : filteredItemsList) {
+            System.out.println(btn.getActionCommand());
+            GamePanel.updateOutputTextArea("\nYou dropped a(n) " + btn.getActionCommand());
+            InputParser.getGUIInput("drop " + btn.getActionCommand());
+        }
+
+        inventoryItemsList.removeAll(filteredItemsList);
+        Game3.updateGUI();
     }
 
 }

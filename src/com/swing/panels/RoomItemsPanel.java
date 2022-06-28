@@ -1,5 +1,7 @@
 package com.swing.panels;
 
+import com.pending.game3.Game3;
+import com.pending.game3.InputParser;
 import com.swing.ButtonFactory;
 import com.swing.WrapLayout;
 
@@ -7,13 +9,16 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
-public class PickUpPanel {
+public class RoomItemsPanel {
 
-    private static JPanel roomItems;
+    public static JPanel currentRoomItems;
     private static JPanel roomItemsScrollPanel;
+    public static ArrayList<JRadioButton> roomItemsList = new ArrayList<JRadioButton>();
 
     public static JPanel create(Border border) {
 
@@ -29,9 +34,9 @@ public class PickUpPanel {
     }
 
     private static JScrollPane createRoomItemsScrollPane(Border border) {
-        roomItems = new JPanel(new WrapLayout(WrapLayout.LEADING));
-        roomItems.setBackground(Color.black);
-        JScrollPane roomScrollPane = new JScrollPane(roomItems);
+        currentRoomItems = new JPanel(new WrapLayout(WrapLayout.LEADING));
+        currentRoomItems.setBackground(Color.black);
+        JScrollPane roomScrollPane = new JScrollPane(currentRoomItems);
         roomScrollPane.setBackground(Color.black);
         roomScrollPane.setBorder(null);
 
@@ -63,14 +68,31 @@ public class PickUpPanel {
         return roomScrollPane;
     }
 
-    public static void renderRoomItems(List<String> currentRoomItems){
-        roomItems.removeAll();
-        for (String item : currentRoomItems) {
-            roomItems.add(ButtonFactory.createRadioButton(item));
+    public static void renderRoomItems(List<String> roomItems){
+        currentRoomItems.removeAll();
+        roomItemsList.clear();
+        for (String item : roomItems) {
+            JRadioButton newBtn = ButtonFactory.createRadioButton(item);
+            roomItemsList.add(newBtn);
+            currentRoomItems.add(newBtn);
         }
-
         roomItemsScrollPanel.validate();
-//        InventoryScrollPanel.repaint();
+        roomItemsScrollPanel.repaint();
+    }
+
+    static void takeSelectedItems() {
+        List<JRadioButton> filteredItemsList = roomItemsList.stream().filter(btn -> btn.isSelected()).collect(Collectors.toList());
+
+        System.out.println(roomItemsList);
+
+        for (JRadioButton btn : filteredItemsList) {
+            System.out.println(btn.getActionCommand());
+            GamePanel.updateOutputTextArea("\nYou grabbed a(n) " + btn.getActionCommand());
+            InputParser.getGUIInput("take " + btn.getActionCommand());
+        }
+        roomItemsList.removeAll(filteredItemsList);
+
+        Game3.updateGUI();
     }
 
 }
