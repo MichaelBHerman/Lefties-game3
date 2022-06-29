@@ -60,6 +60,8 @@ public class ButtonFactory {
         JRadioButton imgButton = new JRadioButton();
         imgButton.setIcon(healingIcon);
         imgButton.setText(item);
+        imgButton.setFocusPainted(false);
+        imgButton.setForeground(Color.green);
         imgButton.setVerticalTextPosition(JRadioButton.BOTTOM);
         imgButton.setHorizontalTextPosition(JRadioButton.CENTER);
         imgButton.setIconTextGap(-5);
@@ -68,10 +70,12 @@ public class ButtonFactory {
 
             if (imgButton.isSelected()) {
                 imgButton.setBackground(Color.GREEN);
+                imgButton.setForeground(Color.black);
                 System.out.println(imgButton.getActionCommand());
                 // TODO: System.out.println(imgButton.setActionCommand( item name + " " + itemId)); Set the btn to use the item id instead.
             } else {
                 imgButton.setBackground(Color.black);
+                imgButton.setForeground(Color.green);
             }
         });
         imgButton.setBackground(Color.black);
