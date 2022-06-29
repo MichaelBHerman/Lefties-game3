@@ -55,7 +55,7 @@ public class ButtonFactory {
     }
 
     public static JRadioButton createRadioButton(String item) {
-        ImageIcon healingIcon = new ImageIcon("resources/redPotion.png");
+        ImageIcon healingIcon = new ImageIcon("resources/" + item + ".png");
         healingIcon.setImage(healingIcon.getImage().getScaledInstance(100,85, Image.SCALE_DEFAULT));
         JRadioButton imgButton = new JRadioButton();
         imgButton.setIcon(healingIcon);
