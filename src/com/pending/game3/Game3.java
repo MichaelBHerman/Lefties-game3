@@ -149,11 +149,6 @@ public class Game3 {
         }
     }
 
-    public static void updateGUI() {
-        checkEndCondition();
-        displayRoomGUI();
-    }
-
     private static boolean checkEndCondition() {
         for(EndCondition ec : fileParser.endConditions) {
             //if in the correct room, true
@@ -216,19 +211,14 @@ public class Game3 {
         System.out.println();
     }
 
+    public static void updateGUI() {
+        checkEndCondition();
+        displayRoomGUI();
+    }
+
     private static void displayRoomGUI() {
-//        GamePanel.updateOutputTextArea("\nCURRENT ROOM: " + getCurrentRoom().name);
-//        GamePanel.updateOutputTextArea("\nDESCRIPTION: " + getCurrentRoom().description);
-//        GamePanel.updateOutputTextArea("\nITEMS: " + getCurrentRoom().getItems());
-//        GamePanel.updateOutputTextArea("\nInventory: " + getInventory());
         InventoryPanel.updateInventoryGUI(getInventory());
         RoomItemsPanel.renderRoomItems(getCurrentRoom().getItems());
-//        GamePanel.updateOutputTextArea("\nNPCs: " + getCurrentRoom().getNpcs());
-//        GamePanel.updateOutputTextArea("\nMovement options: ");
-//        for(String direction : currentRoom.getConnections().keySet()) {
-//            GamePanel.updateOutputTextArea("\"" + direction + "\" ");
-//        }
-        System.out.println();
     }
 
     private static void displayConsoleGUI() {
@@ -241,7 +231,6 @@ public class Game3 {
         for(String direction : currentRoom.getConnections().keySet()) {
             GamePanel.updateOutputTextArea("\"" + direction + "\" ");
         }
-        System.out.println();
     }
 
     // method to prompt user to load JSON file
