@@ -8,7 +8,7 @@ import static com.swing.panels.MapPanel.updateMapGUI;
 
 public class InputParser {
     static Random random = new Random();
-    private static Scanner scanner;
+    private static Scanner scanner = new Scanner(System.in);
 
 //    boolean getInput(Scanner userInput){
 //        System.out.print("Enter Command\n> "); // allows input command to be on next line
