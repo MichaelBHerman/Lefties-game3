@@ -147,7 +147,7 @@ public class InputParser {
             case INSPECT:
                 if("room".equalsIgnoreCase(inputSplit[1])){
                     GamePanel.updateOutputTextArea(Game3.getCurrentRoom().description);
-                } else if (Game3.getCurrentRoom().getItems().contains(inputSplit[1])) {
+                } else if (Game3.getCurrentRoom().getItems().containsKey(inputSplit[1])) {
                     GamePanel.updateOutputTextArea(Game3.getItems().get(inputSplit[1]).description);
                 } else {
                     GamePanel.updateOutputTextArea("\nWARNING: Item \"" + inputSplit[1] + "\" does not exist in the current room");
