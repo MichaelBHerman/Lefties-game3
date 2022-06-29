@@ -201,7 +201,7 @@ class Game3 {
         System.out.println("--------------");
         System.out.println("Items: " + getCurrentRoom().getItems());
         System.out.println("--------------");
-        System.out.println("Inventory: " + getInventory());
+        System.out.println("Inventory: " + getInventory().keySet());
         System.out.println("--------------");
         System.out.println("NPCs: " + getCurrentRoom().getNpcs());
         System.out.println("--------------");
