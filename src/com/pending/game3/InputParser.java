@@ -191,11 +191,10 @@ public class InputParser {
     private static void interact(String target) {
         //if the NPC exists and is in this room
         if(Game3.getNpcs().containsKey(target) && Game3.getCurrentRoom().getNpcs().contains(target)) {
-            System.out.println("So far so good........");
             Npc npc = Game3.getNpcs().get(target);
             //if the NPC has the "Translator" tag
-            if (npc.getFlags().containsKey("Translator")) {
-                List<String> translatorFlagData = npc.getFlags().get("Translator");
+            if (npc.getFlags().containsKey("Random") && npc.getFlags().get("Random").contains("Translator")) {
+                List<String> translatorFlagData = npc.getFlags().get("Random");
                 //if the player has an item with the translator tag and the translator tag has a matching ID
                 for (String itemName : Game3.getInventory().keySet()) {
                     HashMap<String, List<String>> itemFlags = Game3.getItems().get(itemName).getFlags();
@@ -211,7 +210,7 @@ public class InputParser {
                     }
                 }
             }
-            if(npc.getFlags().containsKey("Random")){
+            if(npc.getFlags().containsValue("Random")){
                 System.out.println(npc.getAlternativeDialogue()
                         .get(random.nextInt(npc.getAlternativeDialogue().size())));
             } else {
@@ -223,6 +222,7 @@ public class InputParser {
         }
     }
 
+    // METHOD OVERRIDING
 //    private void crafting(Scanner userInput) {
 //        if(Game3.getCurrentRoom().getFlags().containsKey("Crafting")){
 //            List<CraftingRecipe> availableRecipes = new ArrayList<>();
@@ -250,7 +250,8 @@ public class InputParser {
 //                    for (String item : selectedRecipe.ingredients){
 //                        Game3.getInventory().remove(item);
 //                    }
-//                    Game3.getInventory().put(selectedRecipe.name, selectedRecipe);
+//                    Item translator = Game3.getItems().get("multi-lingual neural mechanical translator (mlnmt)");
+//                    Game3.getInventory().put(translator.name, translator);
 //                    System.out.println("Successfully crafted " + selectedRecipe.result);
 //                    break;
 //                } catch (Exception e) {
