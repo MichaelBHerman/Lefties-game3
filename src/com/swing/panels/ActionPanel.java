@@ -84,14 +84,14 @@ public class ActionPanel {
             takeRoomItemPanel.setVisible(true);
             talkRoomNPCPanel.setVisible(false);
             dropItemPanel.setVisible(false);
-            Game3.updateGUI(); // Update GUI to ensure all items are unchecked when leaving the panel
+            Game3.displayRoomGUI();
 //            useItemPanel.setVisible(false);
         } else if (option.equalsIgnoreCase("talk")) {
             mainPanel.setVisible(false);
             takeRoomItemPanel.setVisible(false);
             talkRoomNPCPanel.setVisible(true);
             dropItemPanel.setVisible(false);
-            Game3.updateGUI(); // Update GUI to ensure all items are unchecked when leaving the panel
+            Game3.displayRoomGUI();
 //            useItemPanel.setVisible(false);
         } else if (option.equalsIgnoreCase("drop")) {
             mainPanel.setVisible(false);
@@ -104,7 +104,7 @@ public class ActionPanel {
             takeRoomItemPanel.setVisible(false);
             talkRoomNPCPanel.setVisible(false);
             dropItemPanel.setVisible(false);
-            Game3.updateGUI(); // Update GUI to ensure all items are unchecked when leaving the panel
+            Game3.displayRoomGUI();
 //            useItemPanel.setVisible(false);
         } else if (option.equalsIgnoreCase("confirm selected")) {
             if (takeRoomItemPanel.isVisible()) {

@@ -5,6 +5,7 @@ import com.swing.panels.GamePanel;
 import com.swing.panels.InventoryPanel;
 import com.swing.panels.RoomItemsPanel;
 
+import javax.swing.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -18,9 +19,9 @@ public class Game3 {
     public static final String mainSplash = "So, you want to play an adventure game?\n" +
             "Too bad, this is just an engine for adventure games.\n" +
             "After selecting New Game, you will be prompted to choose a .json file to load the game from.\n" +
-            "Yes, you read that correctly: This engine can read in the entire game from a .json file, so you and " +
+            "Yes, you read that correctly: This engine can read in the entire game from a .json file, so you and \n" +
             "your friends can modify or even create new game worlds to play in this engine.\n" +
-            "The sky is the limit!\n\n\n\n" +
+            "The sky is the limit!\n\n" +
             "Or is it?";
     private static FileParser fileParser;
     private InputParser inputParser;
@@ -38,6 +39,7 @@ public class Game3 {
 
     //singleton
     private static Game3 instance;
+
     // logic for running a new instance of a game
     public static void runProgram() {
         if (instance == null) {
@@ -51,10 +53,6 @@ public class Game3 {
     private Game3(){}
     //end singleton
 
-    //accessors
-//    static void setInventory(List<String> newInventory){
-//        instance.inventory = newInventory;
-//    }
 
     static void setCurrentRoom(Room newCurrentRoom){
         instance.currentRoom = newCurrentRoom;
@@ -76,7 +74,7 @@ public class Game3 {
         return instance.inventory;
     }
 
-    static Room getCurrentRoom(){
+    public static Room getCurrentRoom(){
         return instance.currentRoom;
     }
 
@@ -98,12 +96,11 @@ public class Game3 {
 
     //method for starting the game
     private void run() {
-        System.out.println(mainSplash);//splash screen
-        if(mainMenu()) return;
-
+        //if(mainMenu()) return;
+        String userChoice = JOptionPane.showInputDialog(mainSplash + "\n[1]: Start new game\n[4]: quit program");
         try (Stream<Path> stream = Files.list(Path.of(jsonDir))) {
             List<Path> files = getJsonList(stream);
-            if (promptUserForFile(reader, files)) return;
+            if (promptUserForFileGUI( files)) return;
         } catch (Exception e) {
             System.out.println("Unable to locate resources\\json folder.");
             return;
@@ -118,39 +115,6 @@ public class Game3 {
         }
         //mainLoop();
         displayConsoleGUI();
-        updateGUI();
-    }
-    // method to run the main menu
-    private boolean mainMenu() {
-        System.out.println("[1]: Start new game\n[4]: quit program");
-        while (true){
-            String input = reader.nextLine();
-            switch (input){
-                case "1":
-                    return false;
-                case "4":
-                    return true;
-            }
-            System.out.println("Invalid input, please enter the number for your menu selection.");
-
-        }
-    }
-    //method that handles the game logic of taking in a command and displaying a room
-    private void mainLoop() {
-        while (true) {
-            displayRoom();
-            displayRoomGUI();
-            if(inputParser.getInput(reader)) {
-                break;
-            }
-            if(checkEndCondition()) {
-                break;
-            }
-        }
-    }
-
-    public static void updateGUI() {
-        checkEndCondition();
         displayRoomGUI();
     }
 
@@ -196,64 +160,34 @@ public class Game3 {
         return false;
     }
 
-    // method that show the user the current room, items in the room, and their inventory
-    private void displayRoom() {
-        System.out.println("--------------");
-        System.out.println(getCurrentRoom().name);
-        System.out.println("--------------");
-        System.out.println(getCurrentRoom().description);
-        System.out.println("--------------");
-        System.out.println("Items: " + getCurrentRoom().getItems());
-        System.out.println("--------------");
-        System.out.println("Inventory: " + getInventory().keySet());
-        System.out.println("--------------");
-        System.out.println("NPCs: " + getCurrentRoom().getNpcs());
-        System.out.println("--------------");
-        System.out.print("Movement options: ");
-        for(String direction : currentRoom.getConnections().keySet()) {
-            System.out.print("\"" + direction + " -> " +  currentRoom.getConnections().get(direction) + "\"");
-        }
-        System.out.println();
-    }
-
-    private static void displayRoomGUI() {
-//        GamePanel.updateOutputTextArea("\nCURRENT ROOM: " + getCurrentRoom().name);
-//        GamePanel.updateOutputTextArea("\nDESCRIPTION: " + getCurrentRoom().description);
-//        GamePanel.updateOutputTextArea("\nITEMS: " + getCurrentRoom().getItems());
-//        GamePanel.updateOutputTextArea("\nInventory: " + getInventory());
+    public static void displayRoomGUI() {
+        checkEndCondition();
         InventoryPanel.updateInventoryGUI(getInventory());
         RoomItemsPanel.renderRoomItems(getCurrentRoom().getItems());
-//        GamePanel.updateOutputTextArea("\nNPCs: " + getCurrentRoom().getNpcs());
-//        GamePanel.updateOutputTextArea("\nMovement options: ");
-//        for(String direction : currentRoom.getConnections().keySet()) {
-//            GamePanel.updateOutputTextArea("\"" + direction + "\" ");
-//        }
-        System.out.println();
     }
 
-    private static void displayConsoleGUI() {
+    static void displayConsoleGUI() {
+        checkEndCondition();
+        GamePanel.clearOutputTextArea();
         GamePanel.updateOutputTextArea("\nCURRENT ROOM: " + getCurrentRoom().name);
         GamePanel.updateOutputTextArea("\nDESCRIPTION: " + getCurrentRoom().description);
         GamePanel.updateOutputTextArea("\nITEMS: " + getCurrentRoom().getItems());
-        GamePanel.updateOutputTextArea("\nInventory: " + getInventory());
         GamePanel.updateOutputTextArea("\nNPCs: " + getCurrentRoom().getNpcs());
-        GamePanel.updateOutputTextArea("\nMovement options: ");
+        GamePanel.updateOutputTextArea("\nMOVEMENT OPTIONS: ");
         for(String direction : currentRoom.getConnections().keySet()) {
             GamePanel.updateOutputTextArea("\"" + direction + "\" ");
         }
-        System.out.println();
+        GamePanel.updateOutputTextArea("\n-----");
     }
 
-    // method to prompt user to load JSON file
-    private boolean promptUserForFile(Scanner reader, List<Path> files) {
+    private boolean promptUserForFileGUI(List<Path> files) {
 
         while (true){
-            printFiles(files);
-            System.out.print("Enter a number to select a json file to load: ");
-            String input = reader.nextLine();
-            if ("quit".equals(input.toLowerCase())) return true;
+            //printFiles(files);
+            String userInput = JOptionPane.showInputDialog("Enter a number to select a json file to load: " + printFilesGUI(files));
+            if ("quit".equals(userInput.toLowerCase())) return true;
             try{
-                int inputIndex = Integer.parseInt(input) - 1;
+                int inputIndex = Integer.parseInt(userInput) - 1;
                 fileParser = FileParser.loadFile(files.get(inputIndex));
                 if(fileParser == null) return true;
                 else return false;
@@ -263,11 +197,13 @@ public class Game3 {
             }
         }
     }
-    // displays file names
-    private void printFiles(List<Path> files) {
+
+    private String printFilesGUI(List<Path> files) {
+        StringBuilder options = new StringBuilder();
         for (int i = 0; i < files.size(); i++){
-            System.out.println("[" + (1 + i) + "]: " + files.get(i).getFileName());
+          options.append("\n[").append(1 + i).append("]: ").append(files.get(i).getFileName());
         }
+        return options.toString();
     }
     // gets JSON files from the list
     private List<Path> getJsonList(Stream<Path> stream) {
@@ -275,4 +211,81 @@ public class Game3 {
                 && file.getFileName().toString().contains(".json"))
                 .collect(Collectors.toList());
     }
+
+    // method to run the main menu
+//    private boolean mainMenu() {
+//        System.out.println("[1]: Start new game\n[4]: quit program");
+//        while (true){
+//            String input = reader.nextLine();
+//            switch (input){
+//                case "1":
+//                    return false;
+//                case "4":
+//                    return true;
+//            }
+//            System.out.println("Invalid input, please enter the number for your menu selection.");
+//
+//        }
+//    }
+
+    //method that handles the game logic of taking in a command and displaying a room
+//    private void mainLoop() {
+//        while (true) {
+//            displayRoom();
+//            displayRoomGUI();
+//            if(inputParser.getInput(reader)) {
+//                break;
+//            }
+//            if(checkEndCondition()) {
+//                break;
+//            }
+//        }
+//    }
+
+    // method that show the user the current room, items in the room, and their inventory
+//    private void displayRoom() {
+//        System.out.println("--------------");
+//        System.out.println(getCurrentRoom().name);
+//        System.out.println("--------------");
+//        System.out.println(getCurrentRoom().description);
+//        System.out.println("--------------");
+//        System.out.println("Items: " + getCurrentRoom().getItems());
+//        System.out.println("--------------");
+//        System.out.println("Inventory: " + getInventory());
+//        System.out.println("--------------");
+//        System.out.println("NPCs: " + getCurrentRoom().getNpcs());
+//        System.out.println("--------------");
+//        System.out.print("Movement options: ");
+//        for(String direction : currentRoom.getConnections().keySet()) {
+//            System.out.print("\"" + direction + " -> " +  currentRoom.getConnections().get(direction) + "\"");
+//        }
+//        System.out.println();
+//    }
+
+    // method to prompt user to load JSON file
+//    private boolean promptUserForFile(Scanner reader, List<Path> files) {
+//
+//        while (true){
+//            printFiles(files);
+//            System.out.print("Enter a number to select a json file to load: ");
+//            String input = reader.nextLine();
+//            if ("quit".equals(input.toLowerCase())) return true;
+//            try{
+//                int inputIndex = Integer.parseInt(input) - 1;
+//                fileParser = FileParser.loadFile(files.get(inputIndex));
+//                if(fileParser == null) return true;
+//                else return false;
+//            } catch (Exception e) {
+//                System.out.println(e);
+//                System.out.println("Invalid input, please try again.");
+//            }
+//        }
+//    }
+
+    // displays file names
+//    private void printFiles(List<Path> files) {
+//        for (int i = 0; i < files.size(); i++){
+//            System.out.println("[" + (1 + i) + "]: " + files.get(i).getFileName());
+//        }
+//    }
 }

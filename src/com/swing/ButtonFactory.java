@@ -39,17 +39,46 @@ public class ButtonFactory {
             }
         });
 
+
         if (btnName.equalsIgnoreCase("take")) {
-            return take(button);
+            button.addActionListener(e -> MyFrame.updateFrameWindow("take"));
+
         } else if (btnName.equalsIgnoreCase("talk")) {
-            return talk(button);
+            button.addActionListener(e -> MyFrame.updateFrameWindow("talk"));
+
         } else if (btnName.equalsIgnoreCase("drop")) {
-            return drop(button);
+            button.addActionListener(e -> MyFrame.updateFrameWindow("drop"));
+
         } else if (btnName.equalsIgnoreCase("back")) {
-            return back(button);
+            button.addActionListener(e -> MyFrame.updateFrameWindow("back"));
+
         } else if (btnName.equalsIgnoreCase("confirm selected")) {
-            System.out.println("Confirmed selected items.");
-            return confirm(button);
+            button.addActionListener(e -> MyFrame.updateFrameWindow("confirm selected"));
+
+        } else if (btnName.equalsIgnoreCase("clockwise")) {
+            System.out.println("Going clockwise");
+            button.addActionListener(e -> MyFrame.updateFrameWindow("clockwise"));
+
+        } else if (btnName.equalsIgnoreCase("counter-clockwise")) {
+            System.out.println("Going counter-clockwise");
+            button.addActionListener(e -> MyFrame.updateFrameWindow("counter-clockwise"));
+
+        } else if (btnName.equalsIgnoreCase("outward")) {
+            System.out.println("Going outward");
+            button.addActionListener(e -> MyFrame.updateFrameWindow("outward"));
+
+        } else if (btnName.equalsIgnoreCase("inward")) {
+            System.out.println("Going inward");
+            button.addActionListener(e -> MyFrame.updateFrameWindow("inward"));
+
+        } else if (btnName.equalsIgnoreCase("outward right")) {
+            System.out.println("Going outward right");
+            button.addActionListener(e -> MyFrame.updateFrameWindow("outward right"));
+
+        }  else if (btnName.equalsIgnoreCase("outward left")) {
+            System.out.println("Going outward left");
+            button.addActionListener(e -> MyFrame.updateFrameWindow("outward left"));
+
         }
         return button;
     }
@@ -60,6 +89,8 @@ public class ButtonFactory {
         JRadioButton imgButton = new JRadioButton();
         imgButton.setIcon(healingIcon);
         imgButton.setText(item);
+        imgButton.setFocusPainted(false);
+        imgButton.setForeground(Color.green);
         imgButton.setVerticalTextPosition(JRadioButton.BOTTOM);
         imgButton.setHorizontalTextPosition(JRadioButton.CENTER);
         imgButton.setIconTextGap(-5);
@@ -68,39 +99,16 @@ public class ButtonFactory {
 
             if (imgButton.isSelected()) {
                 imgButton.setBackground(Color.GREEN);
+                imgButton.setForeground(Color.black);
                 System.out.println(imgButton.getActionCommand());
                 // TODO: System.out.println(imgButton.setActionCommand( item name + " " + itemId)); Set the btn to use the item id instead.
             } else {
                 imgButton.setBackground(Color.black);
+                imgButton.setForeground(Color.green);
             }
         });
         imgButton.setBackground(Color.black);
         return imgButton;
-    }
-
-    private static JButton take(JButton button) {
-        button.addActionListener(e -> MyFrame.updateFrameWindow("take"));
-        return button;
-    }
-
-    private static JButton talk(JButton button) {
-        button.addActionListener(e -> MyFrame.updateFrameWindow("talk"));
-        return button;
-    }
-
-    private static JButton drop(JButton button) {
-        button.addActionListener(e -> MyFrame.updateFrameWindow("drop"));
-        return button;
-    }
-
-    private static JButton back(JButton button) {
-        button.addActionListener(e -> MyFrame.updateFrameWindow("back"));
-        return button;
-    }
-
-    private static JButton confirm(JButton button) {
-        button.addActionListener(e -> MyFrame.updateFrameWindow("confirm selected"));
-        return button;
     }
 
 }

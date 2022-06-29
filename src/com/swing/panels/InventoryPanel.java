@@ -11,7 +11,6 @@ import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -95,12 +94,11 @@ public class InventoryPanel {
 
         for (JRadioButton btn : filteredItemsList) {
             System.out.println(btn.getActionCommand());
-            GamePanel.updateOutputTextArea("\nYou dropped a(n) " + btn.getActionCommand());
             InputParser.getGUIInput("drop " + btn.getActionCommand());
         }
 
         inventoryItemsList.removeAll(filteredItemsList);
-        Game3.updateGUI();
+        Game3.displayRoomGUI();
     }
 
 }

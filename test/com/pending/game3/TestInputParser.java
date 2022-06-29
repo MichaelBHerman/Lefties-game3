@@ -8,8 +8,8 @@ class TestInputParser {
 
     @Test
     public static void main(String[] args) {
-        InputParser inputParser = new InputParser();
-        Scanner scanner = new Scanner(System.in);
-        inputParser.getInput(scanner);
+//        InputParser inputParser = new InputParser();
+//        Scanner scanner = new Scanner(System.in);
+//        inputParser.getInput(scanner);
     }
 }

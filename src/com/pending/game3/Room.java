@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-class Room {
+public class Room {
     private HashMap<String, List<String>> flags;
     private List<String> items;
     private List<String> npcs;
@@ -80,6 +80,10 @@ class Room {
     }
 
     void craft(){
+    }
+
+    public String getName() {
+        return this.name;
     }
 
 }
