@@ -87,12 +87,11 @@ public class RoomItemsPanel {
 
         for (JRadioButton btn : filteredItemsList) {
             System.out.println(btn.getActionCommand());
-            GamePanel.updateOutputTextArea("\nYou grabbed a(n) " + btn.getActionCommand());
             InputParser.getGUIInput("take " + btn.getActionCommand());
         }
         roomItemsList.removeAll(filteredItemsList);
 
-        Game3.updateGUI();
+        Game3.displayRoomGUI();
     }
 
 }
