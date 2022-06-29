@@ -99,7 +99,9 @@
       "Description": "A room full of tanks filled with green goop with what can contain different life-forms, some familiar, some unfamiliar",
       "Items": ["Springy Thingy"],
       "Connected Rooms": [
-        {"Inward" :  "Hallway1"}
+        {
+          "Inward" :  "Hallway1"
+        }
       ]
     },
     {
@@ -151,10 +153,7 @@
       "Npcs" : ["alien4"],
       "Connected Rooms": [
         {
-          "Inward left": "Hallway2"
-        },
-        {
-          "Inward right": "Hallway3"
+          "Inward": "Hallway2"
         }
       ]
     },
@@ -222,10 +221,8 @@
         },
         {
           "Inward": "Bridge"
-        },
-        {
-          "Outward": "Shuttle Bay"
         }
+
       ]
     },
     {
@@ -524,8 +521,8 @@
       "Name": "Multi-Lingual Neural Mechanical Translator (MLNMT)",
       "Effect Tags": [
         {
-          "Tag Name": "Craftable",
-          "Tag Data": [""]
+          "Tag Name": "Translator",
+          "Tag Data": ["Translator"]
         }
       ],
       "Description": "A translator object that would allow you to communicate with any species anywhere."
@@ -626,8 +623,8 @@
       "Name": "alien1",
       "Effect Tags": [
         {
-          "Tag Name": "Translator",
-          "Tag Data": [""]
+          "Tag Name": "Random",
+          "Tag Data": ["Translator"]
         }
       ],
       "Dialogue": "Ack Ack Ack Ack Ack",
@@ -637,8 +634,8 @@
       "Name": "alien2",
       "Effect Tags": [
         {
-          "Tag Name": "Translator",
-          "Tag Data": [""]
+          "Tag Name": "Random",
+          "Tag Data": ["Translator"]
         }
       ],
       "Dialogue": "Ack Ack Ack Ack Ack",
@@ -648,8 +645,8 @@
       "Name": "alien3",
       "Effect Tags": [
         {
-          "Tag Name": "Translator",
-          "Tag Data": [""]
+          "Tag Name": "Random",
+          "Tag Data": ["Translator"]
         }
       ],
       "Dialogue": "Ack Ack Ack Ack Ack",
@@ -659,8 +656,8 @@
       "Name": "alien4",
       "Effect Tags": [
         {
-          "Tag Name": "Translator",
-          "Tag Data": [""]
+          "Tag Name": "Random",
+          "Tag Data": ["Translator"]
         }
       ],
       "Dialogue": "Ack Ack Ack Ack Ack",
@@ -670,8 +667,8 @@
       "Name": "alien5",
       "Effect Tags": [
         {
-          "Tag Name": "Translator",
-          "Tag Data": [""]
+          "Tag Name": "Random",
+          "Tag Data": ["Translator"]
         }
       ],
       "Dialogue": "Ack Ack Ack Ack Ack",
@@ -703,14 +700,16 @@
         "Communication buffer GUI",
         "Greenprints projector do-hickey",
         "Arcanospanner"
-      ]
+      ],
+      "Name" : "multi-lingual neural mechanical translator (mlnmt)",
+      "Description" : "A recipe for making a language translator for talk to aliens."
     }
   ],
   "End Conditions": [
     {
       "Win": true,
       "Room Requirement": "Bridge",
-      "Item Requirements": ["Multi-Lingual Neural Mechanical Translator (MLNMT)"]
+      "Item Requirements": ["multi-lingual neural mechanical translator (mlnmt)"]
     }
   ]
 }
