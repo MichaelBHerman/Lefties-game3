@@ -2,6 +2,7 @@ package com.swing.panels;
 
 import com.pending.game3.Game3;
 import com.pending.game3.InputParser;
+import com.pending.game3.Item;
 import com.swing.ButtonFactory;
 import com.swing.WrapLayout;
 
@@ -10,6 +11,7 @@ import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,10 +70,10 @@ public class RoomItemsPanel {
         return roomScrollPane;
     }
 
-    public static void renderRoomItems(List<String> roomItems){
+    public static void renderRoomItems(HashMap<String, Item> roomItems){
         currentRoomItems.removeAll();
         roomItemsList.clear();
-        for (String item : roomItems) {
+        for (String item : roomItems.keySet()) {
             JRadioButton newBtn = ButtonFactory.createRadioButton(item);
             roomItemsList.add(newBtn);
             currentRoomItems.add(newBtn);

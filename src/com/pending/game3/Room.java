@@ -6,14 +6,14 @@ import java.util.List;
 
 class Room {
     private HashMap<String, List<String>> flags;
-    private List<String> items;
+    private HashMap<String, Item> items;
     private List<String> npcs;
     private HashMap<String, String> connections;
     final String description;
     final String name;
     final String displayName;
 
-    Room(HashMap<String, List<String>> flags, List<String> items, List<String> npcs,
+    Room(HashMap<String, List<String>> flags, HashMap<String, Item> items, List<String> npcs,
          HashMap<String, String> connections, String description, String name, String displayName){
 
         this.flags = flags;
@@ -41,11 +41,11 @@ class Room {
         return connections;
     }
 
-    List<String> getItems(){
-        return new ArrayList<>(items);
+    HashMap<String, Item> getItems(){
+        return this.items;
     }
 
-    List<String> editItems(){
+    HashMap<String, Item> editItems(){
         return items;
     }
 
@@ -59,17 +59,17 @@ class Room {
 
 
     void takeItem(String itemToTake) {
-        if (items.contains(itemToTake)) {
+        if (items.containsKey(itemToTake)) {
             HashMap<String, Item> itemsList = Game3.getItems();
             Game3.getInventory().put(itemToTake, itemsList.get(itemToTake));
             items.remove(itemToTake);
         }
     }
 
-    void dropItem(String itemToDrop) {
-        if (Game3.getInventory().containsKey(itemToDrop)) {
-            Game3.getInventory().remove(itemToDrop);
-            items.add(itemToDrop);
+    void dropItem(Item itemToDrop) {
+        if (Game3.getInventory().containsKey(itemToDrop.name)) {
+            Game3.getInventory().remove(itemToDrop.name);
+            items.put(itemToDrop.name, itemToDrop);
         }
     }
 

@@ -116,7 +116,7 @@ public class Game3 {
         for (String line : fileParser.splashText){
             System.out.println(line);
         }
-        //mainLoop();
+        mainLoop();
         displayConsoleGUI();
         updateGUI();
     }

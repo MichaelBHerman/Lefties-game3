@@ -56,7 +56,7 @@ public class InputParser {
             case INSPECT:
                 if("room".equalsIgnoreCase(inputSplit[1])){
                 System.out.println(Game3.getCurrentRoom().description);
-                } else if (Game3.getCurrentRoom().getItems().contains(inputSplit[1])) {
+                } else if (Game3.getCurrentRoom().getItems().containsKey(inputSplit[1])) {
                         System.out.println(Game3.getItems().get(inputSplit[1]).description);
                     } else {
                         System.out.println("Item does not exist");
@@ -69,7 +69,7 @@ public class InputParser {
                 break;
             case DROP:
                 if (Game3.getItems().containsKey(inputSplit[1])) {
-                    Game3.getCurrentRoom().dropItem(inputSplit[1]);
+                    Game3.getCurrentRoom().dropItem(Game3.getCurrentRoom().getItems().get(inputSplit[1]));
                 }
                 break;
             case QUIT:
@@ -143,7 +143,7 @@ public class InputParser {
             case INSPECT:
                 if("room".equalsIgnoreCase(inputSplit[1])){
                     System.out.println(Game3.getCurrentRoom().description);
-                } else if (Game3.getCurrentRoom().getItems().contains(inputSplit[1])) {
+                } else if (Game3.getCurrentRoom().getItems().containsKey(inputSplit[1])) {
                     System.out.println(Game3.getItems().get(inputSplit[1]).description);
                 } else {
                     System.out.println("Item does not exist");
@@ -156,7 +156,7 @@ public class InputParser {
                 break;
             case DROP:
                 if (Game3.getItems().containsKey(inputSplit[1])) {
-                    Game3.getCurrentRoom().dropItem(inputSplit[1]);
+                    Game3.getCurrentRoom().dropItem(Game3.getCurrentRoom().getItems().get(inputSplit[1]));
                 }
                 break;
             case QUIT:
@@ -219,7 +219,8 @@ public class InputParser {
             List<CraftingRecipe> availableRecipes = new ArrayList<>();
             for (CraftingRecipe recipe : Game3.getCraftingRecipes()) {
                 for(String item : recipe.ingredients){
-                    if(!Game3.getInventory().keySet().contains(item)){
+                    if(!Game3.getInventory().containsKey(item)){
+                        System.out.println("Inside the for loop for recipe ingredients");
                         break;
                     }
                 }
