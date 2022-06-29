@@ -1,5 +1,8 @@
 package com.swing.panels;
 
+import com.pending.game3.Game3;
+import com.pending.game3.InputParser;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
@@ -35,7 +38,7 @@ public class GamePanel {
 
     private static JTextField createTextInputField(Border border, JTextArea outputTextArea) {
         JTextField textField = new JTextField();
-        textField.setPreferredSize(new Dimension(200, 40));
+        textField.setPreferredSize(new Dimension(0, 40));
         textField.setBackground(Color.BLACK);
         textField.setForeground(Color.green);
         textField.setCaretColor(Color.green);
@@ -47,6 +50,8 @@ public class GamePanel {
             outputTextArea.setCaretPosition(outputTextArea.getDocument().getLength());
             outputTextArea.revalidate();
             textField.setText("");
+            InputParser.getGUIInput(e.getActionCommand());
+            Game3.displayRoomGUI();
         });
 
         return textField;
@@ -76,6 +81,15 @@ public class GamePanel {
         outputTextArea.append(roomInfo);
         // Set the scroll bar to the bottom for the user.
         outputTextArea.setCaretPosition(outputTextArea.getDocument().getLength());
+
+    }
+
+    // Reset the game window
+    public static void clearOutputTextArea() {
+        outputTextArea.setText("");
+        gameInfoPanel.validate();
+        gameInfoPanel.repaint();
+        //outputTextArea.setCaretPosition(outputTextArea.getDocument().getLength());
 
     }
 
@@ -126,14 +140,12 @@ public class GamePanel {
             gameInfoPanel.setVisible(true);
             roomItemsPanel.setVisible(false);
             roomNpcsPanel.setVisible(false);
-
 //            useItemPanel.setVisible(false);
             System.out.println("Going back.");
         } else if (option.equalsIgnoreCase("confirm selected")) {
             gameInfoPanel.setVisible(true);
             roomItemsPanel.setVisible(false);
             roomNpcsPanel.setVisible(false);
-            System.out.println("Confirmed user choice");
         }
 
     }

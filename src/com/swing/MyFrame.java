@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 
 import static com.swing.panels.ActionPanel.setActionPanel;
 import static com.swing.panels.GamePanel.setMainGamePanel;
+import static com.swing.panels.MovementPanel.setMovementPanel;
 
 public class MyFrame {
 
@@ -30,7 +31,7 @@ public class MyFrame {
         frame.add(southPanel, BorderLayout.PAGE_END);
         frame.add(menuPanel, BorderLayout.LINE_END);
 
-        frame.setPreferredSize(new Dimension(1400, 900));
+        frame.setPreferredSize(new Dimension(1500, 825));
         frame.setBackground(Color.black);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -52,6 +53,7 @@ public class MyFrame {
     public static void updateFrameWindow(String option) {
         setActionPanel(option);
         setMainGamePanel(option);
+        setMovementPanel(option);
     }
 
     public static void createCardLayout() {
