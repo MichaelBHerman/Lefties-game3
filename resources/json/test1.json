@@ -282,7 +282,7 @@
       "Effect Tags": [
         {
           "Tag Name": "Key",
-          "Tag Data": ["Key1", "Translator"]
+          "Tag Data": ["Key1"]
         }
       ],
       "Description": "This looks an awful lot like a key-card from one of them new-fangled SYE-FIE shows"
@@ -521,7 +521,7 @@
       "Name": "Multi-Lingual Neural Mechanical Translator (MLNMT)",
       "Effect Tags": [
         {
-          "Tag Name": "Craftable",
+          "Tag Name": "Translator",
           "Tag Data": ["Translator"]
         }
       ],
@@ -623,8 +623,8 @@
       "Name": "alien1",
       "Effect Tags": [
         {
-          "Tag Name": "Translator",
-          "Tag Data": [""]
+          "Tag Name": "Random",
+          "Tag Data": ["Translator"]
         }
       ],
       "Dialogue": "Ack Ack Ack Ack Ack",
@@ -634,8 +634,8 @@
       "Name": "alien2",
       "Effect Tags": [
         {
-          "Tag Name": "Translator",
-          "Tag Data": [""]
+          "Tag Name": "Random",
+          "Tag Data": ["Translator"]
         }
       ],
       "Dialogue": "Ack Ack Ack Ack Ack",
@@ -645,8 +645,8 @@
       "Name": "alien3",
       "Effect Tags": [
         {
-          "Tag Name": "Translator",
-          "Tag Data": [""]
+          "Tag Name": "Random",
+          "Tag Data": ["Translator"]
         }
       ],
       "Dialogue": "Ack Ack Ack Ack Ack",
@@ -656,8 +656,8 @@
       "Name": "alien4",
       "Effect Tags": [
         {
-          "Tag Name": "Translator",
-          "Tag Data": [""]
+          "Tag Name": "Random",
+          "Tag Data": ["Translator"]
         }
       ],
       "Dialogue": "Ack Ack Ack Ack Ack",
@@ -667,8 +667,8 @@
       "Name": "alien5",
       "Effect Tags": [
         {
-          "Tag Name": "Translator",
-          "Tag Data": [""]
+          "Tag Name": "Random",
+          "Tag Data": ["Translator"]
         }
       ],
       "Dialogue": "Ack Ack Ack Ack Ack",
