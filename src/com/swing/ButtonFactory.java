@@ -43,6 +43,9 @@ public class ButtonFactory {
         if (btnName.equalsIgnoreCase("take")) {
             button.addActionListener(e -> MyFrame.updateFrameWindow("take"));
 
+        } else if (btnName.equalsIgnoreCase("craft")) {
+            button.addActionListener(e -> MyFrame.updateFrameWindow("craft"));
+
         } else if (btnName.equalsIgnoreCase("talk")) {
             button.addActionListener(e -> MyFrame.updateFrameWindow("talk"));
 

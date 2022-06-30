@@ -7,6 +7,7 @@ import java.util.*;
 import static com.swing.panels.MapPanel.updateMapGUI;
 
 public class InputParser {
+    private static ArrayList<String> selectedItemsList = new ArrayList<>();
     static Random random = new Random();
     private static Scanner scanner = new Scanner(System.in);
 
@@ -184,11 +185,21 @@ public class InputParser {
                 }
                 break;
             case CRAFT:
-                crafting();
+//                 ArrayList<String> list = new ArrayList<>();
+//                 list.add("communication buffer gui");
+//                 list.add("springy thingy");
+//                 list.add("arcanospanner");
+//                 list.add("greenprints projector do-hickey");
+//                craftingGUI(list);
+                craftingGUI(selectedItemsList);
                 break;
             default:
                 GamePanel.updateOutputTextArea("\nERROR: \"" + command + "\" Command not yet supported");
         }
+    }
+
+    public static void confirmSelected(String selectedItem) {
+        selectedItemsList.add(selectedItem);
     }
 
     private static void interact(String target) {
@@ -226,80 +237,108 @@ public class InputParser {
     }
 
     // METHOD OVERRIDING
-    private void crafting(Scanner userInput) {
+//    private void crafting(Scanner userInput) {
+//        if(Game3.getCurrentRoom().getFlags().containsKey("Crafting")){
+//            List<CraftingRecipe> availableRecipes = new ArrayList<>();
+//            for (CraftingRecipe recipe : Game3.getCraftingRecipes()) {
+//                for(String item : recipe.ingredients){
+//                    if(!Game3.getInventory().keySet().contains(item)){ // TODO pass the select items list into this spot.
+//                        break;
+//                    }
+//                }
+//                availableRecipes.add(recipe); // TODO adds the item to the list player can craft from (wont need anymore)
+//            }
+//            while (availableRecipes.size() > 0){
+//                System.out.println("Select an item to craft: ");
+//                for (int i = 0; i < availableRecipes.size(); i++){
+//                    System.out.print("[" + (i + 1) + "]: " + availableRecipes.get(i).result + ": materials: ");
+//                    for(String ingredient : availableRecipes.get(i).ingredients){
+//                        System.out.print(ingredient + ", ");
+//                    }
+//                    System.out.println();
+//                }
+//                String input = userInput.nextLine();
+//                try{
+//                    int inputIndex = Integer.parseInt(input) - 1;
+//                    CraftingRecipe selectedRecipe = availableRecipes.get(inputIndex);
+//                    for (String item : selectedRecipe.ingredients){  // TODO keep this one (removes the items)
+//                        Game3.getInventory().remove(item);
+//                    }
+//                    Item translator = Game3.getItems().get("multi-lingual neural mechanical translator (mlnmt)"); // TODO keep this one (Creates item obj)
+//                    Game3.getInventory().put(translator.name, translator); // TODO keep this one (gives items to player)
+//                    System.out.println("Successfully crafted " + selectedRecipe.result);
+//                    break;
+//                } catch (Exception e) {
+//                    System.out.println("Invalid Input, try again.");
+//                }
+//            }
+//        }
+//    }
+
+//    private static void crafting() {
+//        if(Game3.getCurrentRoom().getFlags().containsKey("Crafting")){
+//            List<CraftingRecipe> availableRecipes = new ArrayList<>();
+//            for (CraftingRecipe recipe : Game3.getCraftingRecipes()) {
+//                for(String item : recipe.ingredients){
+//                    if(!Game3.getInventory().keySet().contains(item)){
+//                        break;
+//                    }
+//                }
+//                availableRecipes.add(recipe);
+//            }
+//            while (availableRecipes.size() > 0){
+//                System.out.println("Select an item to craft: ");
+//                for (int i = 0; i < availableRecipes.size(); i++){
+//                    System.out.print("[" + (i + 1) + "]: " + availableRecipes.get(i).result + ": materials: ");
+//                    for(String ingredient : availableRecipes.get(i).ingredients){
+//                        System.out.print(ingredient + ", ");
+//                    }
+//                    System.out.println();
+//                }
+//                String input = scanner.nextLine();
+//                try{
+//                    int inputIndex = Integer.parseInt(input) - 1;
+//                    CraftingRecipe selectedRecipe = availableRecipes.get(inputIndex);
+//                    for (String item : selectedRecipe.ingredients){
+//                        Game3.getInventory().remove(item);
+//                    }
+//                    Game3.getInventory().put(selectedRecipe.name, selectedRecipe);
+//                    System.out.println("Successfully crafted " + selectedRecipe.result);
+//                    break;
+//                } catch (Exception e) {
+//                    System.out.println("Invalid Input, try again.");
+//                }
+//            }
+//        }
+//    }
+
+    private static void craftingGUI(ArrayList<String> selectedList) {
+        System.out.println("Not sorted: " + selectedList);
+        Collections.sort(selectedList);
+        System.out.println("Sorted: " + selectedList);
         if(Game3.getCurrentRoom().getFlags().containsKey("Crafting")){
-            List<CraftingRecipe> availableRecipes = new ArrayList<>();
             for (CraftingRecipe recipe : Game3.getCraftingRecipes()) {
-                for(String item : recipe.ingredients){
-                    if(!Game3.getInventory().keySet().contains(item)){ // TODO pass the select items list into this spot.
-                        break;
-                    }
-                }
-                availableRecipes.add(recipe); // TODO adds the item to the list player can craft from (wont need anymore)
-            }
-            while (availableRecipes.size() > 0){
-                System.out.println("Select an item to craft: ");
-                for (int i = 0; i < availableRecipes.size(); i++){
-                    System.out.print("[" + (i + 1) + "]: " + availableRecipes.get(i).result + ": materials: ");
-                    for(String ingredient : availableRecipes.get(i).ingredients){
-                        System.out.print(ingredient + ", ");
-                    }
-                    System.out.println();
-                }
-                String input = userInput.nextLine();
-                try{
-                    int inputIndex = Integer.parseInt(input) - 1;
-                    CraftingRecipe selectedRecipe = availableRecipes.get(inputIndex);
-                    for (String item : selectedRecipe.ingredients){  // TODO keep this one (removes the items)
+                System.out.println("Not sorted[r]: " + selectedList);
+                Collections.sort(recipe.ingredients);
+                System.out.println("Sorted[r]: " + selectedList);
+                if(recipe.ingredients.equals(selectedList)) {
+                    System.out.println(recipe.ingredients);
+                    for (String item : recipe.ingredients){  // TODO keep this one (removes the items)
                         Game3.getInventory().remove(item);
                     }
                     Item translator = Game3.getItems().get("multi-lingual neural mechanical translator (mlnmt)"); // TODO keep this one (Creates item obj)
                     Game3.getInventory().put(translator.name, translator); // TODO keep this one (gives items to player)
-                    System.out.println("Successfully crafted " + selectedRecipe.result);
-                    break;
-                } catch (Exception e) {
-                    System.out.println("Invalid Input, try again.");
+                    GamePanel.updateOutputTextArea("\nSuccessfully crafted " + recipe.result);
+                    } else {
+                        GamePanel.updateOutputTextArea("\nYou do not have the required selected items to craft anything.");
+                    }
                 }
-            }
+            } else {
+                GamePanel.updateOutputTextArea("\nYou do not have the proper tool to craft with in this current room.");
         }
+        selectedList.clear();
     }
 
-    private static void crafting() {
-        if(Game3.getCurrentRoom().getFlags().containsKey("Crafting")){
-            List<CraftingRecipe> availableRecipes = new ArrayList<>();
-            for (CraftingRecipe recipe : Game3.getCraftingRecipes()) {
-                for(String item : recipe.ingredients){
-                    if(!Game3.getInventory().keySet().contains(item)){
-                        break;
-                    }
-                }
-                availableRecipes.add(recipe);
-            }
-            while (availableRecipes.size() > 0){
-                System.out.println("Select an item to craft: ");
-                for (int i = 0; i < availableRecipes.size(); i++){
-                    System.out.print("[" + (i + 1) + "]: " + availableRecipes.get(i).result + ": materials: ");
-                    for(String ingredient : availableRecipes.get(i).ingredients){
-                        System.out.print(ingredient + ", ");
-                    }
-                    System.out.println();
-                }
-                String input = scanner.nextLine();
-                try{
-                    int inputIndex = Integer.parseInt(input) - 1;
-                    CraftingRecipe selectedRecipe = availableRecipes.get(inputIndex);
-                    for (String item : selectedRecipe.ingredients){
-                        Game3.getInventory().remove(item);
-                    }
-                    Game3.getInventory().put(selectedRecipe.name, selectedRecipe);
-                    System.out.println("Successfully crafted " + selectedRecipe.result);
-                    break;
-                } catch (Exception e) {
-                    System.out.println("Invalid Input, try again.");
-                }
-            }
-        }
-    }
 
     private static void goToRoom(String destination) {
         if (Game3.getRooms().containsKey(destination)) {
@@ -314,7 +353,7 @@ public class InputParser {
                         Game3.displayConsoleGUI();
                         updateMapGUI();
                     } else {
-                        GamePanel.updateOutputTextArea("The door is locked.");
+                        GamePanel.updateOutputTextArea("\nThe door is locked.");
                     }
                 }else{
                     GamePanel.updateOutputTextArea("Locked flag on Room " + destination +
@@ -327,7 +366,7 @@ public class InputParser {
                 updateMapGUI();
             }
         } else {
-            GamePanel.updateOutputTextArea("Room " + destination + " does not exist.");
+            GamePanel.updateOutputTextArea("\nRoom " + destination + " does not exist.");
         }
     }
 

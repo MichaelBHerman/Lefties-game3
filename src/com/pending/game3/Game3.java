@@ -1,6 +1,7 @@
 package com.pending.game3;
 
 import com.swing.MyFrame;
+import com.swing.panels.CraftingPanel;
 import com.swing.panels.GamePanel;
 import com.swing.panels.InventoryPanel;
 import com.swing.panels.RoomItemsPanel;
@@ -164,6 +165,7 @@ public class Game3 {
         checkEndCondition();
         InventoryPanel.updateInventoryGUI(getInventory());
         RoomItemsPanel.renderRoomItems(getCurrentRoom().getItems());
+        CraftingPanel.renderRecipeItems();
     }
 
     static void displayConsoleGUI() {
