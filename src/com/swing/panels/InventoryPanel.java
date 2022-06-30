@@ -18,6 +18,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.pending.game3.InputParser.confirmSelected;
+import static com.swing.panels.CraftingPanel.recipeItemsList;
+
 public class InventoryPanel {
 
     private static JPanel inventoryScrollPanel;
@@ -45,7 +48,7 @@ public class InventoryPanel {
     public static void updateInventoryGUI(HashMap<String, Item> playerInventory) {
         inventory.removeAll();
         inventoryItemsList.clear();
-        for (String item : playerInventory.keySet()) {
+        for (Item item : playerInventory.values()) {
             JRadioButton newBtn = ButtonFactory.createRadioButton(item);
             inventory.add(newBtn);
             inventoryItemsList.add(newBtn);
@@ -91,7 +94,7 @@ public class InventoryPanel {
     }
 
     static void dropSelectedItems() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        List<JRadioButton> filteredItemsList = inventoryItemsList.stream().filter(btn -> btn.isSelected()).collect(Collectors.toList());
+        List<JRadioButton> filteredItemsList = getSelectedList();
 
         System.out.println(inventoryItemsList);
 
@@ -102,6 +105,21 @@ public class InventoryPanel {
 
         inventoryItemsList.removeAll(filteredItemsList);
         Game3.displayRoomGUI();
+    }
+
+    static void craftSelectedItems() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        ArrayList<JRadioButton> filteredItemsList = getSelectedList();
+
+        System.out.println(inventoryItemsList);
+
+        InputParser.getGUIInput("craft");
+        inventoryItemsList.removeAll(filteredItemsList);
+
+        Game3.displayRoomGUI();
+    }
+
+    public static ArrayList<JRadioButton> getSelectedList() {
+        return (ArrayList<JRadioButton>) inventoryItemsList.stream().filter(btn -> btn.isSelected()).collect(Collectors.toList());
     }
 
 }

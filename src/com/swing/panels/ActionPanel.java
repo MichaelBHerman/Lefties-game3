@@ -10,13 +10,15 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.io.IOException;
 
+import static com.swing.ButtonFactory.updateRecipeRadioButton;
+
 public class ActionPanel {
 
     private static JPanel takeRoomItemPanel;
     private static JPanel mainPanel;
     private static JPanel talkRoomNPCPanel;
     private static JPanel dropItemPanel;
-    private static JPanel useItemPanel;
+    public static JPanel craftItemPanel;
 
     ActionPanel() {
 
@@ -26,11 +28,13 @@ public class ActionPanel {
         JPanel actionPanel = new JPanel(new CardLayout());
         JPanel mainPanel = createMainPanel(border);
         JPanel takeRoomItemPanel = createTakeRoomItemPanel(border);
+        JPanel craftItemPanel = createCraftItemPanel(border);
         JPanel talkRoomNPCPanel = createTalkRoomNPCPanel(border);
         JPanel dropItemPanel = createDropItemPanel(border);
         actionPanel.setPreferredSize(new Dimension(400,0));
         actionPanel.add(mainPanel);
         actionPanel.add(takeRoomItemPanel);
+        actionPanel.add(craftItemPanel);
         actionPanel.add(talkRoomNPCPanel);
         actionPanel.add(dropItemPanel);
 
@@ -61,6 +65,16 @@ public class ActionPanel {
         return takeRoomItemPanel;
     }
 
+    private static JPanel createCraftItemPanel(Border border) {
+        craftItemPanel = new JPanel(new GridLayout(2,1,7,7));
+        craftItemPanel.add(ButtonFactory.createButton("Confirm Selected", border));
+        craftItemPanel.add(ButtonFactory.createButton("Back", border));
+        craftItemPanel.setBackground(Color.black);
+        craftItemPanel.setBorder(BorderFactory.createTitledBorder(border, "Craft with selected item(s)", 0,2, null, Color.green));
+
+        return craftItemPanel;
+    }
+
     private static JPanel createTalkRoomNPCPanel(Border border) {
         talkRoomNPCPanel = new JPanel(new GridLayout(2,1,7,7));
         talkRoomNPCPanel.add(ButtonFactory.createButton("Confirm Selected", border));
@@ -87,13 +101,27 @@ public class ActionPanel {
             takeRoomItemPanel.setVisible(true);
             talkRoomNPCPanel.setVisible(false);
             dropItemPanel.setVisible(false);
+            craftItemPanel.setVisible(false);
             Game3.displayRoomGUI();
+//            useItemPanel.setVisible(false);
+        } else if (option.equalsIgnoreCase("craft")) {
+            mainPanel.setVisible(false);
+            takeRoomItemPanel.setVisible(false);
+            talkRoomNPCPanel.setVisible(false);
+            dropItemPanel.setVisible(false);
+            craftItemPanel.setVisible(true);
+//            if (!InventoryPanel.getSelectedList().isEmpty()) {
+//                for (JRadioButton btn : InventoryPanel.getSelectedList()) {
+//                    updateRecipeRadioButton(btn);
+//                }
+//            }
 //            useItemPanel.setVisible(false);
         } else if (option.equalsIgnoreCase("talk")) {
             mainPanel.setVisible(false);
             takeRoomItemPanel.setVisible(false);
             talkRoomNPCPanel.setVisible(true);
             dropItemPanel.setVisible(false);
+            craftItemPanel.setVisible(false);
             Game3.displayRoomGUI();
 //            useItemPanel.setVisible(false);
         } else if (option.equalsIgnoreCase("drop")) {
@@ -101,12 +129,14 @@ public class ActionPanel {
             takeRoomItemPanel.setVisible(false);
             talkRoomNPCPanel.setVisible(false);
             dropItemPanel.setVisible(true);
+            craftItemPanel.setVisible(false);
 //            useItemPanel.setVisible(false);
         } else if (option.equalsIgnoreCase("back")) {
             mainPanel.setVisible(true);
             takeRoomItemPanel.setVisible(false);
             talkRoomNPCPanel.setVisible(false);
             dropItemPanel.setVisible(false);
+            craftItemPanel.setVisible(false);
             Game3.displayRoomGUI();
 //            useItemPanel.setVisible(false);
         } else if (option.equalsIgnoreCase("confirm selected")) {
@@ -114,11 +144,14 @@ public class ActionPanel {
                 RoomItemsPanel.takeSelectedItems();
             } else if (dropItemPanel.isVisible()) {
                 InventoryPanel.dropSelectedItems();
+            } else if (craftItemPanel.isVisible()) {
+                InventoryPanel.craftSelectedItems();
             }
             mainPanel.setVisible(true);
             takeRoomItemPanel.setVisible(false);
             talkRoomNPCPanel.setVisible(false);
             dropItemPanel.setVisible(false);
+            craftItemPanel.setVisible(false);
         }
     }
 
