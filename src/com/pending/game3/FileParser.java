@@ -260,19 +260,21 @@ class FileParser {
                                 } else flags = new HashMap<>();
 
                                 //parse items
-                                List<String> items = new ArrayList<>();
-                                if (roomJsonObj.keySet().contains("Items")) {
+                                HashMap<String, Item> items = new HashMap<>();
+                                //List<String> items = new ArrayList<>();
+                                if (roomJsonObj.containsKey("Items")) {
                                         List<String> items2 = parseStringList(roomJsonObj.get("Items"));
                                         if (items2 == null) {
                                                 System.out.println("Room " + name + " Items.");
                                                 return true;
                                         }
                                         for (int i = 0; i < items2.size(); i++){
-                                                items.add(items2.get(i).toLowerCase());
+                                                String itemName = items2.get(i).toLowerCase();
+                                                items.put(itemName, itemsAtStart.get(itemName));
                                         }
-                                } else items = new ArrayList<>();
-                                for(String item : items){
-                                        if(!itemsAtStart.containsKey(item)){
+                                } else items = new HashMap<>();
+                                for(String item : items.keySet()){
+                                        if(!itemsAtStart.containsKey(item.toLowerCase())){
                                                 System.out.println("Item " + item + " in room " + name + " is not " +
                                                         "defined in Items.");
                                                 return true;
@@ -483,6 +485,16 @@ class FileParser {
                                 }
 
                                 String name = parseString(itemJsonObj.get("Name"));// item.name equals the parsed JSON simple item name
+
+
+
+
+                                // TESTING LINE ------------------------------
+                                System.out.println(name);
+
+
+
+
                                 if (name == null) {    // if the item name is null print
                                         System.out.println("Item Name."); // print item name
                                         return true; //exits parsing method
@@ -506,9 +518,10 @@ class FileParser {
                                         System.out.println("Key \"Description\" does not exist in item " + name + ".");
                                         return true;
                                 }
-
+                                name = name.toLowerCase();
                                 String description = parseString(itemJsonObj.get("Description")); // set item.description to parsed JSON simple object
                                 Item item = new Item(name, description, flags); // this item can now be made a new item in Items
+                                System.out.println(item);
                                 if (item.description == null) {   // if item description is null
                                         System.out.println("Item " + item.name + " Description.");
                                 return true;
