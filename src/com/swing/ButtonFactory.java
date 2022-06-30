@@ -1,6 +1,8 @@
 package com.swing;
 
+import com.pending.game3.CraftingRecipe;
 import com.pending.game3.Item;
+import com.swing.panels.CraftingPanel;
 import com.swing.panels.RoomItemsPanel;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -15,7 +17,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.swing.panels.ActionPanel.craftItemPanel;
+
 public class ButtonFactory {
+
+    static ArrayList<JRadioButton> recipeButtonsList = new ArrayList<>();
+    static ArrayList<JRadioButton> recipeResultItemList = new ArrayList<>();
 
     ButtonFactory() {
 
@@ -25,7 +32,7 @@ public class ButtonFactory {
         JButton button = new JButton(btnName);
 
         // Setting up the button color/border
-        button.setFocusPainted( false );
+        button.setFocusPainted(false);
         button.setBackground(Color.green);
         button.setForeground(Color.black);
         button.setBorder(border);
@@ -36,6 +43,7 @@ public class ButtonFactory {
                 button.setBackground(Color.black);
                 button.setForeground(Color.green);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 button.setBackground(Color.green);
                 button.setForeground(Color.black);
@@ -47,6 +55,19 @@ public class ButtonFactory {
             button.addActionListener(e -> {
                 try {
                     MyFrame.updateFrameWindow("take");
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
+
+        } else if (btnName.equalsIgnoreCase("craft")) {
+            button.addActionListener(e -> {
+                try {
+                    MyFrame.updateFrameWindow("craft");
                 } catch (UnsupportedAudioFileException ex) {
                     ex.printStackTrace();
                 } catch (LineUnavailableException ex) {
@@ -178,7 +199,7 @@ public class ButtonFactory {
                 }
             });
 
-        }  else if (btnName.equalsIgnoreCase("outward left")) {
+        } else if (btnName.equalsIgnoreCase("outward left")) {
             System.out.println("Going outward left");
             button.addActionListener(e -> {
                 try {
@@ -196,12 +217,12 @@ public class ButtonFactory {
         return button;
     }
 
-    public static JRadioButton createRadioButton(String item) {
-        ImageIcon healingIcon = new ImageIcon("resources/" + item + ".png");
-        healingIcon.setImage(healingIcon.getImage().getScaledInstance(100,85, Image.SCALE_DEFAULT));
+    public static JRadioButton createRadioButton(Item item) {
+        ImageIcon healingIcon = new ImageIcon("resources/" + item.getName() + ".png");
+        healingIcon.setImage(healingIcon.getImage().getScaledInstance(100, 85, Image.SCALE_DEFAULT));
         JRadioButton imgButton = new JRadioButton();
         imgButton.setIcon(healingIcon);
-        imgButton.setText(item);
+        imgButton.setText(item.getName());
         imgButton.setFocusPainted(false);
         imgButton.setForeground(Color.green);
         imgButton.setVerticalTextPosition(JRadioButton.BOTTOM);
@@ -213,15 +234,66 @@ public class ButtonFactory {
             if (imgButton.isSelected()) {
                 imgButton.setBackground(Color.GREEN);
                 imgButton.setForeground(Color.black);
+                updateRecipeRadioButton(imgButton);
                 System.out.println(imgButton.getActionCommand());
                 // TODO: System.out.println(imgButton.setActionCommand( item name + " " + itemId)); Set the btn to use the item id instead.
             } else {
+                updateRecipeRadioButton(imgButton);
                 imgButton.setBackground(Color.black);
                 imgButton.setForeground(Color.green);
             }
         });
+        // TODO add tooltip on hover of item description
+        imgButton.setToolTipText(item.getDescription());
+
         imgButton.setBackground(Color.black);
         return imgButton;
+    }
+
+    public static JRadioButton createRecipeRadioButton(String item) {
+        ImageIcon healingIcon = new ImageIcon("resources/" + item + ".png");
+        healingIcon.setImage(healingIcon.getImage().getScaledInstance(100, 85, Image.SCALE_DEFAULT));
+        JRadioButton imgButton = new JRadioButton();
+        imgButton.setIcon(healingIcon);
+        imgButton.setText(item);
+        imgButton.setFocusPainted(false);
+        imgButton.setForeground(Color.green);
+        imgButton.setVerticalTextPosition(JRadioButton.BOTTOM);
+        imgButton.setHorizontalTextPosition(JRadioButton.CENTER);
+        imgButton.setIconTextGap(-5);
+        imgButton.setBackground(Color.black);
+        recipeButtonsList.add(imgButton);
+        return imgButton;
+    }
+
+    public static JRadioButton createRecipeRadioButton(CraftingRecipe recipe) {
+        ImageIcon healingIcon = new ImageIcon("resources/" + recipe.getName() + ".png");
+        healingIcon.setImage(healingIcon.getImage().getScaledInstance(100, 85, Image.SCALE_DEFAULT));
+        JRadioButton imgButton = new JRadioButton();
+        imgButton.setIcon(healingIcon);
+        imgButton.setText(recipe.getName());
+        imgButton.setFocusPainted(false);
+        imgButton.setForeground(Color.lightGray);
+        imgButton.setVerticalTextPosition(JRadioButton.BOTTOM);
+        imgButton.setHorizontalTextPosition(JRadioButton.CENTER);
+        imgButton.setIconTextGap(-5);
+        imgButton.setBackground(Color.black);
+        recipeResultItemList.add(imgButton);
+        return imgButton;
+    }
+
+    public static void updateRecipeRadioButton(JRadioButton item) {
+        for (JRadioButton btn : recipeButtonsList) {
+            if (btn.getActionCommand().equalsIgnoreCase(item.getActionCommand())) {
+                if (item.isSelected()) {
+                    btn.setBackground(Color.GREEN);
+                    btn.setForeground(Color.black);
+                } else {
+                    btn.setBackground(Color.black);
+                    btn.setForeground(Color.green);
+                }
+            }
+        }
     }
 
 }

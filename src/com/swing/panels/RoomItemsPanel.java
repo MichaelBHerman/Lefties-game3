@@ -76,7 +76,7 @@ public class RoomItemsPanel {
     public static void renderRoomItems(HashMap<String, Item> roomItems){
         currentRoomItems.removeAll();
         roomItemsList.clear();
-        for (String item : roomItems.keySet()) {
+        for (Item item : roomItems.values()) {
             JRadioButton newBtn = ButtonFactory.createRadioButton(item);
             roomItemsList.add(newBtn);
             currentRoomItems.add(newBtn);
