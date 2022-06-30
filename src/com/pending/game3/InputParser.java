@@ -191,7 +191,7 @@ public class InputParser {
         }
     }
 
-    // Mainly to allow the craft of items using the GUI command line instead of the button.
+    // Allows the user to craft items using the GUI command line instead of the GUI buttons.
     public static void confirmSelected(ArrayList<JRadioButton> selectItems) {
         for (JRadioButton btn: selectItems) {
             selectedItemsList.add(btn.getActionCommand());
