@@ -25,8 +25,6 @@ public class CraftingPanel {
     private static JPanel recipesScrollPanel;
     public static ArrayList<JRadioButton> recipeItemsList = new ArrayList<JRadioButton>();
 
-    //confirmSelected();
-
     public static JPanel create(Border border) {
 
         recipesScrollPanel = new JPanel(new BorderLayout());
@@ -79,32 +77,17 @@ public class CraftingPanel {
         recipes.removeAll();
         recipeItemsList.clear();
         for (CraftingRecipe recipe : Game3.getCraftingRecipes()) {
-            JRadioButton newBtn = ButtonFactory.createRadioButton(recipe.getName());
+            JRadioButton newBtn = ButtonFactory.createRecipeRadioButton(recipe);
             recipeItemsList.add(newBtn);
             recipes.add(newBtn);
             for (String itemName : recipe.ingredients) {
-                newBtn = ButtonFactory.createRadioButton(itemName);
+                newBtn = ButtonFactory.createRecipeRadioButton(itemName);
                 recipeItemsList.add(newBtn);
                 recipes.add(newBtn);
             }
         }
         recipesScrollPanel.validate();
         recipesScrollPanel.repaint();
-    }
-
-    static void craftSelectedItems() {
-        List<JRadioButton> filteredItemsList = recipeItemsList.stream().filter(btn -> btn.isSelected()).collect(Collectors.toList());
-
-        System.out.println(recipeItemsList);
-
-        for (JRadioButton btn : filteredItemsList) {
-            confirmSelected(btn.getActionCommand());
-        }
-
-        InputParser.getGUIInput("craft");
-        recipeItemsList.removeAll(filteredItemsList);
-
-        Game3.displayRoomGUI();
     }
 
 }

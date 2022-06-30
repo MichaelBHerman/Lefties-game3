@@ -155,6 +155,7 @@ public class GamePanel {
             gameInfoPanel.setVisible(true);
             roomItemsPanel.setVisible(false);
             roomNpcsPanel.setVisible(false);
+            recipesPanel.setVisible(false);
         }
 
     }

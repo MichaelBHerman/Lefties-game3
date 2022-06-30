@@ -1,7 +1,9 @@
 package com.pending.game3;
 
 import com.swing.panels.GamePanel;
+import com.swing.panels.InventoryPanel;
 
+import javax.swing.*;
 import java.util.*;
 
 import static com.swing.panels.MapPanel.updateMapGUI;
@@ -9,7 +11,6 @@ import static com.swing.panels.MapPanel.updateMapGUI;
 public class InputParser {
     private static ArrayList<String> selectedItemsList = new ArrayList<>();
     static Random random = new Random();
-    private static Scanner scanner = new Scanner(System.in);
 
 //    boolean getInput(Scanner userInput){
 //        System.out.print("Enter Command\n> "); // allows input command to be on next line
@@ -98,7 +99,6 @@ public class InputParser {
 //    }
 
     public static void getGUIInput(String userInput){
-        //System.out.print("Enter Command\n> "); // allows input command to be on next line
         String input = userInput.toLowerCase(); // Reads user input
 
         String[] inputSplit = input.split(" ", 2); // splits array in 2 after 1st space
@@ -130,13 +130,11 @@ public class InputParser {
             } else {
                 GamePanel.updateOutputTextArea("\nERROR: command \"" + input +
                         "\" not recognized. enter \"Info\" for a list of valid commands.");
-                //return false;
             }
         }
         switch (command){
             case REPLAY:
                 Game3.runProgram();
-                //return true;
             case GO:
                 HashMap<String,  String> connectionsMap = Game3.getCurrentRoom().getConnections();
                 if (connectionsMap.containsKey(inputSplit[1])) {
@@ -185,12 +183,7 @@ public class InputParser {
                 }
                 break;
             case CRAFT:
-//                 ArrayList<String> list = new ArrayList<>();
-//                 list.add("communication buffer gui");
-//                 list.add("springy thingy");
-//                 list.add("arcanospanner");
-//                 list.add("greenprints projector do-hickey");
-//                craftingGUI(list);
+                confirmSelected(InventoryPanel.getSelectedList());
                 craftingGUI(selectedItemsList);
                 break;
             default:
@@ -198,8 +191,11 @@ public class InputParser {
         }
     }
 
-    public static void confirmSelected(String selectedItem) {
-        selectedItemsList.add(selectedItem);
+    // Mainly to allow the craft of items using the GUI command line instead of the button.
+    public static void confirmSelected(ArrayList<JRadioButton> selectItems) {
+        for (JRadioButton btn: selectItems) {
+            selectedItemsList.add(btn.getActionCommand());
+        }
     }
 
     private static void interact(String target) {
@@ -215,24 +211,24 @@ public class InputParser {
                     if (itemFlags.containsKey("Translator")
                             && itemFlags.get("Translator").contains(translatorFlagData.get(0))) {
                         if (npc.getFlags().containsKey("Random")) {
-                            System.out.println(npc.getAlternativeDialogue()
+                            GamePanel.updateOutputTextArea("\n" + npc.name + ": " + npc.getAlternativeDialogue()
                                     .get(random.nextInt(npc.getAlternativeDialogue().size())));
                         } else {
-                            System.out.println(npc.getAlternativeDialogue().get(0));
+                            GamePanel.updateOutputTextArea("\n" + npc.name + ": " + npc.getAlternativeDialogue().get(0));
                         }
                         return;
                     }
                 }
             }
             if(npc.getFlags().containsValue("Random")){
-                System.out.println(npc.getAlternativeDialogue()
+                GamePanel.updateOutputTextArea("\n" + npc.name + ": " + npc.getAlternativeDialogue()
                         .get(random.nextInt(npc.getAlternativeDialogue().size())));
             } else {
 
-                System.out.println(npc.dialogue);
+                GamePanel.updateOutputTextArea("\n" + npc.name + ": " + npc.dialogue);
             }
         } else{
-            System.out.println("They're not in this room!");
+            GamePanel.updateOutputTextArea("\nWARNING: \"" + target + "\" is not in this room!");
         }
     }
 
@@ -313,9 +309,7 @@ public class InputParser {
 //    }
 
     private static void craftingGUI(ArrayList<String> selectedList) {
-        System.out.println("Not sorted: " + selectedList);
         Collections.sort(selectedList);
-        System.out.println("Sorted: " + selectedList);
         if(Game3.getCurrentRoom().getFlags().containsKey("Crafting")){
             for (CraftingRecipe recipe : Game3.getCraftingRecipes()) {
                 System.out.println("Not sorted[r]: " + selectedList);
@@ -323,18 +317,18 @@ public class InputParser {
                 System.out.println("Sorted[r]: " + selectedList);
                 if(recipe.ingredients.equals(selectedList)) {
                     System.out.println(recipe.ingredients);
-                    for (String item : recipe.ingredients){  // TODO keep this one (removes the items)
+                    for (String item : recipe.ingredients){
                         Game3.getInventory().remove(item);
                     }
                     Item translator = Game3.getItems().get("multi-lingual neural mechanical translator (mlnmt)"); // TODO keep this one (Creates item obj)
-                    Game3.getInventory().put(translator.name, translator); // TODO keep this one (gives items to player)
+                    Game3.getInventory().put(translator.name, translator);
                     GamePanel.updateOutputTextArea("\nSuccessfully crafted " + recipe.result);
                     } else {
-                        GamePanel.updateOutputTextArea("\nYou do not have the required selected items to craft anything.");
+                        GamePanel.updateOutputTextArea("\nWARNING: You have not selected the required items to craft anything.");
                     }
                 }
             } else {
-                GamePanel.updateOutputTextArea("\nYou do not have the proper tool to craft with in this current room.");
+                GamePanel.updateOutputTextArea("\nWARNING: You are not in a room that has crafting capabilities.");
         }
         selectedList.clear();
     }
@@ -353,7 +347,7 @@ public class InputParser {
                         Game3.displayConsoleGUI();
                         updateMapGUI();
                     } else {
-                        GamePanel.updateOutputTextArea("\nThe door is locked.");
+                        GamePanel.updateOutputTextArea("\nWARNING:The door is locked.");
                     }
                 }else{
                     GamePanel.updateOutputTextArea("Locked flag on Room " + destination +

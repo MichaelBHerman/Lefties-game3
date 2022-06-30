@@ -7,13 +7,15 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
+import static com.swing.ButtonFactory.updateRecipeRadioButton;
+
 public class ActionPanel {
 
     private static JPanel takeRoomItemPanel;
     private static JPanel mainPanel;
     private static JPanel talkRoomNPCPanel;
     private static JPanel dropItemPanel;
-    private static JPanel craftItemPanel;
+    public static JPanel craftItemPanel;
 
     ActionPanel() {
 
@@ -105,7 +107,11 @@ public class ActionPanel {
             talkRoomNPCPanel.setVisible(false);
             dropItemPanel.setVisible(false);
             craftItemPanel.setVisible(true);
-            Game3.displayRoomGUI();
+//            if (!InventoryPanel.getSelectedList().isEmpty()) {
+//                for (JRadioButton btn : InventoryPanel.getSelectedList()) {
+//                    updateRecipeRadioButton(btn);
+//                }
+//            }
 //            useItemPanel.setVisible(false);
         } else if (option.equalsIgnoreCase("talk")) {
             mainPanel.setVisible(false);
@@ -136,7 +142,7 @@ public class ActionPanel {
             } else if (dropItemPanel.isVisible()) {
                 InventoryPanel.dropSelectedItems();
             } else if (craftItemPanel.isVisible()) {
-                CraftingPanel.craftSelectedItems();
+                InventoryPanel.craftSelectedItems();
             }
             mainPanel.setVisible(true);
             takeRoomItemPanel.setVisible(false);
