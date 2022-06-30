@@ -6,10 +6,13 @@ import com.pending.game3.Item;
 import com.swing.ButtonFactory;
 import com.swing.WrapLayout;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -87,7 +90,7 @@ public class InventoryPanel {
         return inventoryScrollPane;
     }
 
-    static void dropSelectedItems() {
+    static void dropSelectedItems() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         List<JRadioButton> filteredItemsList = inventoryItemsList.stream().filter(btn -> btn.isSelected()).collect(Collectors.toList());
 
         System.out.println(inventoryItemsList);

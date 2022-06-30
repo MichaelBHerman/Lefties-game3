@@ -2,11 +2,14 @@ package com.swing;
 
 import com.swing.panels.*;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.BorderLayout;
+import java.io.IOException;
 
 import static com.swing.panels.ActionPanel.setActionPanel;
 import static com.swing.panels.GamePanel.setMainGamePanel;
@@ -50,7 +53,7 @@ public class MyFrame {
         southPanel.add(actionPanel, BorderLayout.LINE_END);
     }
 
-    public static void updateFrameWindow(String option) {
+    public static void updateFrameWindow(String option) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         setActionPanel(option);
         setMainGamePanel(option);
         setMovementPanel(option);

@@ -3,9 +3,12 @@ package com.swing.panels;
 import com.pending.game3.Game3;
 import com.swing.ButtonFactory;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.io.IOException;
 
 public class ActionPanel {
 
@@ -78,7 +81,7 @@ public class ActionPanel {
         return dropItemPanel;
     }
 
-    public static void setActionPanel(String option) {
+    public static void setActionPanel(String option) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         if(option.equalsIgnoreCase("take")) {
             mainPanel.setVisible(false);
             takeRoomItemPanel.setVisible(true);
