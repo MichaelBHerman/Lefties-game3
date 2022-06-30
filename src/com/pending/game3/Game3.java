@@ -113,7 +113,7 @@ public class Game3 {
         for (String line : fileParser.splashText){
             System.out.println(line);
         }
-        mainLoop();
+        // mainLoop();
         displayConsoleGUI();
         displayRoomGUI();
     }
@@ -171,7 +171,7 @@ public class Game3 {
         GamePanel.clearOutputTextArea();
         GamePanel.updateOutputTextArea("\nCURRENT ROOM: " + getCurrentRoom().name);
         GamePanel.updateOutputTextArea("\nDESCRIPTION: " + getCurrentRoom().description);
-        GamePanel.updateOutputTextArea("\nITEMS: " + getCurrentRoom().getItems());
+        GamePanel.updateOutputTextArea("\nITEMS: " + getCurrentRoom().getItems().keySet());
         GamePanel.updateOutputTextArea("\nNPCs: " + getCurrentRoom().getNpcs());
         GamePanel.updateOutputTextArea("\nMOVEMENT OPTIONS: ");
         for(String direction : currentRoom.getConnections().keySet()) {

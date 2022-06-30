@@ -163,7 +163,7 @@ public class InputParser {
                 break;
             case DROP:
                 if (Game3.getItems().containsKey(inputSplit[1])) {
-                    Game3.getCurrentRoom().dropItem(inputSplit[1]);
+                    Game3.getCurrentRoom().dropItem(Game3.getItems().get(inputSplit[1]));
                     GamePanel.updateOutputTextArea("\nYou dropped " + inputSplit[1]);
                 } else {
                     GamePanel.updateOutputTextArea("\nWARNING: Item \"" + inputSplit[1] + "\" does not exist in your inventory.");
