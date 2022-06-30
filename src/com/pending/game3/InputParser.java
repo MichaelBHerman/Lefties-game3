@@ -147,7 +147,7 @@ public class InputParser {
             case INSPECT:
                 if("room".equalsIgnoreCase(inputSplit[1])){
                     GamePanel.updateOutputTextArea(Game3.getCurrentRoom().description);
-                } else if (Game3.getCurrentRoom().getItems().contains(inputSplit[1])) {
+                } else if (Game3.getCurrentRoom().getItems().containsKey(inputSplit[1])) {
                     GamePanel.updateOutputTextArea(Game3.getItems().get(inputSplit[1]).description);
                 } else {
                     GamePanel.updateOutputTextArea("\nWARNING: Item \"" + inputSplit[1] + "\" does not exist in the current room");
@@ -163,7 +163,7 @@ public class InputParser {
                 break;
             case DROP:
                 if (Game3.getItems().containsKey(inputSplit[1])) {
-                    Game3.getCurrentRoom().dropItem(inputSplit[1]);
+                    Game3.getCurrentRoom().dropItem(Game3.getItems().get(inputSplit[1]));
                     GamePanel.updateOutputTextArea("\nYou dropped " + inputSplit[1]);
                     // TODO find a way wait for refresh on last item dropped, when dropping multiple items
                     Game3.displayRoomGUI();

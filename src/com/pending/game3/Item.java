@@ -10,7 +10,7 @@ public class Item {
     private HashMap<String, List<String>> flags;
 
     Item(String name, String description) {
-        this.name = name;
+        this.name = name.toLowerCase();
         this.description = description;
     }
 
