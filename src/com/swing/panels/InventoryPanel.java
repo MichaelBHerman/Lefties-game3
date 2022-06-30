@@ -6,10 +6,13 @@ import com.pending.game3.Item;
 import com.swing.ButtonFactory;
 import com.swing.WrapLayout;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +48,7 @@ public class InventoryPanel {
     public static void updateInventoryGUI(HashMap<String, Item> playerInventory) {
         inventory.removeAll();
         inventoryItemsList.clear();
-        for (String item : playerInventory.keySet()) {
+        for (Item item : playerInventory.values()) {
             JRadioButton newBtn = ButtonFactory.createRadioButton(item);
             inventory.add(newBtn);
             inventoryItemsList.add(newBtn);
@@ -90,7 +93,7 @@ public class InventoryPanel {
         return inventoryScrollPane;
     }
 
-    static void dropSelectedItems() {
+    static void dropSelectedItems() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         List<JRadioButton> filteredItemsList = getSelectedList();
 
         System.out.println(inventoryItemsList);
@@ -104,7 +107,7 @@ public class InventoryPanel {
         Game3.displayRoomGUI();
     }
 
-    static void craftSelectedItems() {
+    static void craftSelectedItems() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         ArrayList<JRadioButton> filteredItemsList = getSelectedList();
 
         System.out.println(inventoryItemsList);

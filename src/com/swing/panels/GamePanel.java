@@ -3,10 +3,13 @@ package com.swing.panels;
 import com.pending.game3.Game3;
 import com.pending.game3.InputParser;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
+import java.io.IOException;
 
 public class GamePanel {
     private static JTextArea outputTextArea;
@@ -53,7 +56,11 @@ public class GamePanel {
             outputTextArea.setCaretPosition(outputTextArea.getDocument().getLength());
             outputTextArea.revalidate();
             textField.setText("");
-            InputParser.getGUIInput(e.getActionCommand());
+            try {
+                InputParser.getGUIInput(e.getActionCommand());
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+                ex.printStackTrace();
+            }
             Game3.displayRoomGUI();
         });
 

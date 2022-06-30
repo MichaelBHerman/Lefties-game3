@@ -5,9 +5,12 @@ import com.pending.game3.Item;
 import com.swing.panels.CraftingPanel;
 import com.swing.panels.RoomItemsPanel;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -49,57 +52,177 @@ public class ButtonFactory {
 
 
         if (btnName.equalsIgnoreCase("take")) {
-            button.addActionListener(e -> MyFrame.updateFrameWindow("take"));
+            button.addActionListener(e -> {
+                try {
+                    MyFrame.updateFrameWindow("take");
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
 
         } else if (btnName.equalsIgnoreCase("craft")) {
-            button.addActionListener(e -> MyFrame.updateFrameWindow("craft"));
+            button.addActionListener(e -> {
+                try {
+                    MyFrame.updateFrameWindow("craft");
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
 
         } else if (btnName.equalsIgnoreCase("talk")) {
-            button.addActionListener(e -> MyFrame.updateFrameWindow("talk"));
+            button.addActionListener(e -> {
+                try {
+                    MyFrame.updateFrameWindow("talk");
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
 
         } else if (btnName.equalsIgnoreCase("drop")) {
-            button.addActionListener(e -> MyFrame.updateFrameWindow("drop"));
+            button.addActionListener(e -> {
+                try {
+                    MyFrame.updateFrameWindow("drop");
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
 
         } else if (btnName.equalsIgnoreCase("back")) {
-            button.addActionListener(e -> MyFrame.updateFrameWindow("back"));
+            button.addActionListener(e -> {
+                try {
+                    MyFrame.updateFrameWindow("back");
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
 
         } else if (btnName.equalsIgnoreCase("confirm selected")) {
-            button.addActionListener(e -> MyFrame.updateFrameWindow("confirm selected"));
+            button.addActionListener(e -> {
+                try {
+                    MyFrame.updateFrameWindow("confirm selected");
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
 
         } else if (btnName.equalsIgnoreCase("clockwise")) {
             System.out.println("Going clockwise");
-            button.addActionListener(e -> MyFrame.updateFrameWindow("clockwise"));
+            button.addActionListener(e -> {
+                try {
+                    MyFrame.updateFrameWindow("clockwise");
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
 
         } else if (btnName.equalsIgnoreCase("counter-clockwise")) {
             System.out.println("Going counter-clockwise");
-            button.addActionListener(e -> MyFrame.updateFrameWindow("counter-clockwise"));
+            button.addActionListener(e -> {
+                try {
+                    MyFrame.updateFrameWindow("counter-clockwise");
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
 
         } else if (btnName.equalsIgnoreCase("outward")) {
             System.out.println("Going outward");
-            button.addActionListener(e -> MyFrame.updateFrameWindow("outward"));
+            button.addActionListener(e -> {
+                try {
+                    MyFrame.updateFrameWindow("outward");
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
 
         } else if (btnName.equalsIgnoreCase("inward")) {
             System.out.println("Going inward");
-            button.addActionListener(e -> MyFrame.updateFrameWindow("inward"));
+            button.addActionListener(e -> {
+                try {
+                    MyFrame.updateFrameWindow("inward");
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
 
         } else if (btnName.equalsIgnoreCase("outward right")) {
             System.out.println("Going outward right");
-            button.addActionListener(e -> MyFrame.updateFrameWindow("outward right"));
+            button.addActionListener(e -> {
+                try {
+                    MyFrame.updateFrameWindow("outward right");
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
 
         } else if (btnName.equalsIgnoreCase("outward left")) {
             System.out.println("Going outward left");
-            button.addActionListener(e -> MyFrame.updateFrameWindow("outward left"));
+            button.addActionListener(e -> {
+                try {
+                    MyFrame.updateFrameWindow("outward left");
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
 
         }
         return button;
     }
 
-    public static JRadioButton createRadioButton(String item) {
-        ImageIcon healingIcon = new ImageIcon("resources/" + item + ".png");
+    public static JRadioButton createRadioButton(Item item) {
+        ImageIcon healingIcon = new ImageIcon("resources/" + item.getName() + ".png");
         healingIcon.setImage(healingIcon.getImage().getScaledInstance(100, 85, Image.SCALE_DEFAULT));
         JRadioButton imgButton = new JRadioButton();
         imgButton.setIcon(healingIcon);
-        imgButton.setText(item);
+        imgButton.setText(item.getName());
         imgButton.setFocusPainted(false);
         imgButton.setForeground(Color.green);
         imgButton.setVerticalTextPosition(JRadioButton.BOTTOM);
@@ -120,6 +243,9 @@ public class ButtonFactory {
                 imgButton.setForeground(Color.green);
             }
         });
+        // TODO add tooltip on hover of item description
+        imgButton.setToolTipText(item.getDescription());
+
         imgButton.setBackground(Color.black);
         return imgButton;
     }

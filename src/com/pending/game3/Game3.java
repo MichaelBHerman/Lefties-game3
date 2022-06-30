@@ -1,12 +1,17 @@
 package com.pending.game3;
 
+import com.pending.game3.sound.GameMusic;
+import com.pending.game3.sound.ItemSound;
 import com.swing.MyFrame;
 import com.swing.panels.CraftingPanel;
 import com.swing.panels.GamePanel;
 import com.swing.panels.InventoryPanel;
 import com.swing.panels.RoomItemsPanel;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -32,7 +37,7 @@ public class Game3 {
     private HashMap<String, Item> items;
     private HashMap<String, Npc> npcs;
     private Scanner reader;
-
+    private final GameMusic gameMusic = new GameMusic();
     // Temporary method that only runs the UI
     public static void runGUI() {
         MyFrame frame = new MyFrame();
@@ -42,7 +47,7 @@ public class Game3 {
     private static Game3 instance;
 
     // logic for running a new instance of a game
-    public static void runProgram() {
+    public static void runProgram() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         if (instance == null) {
             instance = new Game3();
             instance.inputParser = new InputParser();
@@ -51,7 +56,7 @@ public class Game3 {
         instance.run();
     }
 
-    private Game3(){}
+    private Game3() throws UnsupportedAudioFileException, LineUnavailableException, IOException {}
     //end singleton
 
 
@@ -115,6 +120,7 @@ public class Game3 {
             System.out.println(line);
         }
         // mainLoop();
+        gameMusic.playMusic();
         displayConsoleGUI();
         displayRoomGUI();
     }
