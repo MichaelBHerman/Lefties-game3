@@ -3,9 +3,12 @@ package com.swing.panels;
 import com.pending.game3.InputParser;
 import com.swing.ButtonFactory;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.io.IOException;
 
 public class MovementPanel {
 
@@ -27,7 +30,7 @@ public class MovementPanel {
         return movementPanel;
     }
 
-    public static void setMovementPanel(String option) {
+    public static void setMovementPanel(String option) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         if(option.equalsIgnoreCase("clockwise")) {
             InputParser.getGUIInput("go clockwise");
         } else if (option.equalsIgnoreCase("counter-clockwise")) {

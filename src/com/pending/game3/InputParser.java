@@ -1,7 +1,11 @@
 package com.pending.game3;
 
+import com.pending.game3.sound.ItemSound;
 import com.swing.panels.GamePanel;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.*;
 
 import static com.swing.panels.MapPanel.updateMapGUI;
@@ -9,7 +13,18 @@ import static com.swing.panels.MapPanel.updateMapGUI;
 public class InputParser {
     static Random random = new Random();
     private static Scanner scanner = new Scanner(System.in);
+    private static ItemSound itemSound;
 
+    static {
+        try {
+            itemSound = new ItemSound();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public InputParser() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    }
 //    boolean getInput(Scanner userInput){
 //        System.out.print("Enter Command\n> "); // allows input command to be on next line
 //        String input = userInput.nextLine().toLowerCase(); // Reads user input
@@ -96,7 +111,7 @@ public class InputParser {
 //                return false;
 //    }
 
-    public static void getGUIInput(String userInput){
+    public static void getGUIInput(String userInput) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         //System.out.print("Enter Command\n> "); // allows input command to be on next line
         String input = userInput.toLowerCase(); // Reads user input
 
@@ -156,6 +171,7 @@ public class InputParser {
             case TAKE:
                 if (Game3.getItems().containsKey(inputSplit[1])) {
                     Game3.getCurrentRoom().takeItem(inputSplit[1]);
+                    itemSound.playSound();
                     GamePanel.updateOutputTextArea("\nYou grabbed " + inputSplit[1]);
                 } else {
                     GamePanel.updateOutputTextArea("\nWARNING: Item \"" + inputSplit[1] + "\" does not exist in the current room.");
