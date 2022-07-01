@@ -25,3 +25,5 @@ hs_err_pid*
 # IntelliJ metadatafiles
 .idea/
 *.iml
+/out/production/Lefties-game3/META-INF/MANIFEST.MF
+/src/META-INF/MANIFEST.MF
