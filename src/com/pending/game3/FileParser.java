@@ -31,6 +31,7 @@ class FileParser {
                 FileParser toReturn = new FileParser();
                 // created parser
                 Object obj = JSONValue.parse(new FileReader(String.valueOf(test1)));
+
                 if(obj == null) {
                         System.out.println("Selected file does not contain valid JSON data.");
                         return null;
