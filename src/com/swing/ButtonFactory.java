@@ -64,11 +64,7 @@ public class ButtonFactory {
             button.addActionListener(e -> {
                 try {
                     MyFrame.updateFrameWindow("craft");
-                } catch (UnsupportedAudioFileException ex) {
-                    ex.printStackTrace();
-                } catch (LineUnavailableException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                     ex.printStackTrace();
                 }
             });
