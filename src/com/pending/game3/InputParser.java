@@ -154,6 +154,7 @@ public class InputParser {
                 HashMap<String,  String> connectionsMap = Game3.getCurrentRoom().getConnections();
                 if (connectionsMap.containsKey(inputSplit[1])) {
                     goToRoom(connectionsMap.get(inputSplit[1]));
+                    Game3.displayRoomGUI();
                 } else {
                     GamePanel.updateOutputTextArea("\nWARNING: There's nowhere to go that direction.");
                 }

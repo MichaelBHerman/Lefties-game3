@@ -55,11 +55,7 @@ public class ButtonFactory {
             button.addActionListener(e -> {
                 try {
                     MyFrame.updateFrameWindow("take");
-                } catch (UnsupportedAudioFileException ex) {
-                    ex.printStackTrace();
-                } catch (LineUnavailableException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                     ex.printStackTrace();
                 }
             });
@@ -68,11 +64,7 @@ public class ButtonFactory {
             button.addActionListener(e -> {
                 try {
                     MyFrame.updateFrameWindow("craft");
-                } catch (UnsupportedAudioFileException ex) {
-                    ex.printStackTrace();
-                } catch (LineUnavailableException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                     ex.printStackTrace();
                 }
             });
@@ -81,11 +73,7 @@ public class ButtonFactory {
             button.addActionListener(e -> {
                 try {
                     MyFrame.updateFrameWindow("talk");
-                } catch (UnsupportedAudioFileException ex) {
-                    ex.printStackTrace();
-                } catch (LineUnavailableException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                     ex.printStackTrace();
                 }
             });
@@ -94,11 +82,7 @@ public class ButtonFactory {
             button.addActionListener(e -> {
                 try {
                     MyFrame.updateFrameWindow("drop");
-                } catch (UnsupportedAudioFileException ex) {
-                    ex.printStackTrace();
-                } catch (LineUnavailableException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                     ex.printStackTrace();
                 }
             });
@@ -107,11 +91,7 @@ public class ButtonFactory {
             button.addActionListener(e -> {
                 try {
                     MyFrame.updateFrameWindow("back");
-                } catch (UnsupportedAudioFileException ex) {
-                    ex.printStackTrace();
-                } catch (LineUnavailableException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                     ex.printStackTrace();
                 }
             });
@@ -120,11 +100,7 @@ public class ButtonFactory {
             button.addActionListener(e -> {
                 try {
                     MyFrame.updateFrameWindow("confirm selected");
-                } catch (UnsupportedAudioFileException ex) {
-                    ex.printStackTrace();
-                } catch (LineUnavailableException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                     ex.printStackTrace();
                 }
             });
@@ -134,11 +110,7 @@ public class ButtonFactory {
             button.addActionListener(e -> {
                 try {
                     MyFrame.updateFrameWindow("clockwise");
-                } catch (UnsupportedAudioFileException ex) {
-                    ex.printStackTrace();
-                } catch (LineUnavailableException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                     ex.printStackTrace();
                 }
             });
@@ -148,11 +120,7 @@ public class ButtonFactory {
             button.addActionListener(e -> {
                 try {
                     MyFrame.updateFrameWindow("counter-clockwise");
-                } catch (UnsupportedAudioFileException ex) {
-                    ex.printStackTrace();
-                } catch (LineUnavailableException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                     ex.printStackTrace();
                 }
             });
@@ -162,11 +130,7 @@ public class ButtonFactory {
             button.addActionListener(e -> {
                 try {
                     MyFrame.updateFrameWindow("outward");
-                } catch (UnsupportedAudioFileException ex) {
-                    ex.printStackTrace();
-                } catch (LineUnavailableException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                     ex.printStackTrace();
                 }
             });
@@ -176,11 +140,7 @@ public class ButtonFactory {
             button.addActionListener(e -> {
                 try {
                     MyFrame.updateFrameWindow("inward");
-                } catch (UnsupportedAudioFileException ex) {
-                    ex.printStackTrace();
-                } catch (LineUnavailableException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                     ex.printStackTrace();
                 }
             });
@@ -190,11 +150,7 @@ public class ButtonFactory {
             button.addActionListener(e -> {
                 try {
                     MyFrame.updateFrameWindow("outward right");
-                } catch (UnsupportedAudioFileException ex) {
-                    ex.printStackTrace();
-                } catch (LineUnavailableException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                     ex.printStackTrace();
                 }
             });
@@ -204,11 +160,7 @@ public class ButtonFactory {
             button.addActionListener(e -> {
                 try {
                     MyFrame.updateFrameWindow("outward left");
-                } catch (UnsupportedAudioFileException ex) {
-                    ex.printStackTrace();
-                } catch (LineUnavailableException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                     ex.printStackTrace();
                 }
             });
