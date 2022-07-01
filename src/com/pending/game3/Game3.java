@@ -1,12 +1,18 @@
 package com.pending.game3;
 
+import com.pending.game3.sound.GameMusic;
+import com.pending.game3.sound.ItemSound;
 import com.swing.MyFrame;
+import com.swing.panels.CraftingPanel;
 import com.swing.panels.GamePanel;
 import com.swing.panels.InventoryPanel;
 import com.swing.panels.RoomItemsPanel;
 import org.json.simple.JSONValue;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+import java.io.IOException;
 import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,7 +39,7 @@ public class Game3 {
     private HashMap<String, Item> items;
     private HashMap<String, Npc> npcs;
     private Scanner reader;
-
+    private final GameMusic gameMusic = new GameMusic();
     // Temporary method that only runs the UI
     public static void runGUI() {
         MyFrame frame = new MyFrame();
@@ -43,7 +49,7 @@ public class Game3 {
     private static Game3 instance;
 
     // logic for running a new instance of a game
-    public static void runProgram() {
+    public static void runProgram() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         if (instance == null) {
             instance = new Game3();
             instance.inputParser = new InputParser();
@@ -52,7 +58,7 @@ public class Game3 {
         instance.run();
     }
 
-    private Game3(){}
+    private Game3() throws UnsupportedAudioFileException, LineUnavailableException, IOException {}
     //end singleton
 
 
@@ -116,6 +122,7 @@ public class Game3 {
             System.out.println(line);
         }
         // mainLoop();
+        gameMusic.playMusic();
         displayConsoleGUI();
         displayRoomGUI();
     }
@@ -166,6 +173,7 @@ public class Game3 {
         checkEndCondition();
         InventoryPanel.updateInventoryGUI(getInventory());
         RoomItemsPanel.renderRoomItems(getCurrentRoom().getItems());
+        CraftingPanel.renderRecipeItems();
     }
 
     static void displayConsoleGUI() {
@@ -200,6 +208,7 @@ public class Game3 {
             }
         }
     }
+
     private String printFilesGUI(List<Path> files) {
         StringBuilder options = new StringBuilder();
         for (int i = 0; i < files.size(); i++){
@@ -208,15 +217,6 @@ public class Game3 {
         return options.toString();
 
     }
-
-
-//    private String printFilesGUI(List<Path> files) {
-//        StringBuilder options = new StringBuilder();
-//        for (int i = 0; i < files.size(); i++){
-//          options.append("\n[").append(1 + i).append("]: ").append(files.get(i).getFileName());
-//        }
-//        return options.toString();
-//    }
     // gets JSON files from the list
     private List<Path> getJsonList(Stream<Path> stream) {
         return stream.filter(file -> (!Files.isDirectory(file))

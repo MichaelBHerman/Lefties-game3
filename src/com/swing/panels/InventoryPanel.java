@@ -6,14 +6,20 @@ import com.pending.game3.Item;
 import com.swing.ButtonFactory;
 import com.swing.WrapLayout;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.pending.game3.InputParser.confirmSelected;
+import static com.swing.panels.CraftingPanel.recipeItemsList;
 
 public class InventoryPanel {
 
@@ -42,7 +48,7 @@ public class InventoryPanel {
     public static void updateInventoryGUI(HashMap<String, Item> playerInventory) {
         inventory.removeAll();
         inventoryItemsList.clear();
-        for (String item : playerInventory.keySet()) {
+        for (Item item : playerInventory.values()) {
             JRadioButton newBtn = ButtonFactory.createRadioButton(item);
             inventory.add(newBtn);
             inventoryItemsList.add(newBtn);
@@ -87,8 +93,8 @@ public class InventoryPanel {
         return inventoryScrollPane;
     }
 
-    static void dropSelectedItems() {
-        List<JRadioButton> filteredItemsList = inventoryItemsList.stream().filter(btn -> btn.isSelected()).collect(Collectors.toList());
+    static void dropSelectedItems() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        List<JRadioButton> filteredItemsList = getSelectedList();
 
         System.out.println(inventoryItemsList);
 
@@ -99,6 +105,21 @@ public class InventoryPanel {
 
         inventoryItemsList.removeAll(filteredItemsList);
         Game3.displayRoomGUI();
+    }
+
+    static void craftSelectedItems() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        ArrayList<JRadioButton> filteredItemsList = getSelectedList();
+
+        System.out.println(inventoryItemsList);
+
+        InputParser.getGUIInput("craft");
+        inventoryItemsList.removeAll(filteredItemsList);
+
+        Game3.displayRoomGUI();
+    }
+
+    public static ArrayList<JRadioButton> getSelectedList() {
+        return (ArrayList<JRadioButton>) inventoryItemsList.stream().filter(btn -> btn.isSelected()).collect(Collectors.toList());
     }
 
 }

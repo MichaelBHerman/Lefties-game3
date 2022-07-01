@@ -1,15 +1,31 @@
 package com.pending.game3;
 
+import com.pending.game3.sound.ItemSound;
 import com.swing.panels.GamePanel;
+import com.swing.panels.InventoryPanel;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.*;
-
+import javax.swing.*;
 import static com.swing.panels.MapPanel.updateMapGUI;
 
 public class InputParser {
+    private static ArrayList<String> selectedItemsList = new ArrayList<>();
     static Random random = new Random();
-    private static Scanner scanner = new Scanner(System.in);
+    private static ItemSound itemSound;
 
+    static {
+        try {
+            itemSound = new ItemSound();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public InputParser() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    }
 //    boolean getInput(Scanner userInput){
 //        System.out.print("Enter Command\n> "); // allows input command to be on next line
 //        String input = userInput.nextLine().toLowerCase(); // Reads user input
@@ -96,7 +112,7 @@ public class InputParser {
 //                return false;
 //    }
 
-    public static void getGUIInput(String userInput){
+    public static void getGUIInput(String userInput) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         //System.out.print("Enter Command\n> "); // allows input command to be on next line
         String input = userInput.toLowerCase(); // Reads user input
 
@@ -129,13 +145,11 @@ public class InputParser {
             } else {
                 GamePanel.updateOutputTextArea("\nERROR: command \"" + input +
                         "\" not recognized. enter \"Info\" for a list of valid commands.");
-                //return false;
             }
         }
         switch (command){
             case REPLAY:
                 Game3.runProgram();
-                //return true;
             case GO:
                 HashMap<String,  String> connectionsMap = Game3.getCurrentRoom().getConnections();
                 if (connectionsMap.containsKey(inputSplit[1])) {
@@ -156,6 +170,7 @@ public class InputParser {
             case TAKE:
                 if (Game3.getItems().containsKey(inputSplit[1])) {
                     Game3.getCurrentRoom().takeItem(inputSplit[1]);
+                    itemSound.playSound();
                     GamePanel.updateOutputTextArea("\nYou grabbed " + inputSplit[1]);
                 } else {
                     GamePanel.updateOutputTextArea("\nWARNING: Item \"" + inputSplit[1] + "\" does not exist in the current room.");
@@ -165,12 +180,15 @@ public class InputParser {
                 if (Game3.getItems().containsKey(inputSplit[1])) {
                     Game3.getCurrentRoom().dropItem(Game3.getItems().get(inputSplit[1]));
                     GamePanel.updateOutputTextArea("\nYou dropped " + inputSplit[1]);
+                    // TODO find a way wait for refresh on last item dropped, when dropping multiple items
+                    Game3.displayRoomGUI();
+                    Game3.displayConsoleGUI();
                 } else {
                     GamePanel.updateOutputTextArea("\nWARNING: Item \"" + inputSplit[1] + "\" does not exist in your inventory.");
                 }
                 break;
             case QUIT:
-                //TODO exit game
+                System.exit(1);
                 break;
             case INTERACT:
                 interact(inputSplit[1]);
@@ -181,10 +199,18 @@ public class InputParser {
                 }
                 break;
             case CRAFT:
-                crafting();
+                confirmSelected(InventoryPanel.getSelectedList());
+                craftingGUI(selectedItemsList);
                 break;
             default:
                 GamePanel.updateOutputTextArea("\nERROR: \"" + command + "\" Command not yet supported");
+        }
+    }
+
+    // Allows the user to craft items using the GUI command line instead of the GUI buttons.
+    public static void confirmSelected(ArrayList<JRadioButton> selectItems) {
+        for (JRadioButton btn: selectItems) {
+            selectedItemsList.add(btn.getActionCommand());
         }
     }
 
@@ -201,24 +227,24 @@ public class InputParser {
                     if (itemFlags.containsKey("Translator")
                             && itemFlags.get("Translator").contains(translatorFlagData.get(0))) {
                         if (npc.getFlags().containsKey("Random")) {
-                            System.out.println(npc.getAlternativeDialogue()
+                            GamePanel.updateOutputTextArea("\n" + npc.name + ": " + npc.getAlternativeDialogue()
                                     .get(random.nextInt(npc.getAlternativeDialogue().size())));
                         } else {
-                            System.out.println(npc.getAlternativeDialogue().get(0));
+                            GamePanel.updateOutputTextArea("\n" + npc.name + ": " + npc.getAlternativeDialogue().get(0));
                         }
                         return;
                     }
                 }
             }
             if(npc.getFlags().containsValue("Random")){
-                System.out.println(npc.getAlternativeDialogue()
+                GamePanel.updateOutputTextArea("\n" + npc.name + ": " + npc.getAlternativeDialogue()
                         .get(random.nextInt(npc.getAlternativeDialogue().size())));
             } else {
 
-                System.out.println(npc.dialogue);
+                GamePanel.updateOutputTextArea("\n" + npc.name + ": " + npc.dialogue);
             }
         } else{
-            System.out.println("They're not in this room!");
+            GamePanel.updateOutputTextArea("\nWARNING: \"" + target + "\" is not in this room!");
         }
     }
 
@@ -261,42 +287,31 @@ public class InputParser {
 //        }
 //    }
 
-    private static void crafting() {
+    private static void craftingGUI(ArrayList<String> selectedList) {
+        Collections.sort(selectedList);
         if(Game3.getCurrentRoom().getFlags().containsKey("Crafting")){
-            List<CraftingRecipe> availableRecipes = new ArrayList<>();
             for (CraftingRecipe recipe : Game3.getCraftingRecipes()) {
-                for(String item : recipe.ingredients){
-                    if(!Game3.getInventory().keySet().contains(item)){
-                        break;
-                    }
-                }
-                availableRecipes.add(recipe);
-            }
-            while (availableRecipes.size() > 0){
-                System.out.println("Select an item to craft: ");
-                for (int i = 0; i < availableRecipes.size(); i++){
-                    System.out.print("[" + (i + 1) + "]: " + availableRecipes.get(i).result + ": materials: ");
-                    for(String ingredient : availableRecipes.get(i).ingredients){
-                        System.out.print(ingredient + ", ");
-                    }
-                    System.out.println();
-                }
-                String input = scanner.nextLine();
-                try{
-                    int inputIndex = Integer.parseInt(input) - 1;
-                    CraftingRecipe selectedRecipe = availableRecipes.get(inputIndex);
-                    for (String item : selectedRecipe.ingredients){
+                System.out.println("Not sorted[r]: " + selectedList);
+                Collections.sort(recipe.ingredients);
+                System.out.println("Sorted[r]: " + selectedList);
+                if(recipe.ingredients.equals(selectedList)) {
+                    System.out.println(recipe.ingredients);
+                    for (String item : recipe.ingredients){
                         Game3.getInventory().remove(item);
                     }
-                    Game3.getInventory().put(selectedRecipe.name, selectedRecipe);
-                    System.out.println("Successfully crafted " + selectedRecipe.result);
-                    break;
-                } catch (Exception e) {
-                    System.out.println("Invalid Input, try again.");
+                    Item translator = Game3.getItems().get("multi-lingual neural mechanical translator (mlnmt)"); // TODO keep this one (Creates item obj)
+                    Game3.getInventory().put(translator.name, translator);
+                    GamePanel.updateOutputTextArea("\nSuccessfully crafted " + recipe.result);
+                    } else {
+                        GamePanel.updateOutputTextArea("\nWARNING: You have not selected the required items to craft anything.");
+                    }
                 }
-            }
+            } else {
+                GamePanel.updateOutputTextArea("\nWARNING: You are not in a room that has crafting capabilities.");
         }
+        selectedList.clear();
     }
+
 
     private static void goToRoom(String destination) {
         if (Game3.getRooms().containsKey(destination)) {
@@ -311,7 +326,7 @@ public class InputParser {
                         Game3.displayConsoleGUI();
                         updateMapGUI();
                     } else {
-                        GamePanel.updateOutputTextArea("The door is locked.");
+                        GamePanel.updateOutputTextArea("\nWARNING:The door is locked.");
                     }
                 }else{
                     GamePanel.updateOutputTextArea("Locked flag on Room " + destination +
@@ -324,7 +339,7 @@ public class InputParser {
                 updateMapGUI();
             }
         } else {
-            GamePanel.updateOutputTextArea("Room " + destination + " does not exist.");
+            GamePanel.updateOutputTextArea("\nRoom " + destination + " does not exist.");
         }
     }
 
