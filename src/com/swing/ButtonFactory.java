@@ -3,6 +3,7 @@ package com.swing;
 import com.pending.game3.CraftingRecipe;
 import com.pending.game3.Item;
 import com.swing.panels.CraftingPanel;
+import com.swing.panels.MapPanel;
 import com.swing.panels.RoomItemsPanel;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -218,8 +219,9 @@ public class ButtonFactory {
     }
 
     public static JRadioButton createRadioButton(Item item) {
-        ImageIcon healingIcon = new ImageIcon("resources/" + item.getName() + ".png");
-        healingIcon.setImage(healingIcon.getImage().getScaledInstance(100, 85, Image.SCALE_DEFAULT));
+        ImageIcon healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + item.getName() + ".png"));
+//        ImageIcon healingIcon = new ImageIcon("resources/" + item + ".png");
+        healingIcon.setImage(healingIcon.getImage().getScaledInstance(100,85, Image.SCALE_DEFAULT));
         JRadioButton imgButton = new JRadioButton();
         imgButton.setIcon(healingIcon);
         imgButton.setText(item.getName());

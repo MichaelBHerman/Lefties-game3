@@ -10,7 +10,7 @@
         }
       ],
       "Description": "What appears to be an examination room with three walls, one of which is curved outward and has a door in it. In this hospital-like room you also notice some advanced looking medical equipment. \nNext to the examination table you woke up on is a surgical instrument trolley with a keycard on it, and some type of body scanning device. In the cabinets on the wall there is something that resembles medicine.",
-      "Items": ["Key Card", "Body-Scanning Device", "Medicine", "Springy Thingy", "Communication buffer GUI", "Greenprints projector do-hickey", "Arcanospanner","Spectrographic protoplasm", "Coolant Tanks"],
+      "Items": ["Key Card", "Body-Scanning Device", "Medicine", "Greenprints projector do-hickey"],
       "Npcs" : ["alien1", "alien3"],
       "Connected Rooms": [
         {
