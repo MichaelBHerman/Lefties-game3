@@ -25,3 +25,7 @@ hs_err_pid*
 # IntelliJ metadatafiles
 .idea/
 *.iml
+
+META-INF/
+/src/META-INF/MANIFEST.MF
+out/*
