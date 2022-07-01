@@ -7,11 +7,13 @@ import com.swing.panels.CraftingPanel;
 import com.swing.panels.GamePanel;
 import com.swing.panels.InventoryPanel;
 import com.swing.panels.RoomItemsPanel;
+import org.json.simple.JSONValue;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.io.IOException;
+import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -197,6 +199,7 @@ public class Game3 {
             try{
                 int inputIndex = Integer.parseInt(userInput) - 1;
                 fileParser = FileParser.loadFile(files.get(inputIndex));
+//                Object obj = JSONValue.parse(new FileReader(String.valueOf(FileParser.class.getResourceAsStream("resources/json/test1.json"))));
                 if(fileParser == null) return true;
                 else return false;
             } catch (Exception e) {
@@ -209,9 +212,10 @@ public class Game3 {
     private String printFilesGUI(List<Path> files) {
         StringBuilder options = new StringBuilder();
         for (int i = 0; i < files.size(); i++){
-          options.append("\n[").append(1 + i).append("]: ").append(files.get(i).getFileName());
+            options.append("\n[").append(1 + i).append("]: ").append(files.get(i).getFileName());
         }
         return options.toString();
+
     }
     // gets JSON files from the list
     private List<Path> getJsonList(Stream<Path> stream) {
