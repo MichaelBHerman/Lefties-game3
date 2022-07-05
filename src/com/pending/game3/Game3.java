@@ -37,7 +37,7 @@ public class Game3 {
     private HashMap<String, Room> rooms;
     private HashMap<String, Item> items;
     private HashMap<String, Npc> npcs;
-    private final GameMusic gameMusic = new GameMusic();
+//    private final GameMusic gameMusic = new GameMusic();
     public static MyFrame frame;
 
     //singleton
@@ -193,7 +193,7 @@ public class Game3 {
             //printFiles(files);
 //            String userInput = JOptionPane.showInputDialog("Enter a number to select a json file to load: " + printFilesGUI(files));
             String userInput = JOptionPane.showInputDialog("Enter a number to select a json file to load: [1] test1.json");
-            String userInput = JOptionPane.showInputDialog("Enter a number to select a json file to load: " + printFilesGUI(files));
+//            String userInput = JOptionPane.showInputDialog("Enter a number to select a json file to load: " + printFilesGUI(files));
             if ("quit".equals(userInput.toLowerCase())) return true;
             try{
                 int inputIndex = Integer.parseInt(userInput) - 1;

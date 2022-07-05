@@ -200,7 +200,7 @@ public class ButtonFactory {
 
     public static JRadioButton createRadioButton(String npc) {
         //ImageIcon healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + npc + ".png"));
-        ImageIcon healingIcon = new ImageIcon("resources/Medicine.png");
+        healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/medicine.png"));
         healingIcon.setImage(healingIcon.getImage().getScaledInstance(100,85, Image.SCALE_DEFAULT));
         JRadioButton imgButton = new JRadioButton();
         imgButton.setIcon(healingIcon);
