@@ -81,7 +81,7 @@ public class CraftingPanel {
             recipeItemsList.add(newBtn);
             recipes.add(newBtn);
             for (String itemName : recipe.ingredients) {
-                newBtn = ButtonFactory.createRecipeRadioButton(itemName);
+                newBtn = ButtonFactory.createRecipeRadioButton(itemName.toLowerCase());
                 recipeItemsList.add(newBtn);
                 recipes.add(newBtn);
             }

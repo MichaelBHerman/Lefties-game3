@@ -9,8 +9,11 @@ import org.json.simple.JSONValue;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -34,7 +37,7 @@ public class Game3 {
     private HashMap<String, Room> rooms;
     private HashMap<String, Item> items;
     private HashMap<String, Npc> npcs;
-    private final GameMusic gameMusic = new GameMusic();
+//    private final GameMusic gameMusic = new GameMusic();
     public static MyFrame frame;
 
     //singleton
@@ -93,31 +96,36 @@ public class Game3 {
     }
 
     //method for starting the game
-    private void run() {
+    private void run() throws FileNotFoundException {
         frame = new MyFrame();
-        String userChoice = JOptionPane.showInputDialog(mainSplash + "\n[1]: Start new game\n[4]: quit program");
-        if (userChoice.equalsIgnoreCase("1")) {
-            try (Stream<Path> stream = Files.list(Path.of(jsonDir))) {
-                List<Path> files = getJsonList(stream);
-                if (promptUserForFileGUI( files)) return;
-            } catch (Exception e) {
-                System.out.println("Unable to locate resources\\json folder.");
-                return;
-            }
-            inventory = fileParser.startingInventory;
-            rooms = fileParser.roomsAtStart;
-            items = fileParser.itemsAtStart;
-            currentRoom = rooms.get(fileParser.startingRoom);
-            npcs = fileParser.npcsAtStart;
-            for (String line : fileParser.splashText){
-                System.out.println(line);
-            }
-            gameMusic.playMusic();
-            displayConsoleGUI();
-            displayRoomGUI();
-        } else {
-            System.exit(1);
+        //if(mainMenu()) return;
+//        String userChoice = JOptionPane.showInputDialog(mainSplash + "\n[1]: Start new game\n[4]: quit program");
+//        InputStream path = FileParser.class.getResourceAsStream("/resources/test1.json");
+//        InputStream jsonPath = getClass().getResourceAsStream("resource/test1.json");
+//        try (Stream<Path> stream = Files.list(Path.of(jsonDir))) {
+//
+//            List<Path> files = getJsonList(stream);
+//            if (promptUserForFileGUI( files)) return;
+//        } catch (Exception e) {
+//            System.out.println("Unable to locate resources\\json folder.");
+//            return;
+//        }
+        FileParser fileParser1 = new FileParser();
+        fileParser =fileParser1.loadFile();
+//        fileParser = FileParser.loadFile();
+//        promptUserForFileGUI();
+        inventory = fileParser.startingInventory;
+        rooms = fileParser.roomsAtStart;
+        items = fileParser.itemsAtStart;
+        currentRoom = rooms.get(fileParser.startingRoom);
+        npcs = fileParser.npcsAtStart;
+        for (String line : fileParser.splashText){
+            System.out.println(line);
         }
+        // mainLoop();
+//        gameMusic.playMusic();
+        displayConsoleGUI();
+        displayRoomGUI();
     }
 
     static void checkEndCondition() {
@@ -178,14 +186,20 @@ public class Game3 {
         GamePanel.updateOutputTextArea("\n-----");
     }
 
-    private boolean promptUserForFileGUI(List<Path> files) {
+//    private boolean promptUserForFileGUI(List<Path> files) {
+        private boolean promptUserForFileGUI() {
 
         while (true){
-            String userInput = JOptionPane.showInputDialog("Enter a number to select a json file to load: " + printFilesGUI(files));
+            //printFiles(files);
+//            String userInput = JOptionPane.showInputDialog("Enter a number to select a json file to load: " + printFilesGUI(files));
+            String userInput = JOptionPane.showInputDialog("Enter a number to select a json file to load: [1] test1.json");
+//            String userInput = JOptionPane.showInputDialog("Enter a number to select a json file to load: " + printFilesGUI(files));
             if ("quit".equals(userInput.toLowerCase())) return true;
             try{
                 int inputIndex = Integer.parseInt(userInput) - 1;
-                fileParser = FileParser.loadFile(files.get(inputIndex));
+//                fileParser = FileParser.loadFile();
+
+
 //                Object obj = JSONValue.parse(new FileReader(String.valueOf(FileParser.class.getResourceAsStream("resources/json/test1.json"))));
                 if(fileParser == null) return true;
                 else return false;
@@ -199,7 +213,8 @@ public class Game3 {
     private String printFilesGUI(List<Path> files) {
         StringBuilder options = new StringBuilder();
         for (int i = 0; i < files.size(); i++){
-            options.append("\n[").append(1 + i).append("]: ").append(files.get(i).getFileName());
+//            options.append("\n[").append(1 + i).append("]: ").append(files.get(i).getFileName());
+            options.append("\n[").append(1 + i).append("]: ").append(FileParser.class.getResourceAsStream("/resources/test1.json"));
         }
         return options.toString();
 

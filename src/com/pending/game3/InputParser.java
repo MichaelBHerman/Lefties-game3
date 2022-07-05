@@ -86,7 +86,7 @@ public class InputParser {
             case TAKE:
                 if (Game3.getItems().containsKey(inputSplit[1])) {
                     Game3.getCurrentRoom().takeItem(inputSplit[1]);
-                    itemSound.playSound();
+//                    itemSound.playSound();
                     Game3.displayRoomGUI();
                     Game3.displayConsoleGUI();
                 } else {
