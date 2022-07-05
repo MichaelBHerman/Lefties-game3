@@ -130,7 +130,6 @@ public class ActionPanel {
             talkRoomNPCPanel.setVisible(false);
             dropItemPanel.setVisible(true);
             craftItemPanel.setVisible(false);
-//            useItemPanel.setVisible(false);
         } else if (option.equalsIgnoreCase("back")) {
             mainPanel.setVisible(true);
             takeRoomItemPanel.setVisible(false);

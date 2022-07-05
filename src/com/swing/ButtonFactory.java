@@ -1,6 +1,7 @@
 package com.swing;
 
 import com.pending.game3.CraftingRecipe;
+import com.pending.game3.Game3;
 import com.pending.game3.Item;
 import com.swing.panels.CraftingPanel;
 import com.swing.panels.MapPanel;
@@ -24,6 +25,7 @@ public class ButtonFactory {
 
     static ArrayList<JRadioButton> recipeButtonsList = new ArrayList<>();
     static ArrayList<JRadioButton> recipeResultItemList = new ArrayList<>();
+    static ImageIcon healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/key card.png"));
 
     ButtonFactory() {
 
@@ -60,7 +62,6 @@ public class ButtonFactory {
                     ex.printStackTrace();
                 }
             });
-
         } else if (btnName.equalsIgnoreCase("craft")) {
             button.addActionListener(e -> {
                 try {
@@ -69,7 +70,6 @@ public class ButtonFactory {
                     ex.printStackTrace();
                 }
             });
-
         } else if (btnName.equalsIgnoreCase("talk")) {
             button.addActionListener(e -> {
                 try {
@@ -78,7 +78,6 @@ public class ButtonFactory {
                     ex.printStackTrace();
                 }
             });
-
         } else if (btnName.equalsIgnoreCase("drop")) {
             button.addActionListener(e -> {
                 try {
@@ -87,7 +86,6 @@ public class ButtonFactory {
                     ex.printStackTrace();
                 }
             });
-
         } else if (btnName.equalsIgnoreCase("back")) {
             button.addActionListener(e -> {
                 try {
@@ -96,7 +94,6 @@ public class ButtonFactory {
                     ex.printStackTrace();
                 }
             });
-
         } else if (btnName.equalsIgnoreCase("confirm selected")) {
             button.addActionListener(e -> {
                 try {
@@ -105,7 +102,6 @@ public class ButtonFactory {
                     ex.printStackTrace();
                 }
             });
-
         } else if (btnName.equalsIgnoreCase("clockwise")) {
             System.out.println("Going clockwise");
             button.addActionListener(e -> {
@@ -115,7 +111,6 @@ public class ButtonFactory {
                     ex.printStackTrace();
                 }
             });
-
         } else if (btnName.equalsIgnoreCase("counter-clockwise")) {
             System.out.println("Going counter-clockwise");
             button.addActionListener(e -> {
@@ -125,7 +120,6 @@ public class ButtonFactory {
                     ex.printStackTrace();
                 }
             });
-
         } else if (btnName.equalsIgnoreCase("outward")) {
             System.out.println("Going outward");
             button.addActionListener(e -> {
@@ -135,7 +129,6 @@ public class ButtonFactory {
                     ex.printStackTrace();
                 }
             });
-
         } else if (btnName.equalsIgnoreCase("inward")) {
             System.out.println("Going inward");
             button.addActionListener(e -> {
@@ -145,7 +138,6 @@ public class ButtonFactory {
                     ex.printStackTrace();
                 }
             });
-
         } else if (btnName.equalsIgnoreCase("outward right")) {
             System.out.println("Going outward right");
             button.addActionListener(e -> {
@@ -155,7 +147,6 @@ public class ButtonFactory {
                     ex.printStackTrace();
                 }
             });
-
         } else if (btnName.equalsIgnoreCase("outward left")) {
             System.out.println("Going outward left");
             button.addActionListener(e -> {
@@ -165,14 +156,17 @@ public class ButtonFactory {
                     ex.printStackTrace();
                 }
             });
-
         }
         return button;
     }
 
     public static JRadioButton createRadioButton(Item item) {
-        ImageIcon healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + item.getName() + ".png"));
-//        ImageIcon healingIcon = new ImageIcon("resources/" + item + ".png");
+
+//        ImageIcon healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + item.getName().toLowerCase() + ".png"));
+        healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + item.getName().toLowerCase() + ".png"));
+
+//        ImageIcon healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/key card.png"));
+
         healingIcon.setImage(healingIcon.getImage().getScaledInstance(100,85, Image.SCALE_DEFAULT));
         JRadioButton imgButton = new JRadioButton();
         imgButton.setIcon(healingIcon);
@@ -204,8 +198,42 @@ public class ButtonFactory {
         return imgButton;
     }
 
+    public static JRadioButton createRadioButton(String npc) {
+        //ImageIcon healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + npc + ".png"));
+        healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/medicine.png"));
+        healingIcon.setImage(healingIcon.getImage().getScaledInstance(100,85, Image.SCALE_DEFAULT));
+        JRadioButton imgButton = new JRadioButton();
+        imgButton.setIcon(healingIcon);
+        imgButton.setText(npc);
+        imgButton.setFocusPainted(false);
+        imgButton.setForeground(Color.green);
+        imgButton.setVerticalTextPosition(JRadioButton.BOTTOM);
+        imgButton.setHorizontalTextPosition(JRadioButton.CENTER);
+        imgButton.setIconTextGap(-5);
+        imgButton.addActionListener(e -> {
+            System.out.println(imgButton.isSelected());
+
+            if (imgButton.isSelected()) {
+                imgButton.setBackground(Color.GREEN);
+                imgButton.setForeground(Color.black);
+                updateRecipeRadioButton(imgButton);
+                System.out.println(imgButton.getActionCommand());
+                // TODO: System.out.println(imgButton.setActionCommand( item name + " " + itemId)); Set the btn to use the item id instead.
+            } else {
+                updateRecipeRadioButton(imgButton);
+                imgButton.setBackground(Color.black);
+                imgButton.setForeground(Color.green);
+            }
+        });
+        // TODO add tooltip on hover of item description
+        //imgButton.setToolTipText(npc.getDescription());
+
+        imgButton.setBackground(Color.black);
+        return imgButton;
+    }
+
     public static JRadioButton createRecipeRadioButton(String item) {
-        ImageIcon healingIcon = new ImageIcon("resources/" + item + ".png");
+        healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + item + ".png"));
         healingIcon.setImage(healingIcon.getImage().getScaledInstance(100, 85, Image.SCALE_DEFAULT));
         JRadioButton imgButton = new JRadioButton();
         imgButton.setIcon(healingIcon);
@@ -221,7 +249,8 @@ public class ButtonFactory {
     }
 
     public static JRadioButton createRecipeRadioButton(CraftingRecipe recipe) {
-        ImageIcon healingIcon = new ImageIcon("resources/" + recipe.getName() + ".png");
+        String lowerCaseRecipeName = recipe.getName().toLowerCase();
+        healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + lowerCaseRecipeName.toLowerCase() + ".png"));
         healingIcon.setImage(healingIcon.getImage().getScaledInstance(100, 85, Image.SCALE_DEFAULT));
         JRadioButton imgButton = new JRadioButton();
         imgButton.setIcon(healingIcon);
