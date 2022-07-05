@@ -23,7 +23,6 @@ public class MenuPanel {
         menuPanel.setBorder(BorderFactory.createTitledBorder("Menu"));
         menuPanel.setBackground(Color.black);
         menuPanel.setBorder(BorderFactory.createTitledBorder(border, "Menu", 0,2, null, Color.green));
-
         return menuPanel;
     }
 
