@@ -18,15 +18,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.pending.game3.InputParser.confirmSelected;
-import static com.swing.panels.CraftingPanel.recipeItemsList;
-
 public class InventoryPanel {
 
     private static JPanel inventoryScrollPanel;
     private static JPanel inventory;
 
-    public static ArrayList<JRadioButton> inventoryItemsList = new ArrayList<JRadioButton>();
+    public static ArrayList<JRadioButton> inventoryItemsList = new ArrayList<>();
 
     InventoryPanel() {
 
@@ -37,11 +34,8 @@ public class InventoryPanel {
         inventoryScrollPanel.setPreferredSize(new Dimension(0, 250));
         inventoryScrollPanel.setBorder(BorderFactory.createTitledBorder(border, "Inventory", 0,2, null, Color.green));
         inventoryScrollPanel.setBackground(Color.black);
-
         JScrollPane inventoryScrollPane = createInventoryScrollPane(border);
-
         inventoryScrollPanel.add(inventoryScrollPane);
-
         return inventoryScrollPanel;
     }
 
@@ -53,7 +47,6 @@ public class InventoryPanel {
             inventory.add(newBtn);
             inventoryItemsList.add(newBtn);
         }
-
         inventoryScrollPanel.validate();
         inventoryScrollPanel.repaint();
     }
@@ -64,7 +57,6 @@ public class InventoryPanel {
         JScrollPane inventoryScrollPane = new JScrollPane(inventory);
         inventoryScrollPane.setBackground(Color.black);
         inventoryScrollPane.setBorder(null);
-
         inventoryScrollPane.getVerticalScrollBar().setBackground(Color.BLACK);
         inventoryScrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
@@ -89,32 +81,22 @@ public class InventoryPanel {
                 return button;
             }
         });
-
         return inventoryScrollPane;
     }
 
     static void dropSelectedItems() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         List<JRadioButton> filteredItemsList = getSelectedList();
-
-        System.out.println(inventoryItemsList);
-
         for (JRadioButton btn : filteredItemsList) {
-            System.out.println(btn.getActionCommand());
             InputParser.getGUIInput("drop " + btn.getActionCommand());
         }
-
         inventoryItemsList.removeAll(filteredItemsList);
         Game3.displayRoomGUI();
     }
 
     static void craftSelectedItems() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         ArrayList<JRadioButton> filteredItemsList = getSelectedList();
-
-        System.out.println(inventoryItemsList);
-
         InputParser.getGUIInput("craft");
         inventoryItemsList.removeAll(filteredItemsList);
-
         Game3.displayRoomGUI();
     }
 

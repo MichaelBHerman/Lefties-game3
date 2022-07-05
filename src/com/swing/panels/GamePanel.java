@@ -32,7 +32,6 @@ public class GamePanel {
         roomNpcsPanel = NPCPanel.create(border);
         recipesPanel = CraftingPanel.create(border);
         gameInfoPanel = createGameInfoPanel(border,textInputField, outputScrollWindow);
-
         mainGamePanel = new JPanel(new CardLayout());
         mainGamePanel.add(gameInfoPanel);
         mainGamePanel.add(roomItemsPanel);
@@ -100,7 +99,6 @@ public class GamePanel {
         gameInfoPanel.validate();
         gameInfoPanel.repaint();
         //outputTextArea.setCaretPosition(outputTextArea.getDocument().getLength());
-
     }
 
     private static JScrollPane createOutputScrollWindow(Border border, JTextArea outputTextArea) {
@@ -139,25 +137,21 @@ public class GamePanel {
             roomItemsPanel.setVisible(true);
             roomNpcsPanel.setVisible(false);
             recipesPanel.setVisible(false);
-            System.out.println("Changing to take mode.");
         } else if (option.equalsIgnoreCase("talk")) {
             gameInfoPanel.setVisible(false);
             roomItemsPanel.setVisible(false);
             roomNpcsPanel.setVisible(true);
             recipesPanel.setVisible(false);
-            System.out.println("Changing to crafting mode.");
         } else if (option.equalsIgnoreCase("craft")) {
             gameInfoPanel.setVisible(false);
             roomItemsPanel.setVisible(false);
             roomNpcsPanel.setVisible(false);
             recipesPanel.setVisible(true);
-            System.out.println("Changing to talk mode.");
         } else if (option.equalsIgnoreCase("back")) {
             gameInfoPanel.setVisible(true);
             roomItemsPanel.setVisible(false);
             roomNpcsPanel.setVisible(false);
             recipesPanel.setVisible(false);
-            System.out.println("Going back.");
         } else if (option.equalsIgnoreCase("confirm selected")) {
             gameInfoPanel.setVisible(true);
             roomItemsPanel.setVisible(false);

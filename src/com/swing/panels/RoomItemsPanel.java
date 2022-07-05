@@ -86,17 +86,16 @@ public class RoomItemsPanel {
     }
 
     static void takeSelectedItems() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        List<JRadioButton> filteredItemsList = roomItemsList.stream().filter(btn -> btn.isSelected()).collect(Collectors.toList());
-
-        System.out.println(roomItemsList);
-
+        List<JRadioButton> filteredItemsList = getSelectedList();
         for (JRadioButton btn : filteredItemsList) {
-            System.out.println(btn.getActionCommand());
             InputParser.getGUIInput("take " + btn.getActionCommand());
         }
         roomItemsList.removeAll(filteredItemsList);
-
         Game3.displayRoomGUI();
+    }
+
+    public static ArrayList<JRadioButton> getSelectedList() {
+        return (ArrayList<JRadioButton>) roomItemsList.stream().filter(btn -> btn.isSelected()).collect(Collectors.toList());
     }
 
 }
