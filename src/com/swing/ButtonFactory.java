@@ -164,7 +164,7 @@ public class ButtonFactory {
 
 //        ImageIcon healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + item.getName().toLowerCase() + ".png"));
         healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + item.getName().toLowerCase() + ".png"));
-        System.out.println(item.getName().toString());
+
 //        ImageIcon healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/key card.png"));
 
         healingIcon.setImage(healingIcon.getImage().getScaledInstance(100,85, Image.SCALE_DEFAULT));
