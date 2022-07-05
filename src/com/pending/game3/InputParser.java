@@ -170,7 +170,7 @@ public class InputParser {
             case TAKE:
                 if (Game3.getItems().containsKey(inputSplit[1])) {
                     Game3.getCurrentRoom().takeItem(inputSplit[1]);
-                    itemSound.playSound();
+//                    itemSound.playSound();
                     GamePanel.updateOutputTextArea("\nYou grabbed " + inputSplit[1]);
                 } else {
                     GamePanel.updateOutputTextArea("\nWARNING: Item \"" + inputSplit[1] + "\" does not exist in the current room.");
@@ -309,6 +309,7 @@ public class InputParser {
             } else {
                 GamePanel.updateOutputTextArea("\nWARNING: You are not in a room that has crafting capabilities.");
         }
+
         selectedList.clear();
     }
 

@@ -24,6 +24,7 @@ public class ButtonFactory {
 
     static ArrayList<JRadioButton> recipeButtonsList = new ArrayList<>();
     static ArrayList<JRadioButton> recipeResultItemList = new ArrayList<>();
+    static ImageIcon healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/key card.png"));
 
     ButtonFactory() {
 
@@ -219,8 +220,12 @@ public class ButtonFactory {
     }
 
     public static JRadioButton createRadioButton(Item item) {
-        ImageIcon healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + item.getName() + ".png"));
-//        ImageIcon healingIcon = new ImageIcon("resources/" + item + ".png");
+
+//        ImageIcon healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + item.getName().toLowerCase() + ".png"));
+        healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + item.getName().toLowerCase() + ".png"));
+        System.out.println(item.getName().toString());
+//        ImageIcon healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/key card.png"));
+
         healingIcon.setImage(healingIcon.getImage().getScaledInstance(100,85, Image.SCALE_DEFAULT));
         JRadioButton imgButton = new JRadioButton();
         imgButton.setIcon(healingIcon);
@@ -253,7 +258,7 @@ public class ButtonFactory {
     }
 
     public static JRadioButton createRecipeRadioButton(String item) {
-        ImageIcon healingIcon = new ImageIcon("resources/" + item + ".png");
+        healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + item + ".png"));
         healingIcon.setImage(healingIcon.getImage().getScaledInstance(100, 85, Image.SCALE_DEFAULT));
         JRadioButton imgButton = new JRadioButton();
         imgButton.setIcon(healingIcon);
@@ -269,7 +274,8 @@ public class ButtonFactory {
     }
 
     public static JRadioButton createRecipeRadioButton(CraftingRecipe recipe) {
-        ImageIcon healingIcon = new ImageIcon("resources/" + recipe.getName() + ".png");
+        String lowerCaseRecipeName = recipe.getName().toLowerCase();
+        healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + lowerCaseRecipeName.toLowerCase() + ".png"));
         healingIcon.setImage(healingIcon.getImage().getScaledInstance(100, 85, Image.SCALE_DEFAULT));
         JRadioButton imgButton = new JRadioButton();
         imgButton.setIcon(healingIcon);
