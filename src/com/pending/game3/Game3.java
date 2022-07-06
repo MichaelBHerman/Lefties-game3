@@ -99,33 +99,24 @@ public class Game3 {
     private void run() throws FileNotFoundException {
         frame = new MyFrame();
         //if(mainMenu()) return;
-//        String userChoice = JOptionPane.showInputDialog(mainSplash + "\n[1]: Start new game\n[4]: quit program");
-//        InputStream path = FileParser.class.getResourceAsStream("/resources/test1.json");
-//        InputStream jsonPath = getClass().getResourceAsStream("resource/test1.json");
-//        try (Stream<Path> stream = Files.list(Path.of(jsonDir))) {
-//
-//            List<Path> files = getJsonList(stream);
-//            if (promptUserForFileGUI( files)) return;
-//        } catch (Exception e) {
-//            System.out.println("Unable to locate resources\\json folder.");
-//            return;
-//        }
-        FileParser fileParser1 = new FileParser();
-        fileParser =fileParser1.loadFile();
-//        fileParser = FileParser.loadFile();
-//        promptUserForFileGUI();
-        inventory = fileParser.startingInventory;
-        rooms = fileParser.roomsAtStart;
-        items = fileParser.itemsAtStart;
-        currentRoom = rooms.get(fileParser.startingRoom);
-        npcs = fileParser.npcsAtStart;
-        for (String line : fileParser.splashText){
-            System.out.println(line);
-        }
-        // mainLoop();
+        String userChoice = JOptionPane.showInputDialog(mainSplash + "\n[1]: Start new game\n[4]: quit program");
+        if(userChoice.equalsIgnoreCase("1")) {
+            FileParser fileParser1 = new FileParser();
+            fileParser =fileParser1.loadFile();
+            inventory = fileParser.startingInventory;
+            rooms = fileParser.roomsAtStart;
+            items = fileParser.itemsAtStart;
+            currentRoom = rooms.get(fileParser.startingRoom);
+            npcs = fileParser.npcsAtStart;
+            for (String line : fileParser.splashText){
+                System.out.println(line);
+            }
 //        gameMusic.playMusic();
-        displayConsoleGUI();
-        displayRoomGUI();
+            displayConsoleGUI();
+            displayRoomGUI();
+        } else {
+            System.exit(1);
+        }
     }
 
     static void checkEndCondition() {
@@ -158,7 +149,7 @@ public class Game3 {
             }
             if (roomCheck && npcsCheck && itemsCheck){
                 if(ec.win){
-                    GamePanel.updateOutputTextArea("\nYOU WIN! ");
+                    GamePanel.updateOutputTextArea("\nYou convinced the Aliens to take you home! YOU WIN! ");
                 } else {
                     GamePanel.updateOutputTextArea("\nYou Lost... ");
                 }

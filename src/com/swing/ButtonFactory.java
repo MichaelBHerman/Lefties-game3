@@ -200,7 +200,7 @@ public class ButtonFactory {
 
     public static JRadioButton createRadioButton(String npc) {
         //ImageIcon healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + npc + ".png"));
-        healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/medicine.png"));
+        healingIcon = new ImageIcon(ButtonFactory.class.getResource("/resources/" + npc + ".png"));
         healingIcon.setImage(healingIcon.getImage().getScaledInstance(100,85, Image.SCALE_DEFAULT));
         JRadioButton imgButton = new JRadioButton();
         imgButton.setIcon(healingIcon);
@@ -225,9 +225,6 @@ public class ButtonFactory {
                 imgButton.setForeground(Color.green);
             }
         });
-        // TODO add tooltip on hover of item description
-        //imgButton.setToolTipText(npc.getDescription());
-
         imgButton.setBackground(Color.black);
         return imgButton;
     }

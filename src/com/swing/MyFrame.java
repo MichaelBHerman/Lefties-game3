@@ -34,7 +34,7 @@ public class MyFrame {
         frame.add(southPanel, BorderLayout.PAGE_END);
         frame.add(menuPanel, BorderLayout.LINE_END);
 
-        frame.setPreferredSize(new Dimension(1500, 825));
+        frame.setPreferredSize(new Dimension(1600, 825));
         frame.setBackground(Color.black);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
