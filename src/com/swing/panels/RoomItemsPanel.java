@@ -2,14 +2,19 @@ package com.swing.panels;
 
 import com.pending.game3.Game3;
 import com.pending.game3.InputParser;
+import com.pending.game3.Item;
 import com.swing.ButtonFactory;
 import com.swing.WrapLayout;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,10 +73,10 @@ public class RoomItemsPanel {
         return roomScrollPane;
     }
 
-    public static void renderRoomItems(List<String> roomItems){
+    public static void renderRoomItems(HashMap<String, Item> roomItems){
         currentRoomItems.removeAll();
         roomItemsList.clear();
-        for (String item : roomItems) {
+        for (Item item : roomItems.values()) {
             JRadioButton newBtn = ButtonFactory.createRadioButton(item);
             roomItemsList.add(newBtn);
             currentRoomItems.add(newBtn);
@@ -80,7 +85,7 @@ public class RoomItemsPanel {
         roomItemsScrollPanel.repaint();
     }
 
-    static void takeSelectedItems() {
+    static void takeSelectedItems() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         List<JRadioButton> filteredItemsList = roomItemsList.stream().filter(btn -> btn.isSelected()).collect(Collectors.toList());
 
         System.out.println(roomItemsList);

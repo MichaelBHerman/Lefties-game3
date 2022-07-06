@@ -13,7 +13,7 @@ public class MapPanel {
     }
 
     private static JLabel map = new JLabel();
-    private static ImageIcon mapIcon = new ImageIcon("resources/Examination Room.png");
+    private static ImageIcon mapIcon = new ImageIcon(MapPanel.class.getResource("/resources/Examination Room.png"));
 
     public static JPanel create(Border border) {
         JPanel mapPanel = new JPanel(new BorderLayout());
@@ -29,7 +29,8 @@ public class MapPanel {
     }
 
     public static void updateMapGUI() {
-        mapIcon = new ImageIcon("resources/" + Game3.getCurrentRoom().getName() + ".png");
+        mapIcon = new ImageIcon(MapPanel.class.getResource("/resources/" + Game3.getCurrentRoom().getName() + ".png"));
+//        mapIcon = new ImageIcon("resources/" + Game3.getCurrentRoom().getName() + ".png");
         mapIcon.setImage(mapIcon.getImage().getScaledInstance(map.getWidth(),map.getHeight(), Image.SCALE_SMOOTH));
         map.setIcon((mapIcon));
     }

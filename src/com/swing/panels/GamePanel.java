@@ -3,16 +3,20 @@ package com.swing.panels;
 import com.pending.game3.Game3;
 import com.pending.game3.InputParser;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
+import java.io.IOException;
 
 public class GamePanel {
     private static JTextArea outputTextArea;
     private static JScrollPane outputScrollWindow;
     private static JPanel roomItemsPanel;
     private static JPanel roomNpcsPanel;
+    private static JPanel recipesPanel;
     private static JPanel gameInfoPanel;
     private static JPanel mainGamePanel;
 
@@ -26,12 +30,13 @@ public class GamePanel {
         JScrollPane outputScrollWindow = createOutputScrollWindow(border, outputTextArea);
         roomItemsPanel = RoomItemsPanel.create(border);
         roomNpcsPanel = NPCPanel.create(border);
+        recipesPanel = CraftingPanel.create(border);
         gameInfoPanel = createGameInfoPanel(border,textInputField, outputScrollWindow);
-
         mainGamePanel = new JPanel(new CardLayout());
         mainGamePanel.add(gameInfoPanel);
         mainGamePanel.add(roomItemsPanel);
         mainGamePanel.add(roomNpcsPanel);
+        mainGamePanel.add(recipesPanel);
 
         return mainGamePanel;
     }
@@ -50,7 +55,11 @@ public class GamePanel {
             outputTextArea.setCaretPosition(outputTextArea.getDocument().getLength());
             outputTextArea.revalidate();
             textField.setText("");
-            InputParser.getGUIInput(e.getActionCommand());
+            try {
+                InputParser.getGUIInput(e.getActionCommand());
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+                ex.printStackTrace();
+            }
             Game3.displayRoomGUI();
         });
 
@@ -90,7 +99,6 @@ public class GamePanel {
         gameInfoPanel.validate();
         gameInfoPanel.repaint();
         //outputTextArea.setCaretPosition(outputTextArea.getDocument().getLength());
-
     }
 
     private static JScrollPane createOutputScrollWindow(Border border, JTextArea outputTextArea) {
@@ -128,24 +136,27 @@ public class GamePanel {
             gameInfoPanel.setVisible(false);
             roomItemsPanel.setVisible(true);
             roomNpcsPanel.setVisible(false);
-//            useItemPanel.setVisible(false);
-            System.out.println("Changing to take mode.");
+            recipesPanel.setVisible(false);
         } else if (option.equalsIgnoreCase("talk")) {
             gameInfoPanel.setVisible(false);
             roomItemsPanel.setVisible(false);
             roomNpcsPanel.setVisible(true);
-//            useItemPanel.setVisible(false);
-            System.out.println("Changing to talk mode.");
+            recipesPanel.setVisible(false);
+        } else if (option.equalsIgnoreCase("craft")) {
+            gameInfoPanel.setVisible(false);
+            roomItemsPanel.setVisible(false);
+            roomNpcsPanel.setVisible(false);
+            recipesPanel.setVisible(true);
         } else if (option.equalsIgnoreCase("back")) {
             gameInfoPanel.setVisible(true);
             roomItemsPanel.setVisible(false);
             roomNpcsPanel.setVisible(false);
-//            useItemPanel.setVisible(false);
-            System.out.println("Going back.");
+            recipesPanel.setVisible(false);
         } else if (option.equalsIgnoreCase("confirm selected")) {
             gameInfoPanel.setVisible(true);
             roomItemsPanel.setVisible(false);
             roomNpcsPanel.setVisible(false);
+            recipesPanel.setVisible(false);
         }
 
     }
