@@ -4,15 +4,15 @@ import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
 
-public class TalkSound {
+public class ErrorSound {
     private Clip audioClip;
 
-    public TalkSound() {
+    public ErrorSound() {
 
     }
 
     public void playSound() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        URL audioPath = this.getClass().getResource("/resources/aliensTalk.wav");
+        URL audioPath = this.getClass().getResource("/resources/invalid-selection-39351.wav");
         assert audioPath != null;
         AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioPath);
         AudioFormat format = audioStream.getFormat();
@@ -21,4 +21,5 @@ public class TalkSound {
         audioClip.open(audioStream);
         audioClip.start();
     }
+
 }
