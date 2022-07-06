@@ -1,8 +1,6 @@
 package com.pending.game3;
 
-import com.pending.game3.sound.ItemSound;
-import com.pending.game3.sound.TalkSound;
-import com.pending.game3.sound.WalkSound;
+import com.pending.game3.sound.*;
 import com.swing.panels.GamePanel;
 import com.swing.panels.InventoryPanel;
 
@@ -19,12 +17,16 @@ public class InputParser {
     private static ItemSound itemSound;
     private static WalkSound walkSound;
     private static TalkSound talkSound;
+    private static SuccessSound successSound;
+    private static ErrorSound errorSound;
 
     static {
         try {
             itemSound = new ItemSound();
             walkSound = new WalkSound();
             talkSound = new TalkSound();
+            successSound = new SuccessSound();
+            errorSound = new ErrorSound();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
@@ -64,6 +66,7 @@ public class InputParser {
             } else if (SynonymDictionary.DROP.synonyms.contains(inputSplit[0])) {
                 command = SynonymDictionary.DROP;
             } else {
+                errorSound.playSound();
                 GamePanel.updateOutputTextArea("\nERROR: command \"" + input +
                         "\" not recognized. enter \"Info\" for a list of valid commands.");
             }
@@ -77,6 +80,7 @@ public class InputParser {
                     goToRoom(connectionsMap.get(inputSplit[1]));
                     Game3.displayRoomGUI();
                 } else {
+                    errorSound.playSound();
                     GamePanel.updateOutputTextArea("\nWARNING: There's nowhere to go that direction.");
                 }
                 break;
@@ -86,6 +90,7 @@ public class InputParser {
                 } else if (Game3.getCurrentRoom().getItems().containsKey(inputSplit[1])) {
                     GamePanel.updateOutputTextArea(Game3.getItems().get(inputSplit[1]).description);
                 } else {
+                    errorSound.playSound();
                     GamePanel.updateOutputTextArea("\nWARNING: Item \"" + inputSplit[1] + "\" does not exist in the current room");
                 }
                 break;
@@ -96,6 +101,7 @@ public class InputParser {
                     Game3.displayRoomGUI();
                     Game3.displayConsoleGUI();
                 } else {
+                    errorSound.playSound();
                     GamePanel.updateOutputTextArea("\nWARNING: Item \"" + inputSplit[1] + "\" does not exist in the current room.");
                 }
                 break;
@@ -105,6 +111,7 @@ public class InputParser {
                     Game3.displayRoomGUI();
                     Game3.displayConsoleGUI();
                 } else {
+                    errorSound.playSound();
                     GamePanel.updateOutputTextArea("\nWARNING: Item \"" + inputSplit[1] + "\" does not exist in your inventory.");
                 }
                 break;
@@ -124,6 +131,7 @@ public class InputParser {
                 craftingGUI(selectedItemsList);
                 break;
             default:
+                errorSound.playSound();
                 GamePanel.updateOutputTextArea("\nERROR: \"" + command + "\" Command not yet supported");
         }
         Game3.checkEndCondition();
@@ -167,11 +175,12 @@ public class InputParser {
 
             }
         } else{
+            errorSound.playSound();
             GamePanel.updateOutputTextArea("\nWARNING: \"" + target + "\" is not in this room!");
         }
     }
 
-    private static void craftingGUI(ArrayList<String> selectedList) {
+    private static void craftingGUI(ArrayList<String> selectedList) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         Collections.sort(selectedList);
         if(Game3.getCurrentRoom().getFlags().containsKey("Crafting")){
             for (CraftingRecipe recipe : Game3.getCraftingRecipes()) {
@@ -183,11 +192,14 @@ public class InputParser {
                     Item translator = Game3.getItems().get(recipe.result);
                     Game3.getInventory().put(translator.name, translator);
                     GamePanel.updateOutputTextArea("\nSuccessfully crafted " + recipe.result);
-                    } else {
+                    successSound.playSound();
+                } else {
+                    errorSound.playSound();
                         GamePanel.updateOutputTextArea("\nWARNING: You have not selected the required items to craft anything.");
                     }
                 }
             } else {
+            errorSound.playSound();
                 GamePanel.updateOutputTextArea("\nWARNING: You are not in a room that has crafting capabilities.");
         }
         selectedList.clear();
@@ -206,6 +218,7 @@ public class InputParser {
                         Game3.displayConsoleGUI();
                         updateMapGUI();
                     } else {
+                        errorSound.playSound();
                         GamePanel.updateOutputTextArea("\nWARNING:The door is locked.");
                     }
                 }else{
@@ -220,6 +233,7 @@ public class InputParser {
                 updateMapGUI();
             }
         } else {
+            errorSound.playSound();
             GamePanel.updateOutputTextArea("\nRoom " + destination + " does not exist.");
         }
     }
