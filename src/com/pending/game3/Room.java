@@ -9,7 +9,7 @@ public class Room {
     private HashMap<String, Item> items;
     private List<String> npcs;
     private HashMap<String, String> connections;
-    public final String description;
+    final String description;
     final String name;
     final String displayName;
 

@@ -12,8 +12,6 @@ import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileReader;
-import java.io.InputStream;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -32,12 +30,13 @@ public class Game3 {
             "The sky is the limit!\n\n" +
             "Or is it?";
     private static FileParser fileParser;
+    private InputParser inputParser;
     private static HashMap<String, Item> inventory;
     private static Room currentRoom;
     private HashMap<String, Room> rooms;
     private HashMap<String, Item> items;
     private HashMap<String, Npc> npcs;
-//    private final GameMusic gameMusic = new GameMusic();
+    private final GameMusic gameMusic = new GameMusic();
     public static MyFrame frame;
 
     //singleton
@@ -111,7 +110,12 @@ public class Game3 {
             for (String line : fileParser.splashText){
                 System.out.println(line);
             }
-//        gameMusic.playMusic();
+            try {
+                gameMusic.playMusic();
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
             displayConsoleGUI();
             displayRoomGUI();
         } else {

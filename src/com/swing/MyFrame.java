@@ -59,4 +59,8 @@ public class MyFrame {
         setMovementPanel(option);
     }
 
+    public static void createCardLayout() {
+
+    }
+
 }

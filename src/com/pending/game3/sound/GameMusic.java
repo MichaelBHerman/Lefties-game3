@@ -3,13 +3,15 @@ package com.pending.game3.sound;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class GameMusic extends Sound{
     private final Clip audioClip;
 
     public GameMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        File audioFile = new File("resources/universe-space-sounds-3595.wav");
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+        URL audioPath = this.getClass().getResource("/resources/gameMusic.wav");
+        assert audioPath != null;
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioPath);
         AudioFormat format = audioStream.getFormat();
         DataLine.Info info = new DataLine.Info(Clip.class, format);
         audioClip = (Clip) AudioSystem.getLine(info);
