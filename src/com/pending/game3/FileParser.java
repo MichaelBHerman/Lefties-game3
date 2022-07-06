@@ -37,11 +37,6 @@ class FileParser {
                 InputStream inputStream = this.getClass().getResourceAsStream("/resources/test1.json");
                 InputStreamReader reader = new InputStreamReader((inputStream), StandardCharsets.UTF_8);
                 BufferedReader inputStreamReader = new BufferedReader(reader);
-
-
-
-
-
                 Object obj = JSONValue.parse(inputStreamReader);
 
                 if(obj == null) {
@@ -64,13 +59,6 @@ class FileParser {
                         System.out.println("Base entity in selected file is not a JSON Object.");
                         return null;
                 }
-
-
-//
-//
-//
-//
-//
                 return toReturn;
         }
 
