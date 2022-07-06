@@ -10,8 +10,8 @@
         }
       ],
       "Description": "What appears to be an examination room with three walls, one of which is curved outward and has a door in it. In this hospital-like room you also notice some advanced looking medical equipment. \nNext to the examination table you woke up on is a surgical instrument trolley with a keycard on it, and some type of body scanning device. In the cabinets on the wall there is something that resembles medicine.",
-      "Items": ["Key Card", "Body-Scanning Device", "Medicine", "Springy Thingy", "Communication buffer GUI", "Greenprints projector do-hickey", "Arcanospanner","Spectrographic protoplasm", "Coolant Tanks"],
-      "Npcs" : ["alien1", "alien3"],
+      "Items": ["Key Card", "Body-Scanning Device", "Medicine", "Greenprints projector do-hickey"],
+      "Npcs" : ["alien1"],
       "Connected Rooms": [
         {
           "Outward": "Hallway1"
@@ -81,6 +81,7 @@
       ],
       "Description": "A large Cafeteria-style room, there is one large oval shaped station with 2 types of dispensing machines. The room has a band, and vending machines, and something that clearly resembles a bar.",
       "Items": [],
+      "Npcs" : ["alien3"],
       "Connected Rooms": [
         {
           "Inward": "Hallway4"
@@ -628,7 +629,7 @@
         }
       ],
       "Dialogue": "Ack Ack Ack Ack Ack",
-      "Alternate Dialogue": ["Hello? Woah! Wait, you can talk?","Sorry, we didn't know human beings on Earth were intelligent lifeforms. We usually don't pick up intelligent life.", "This is both exciting and terrifying. We found new intelligent life.", "This is an HR nightmare"]
+      "Alternate Dialogue": ["Hello? Woah! Wait, you can talk?","Sorry, we didn't know human beings on Earth were intelligent lifeforms. We usually don't pick up intelligent life.", "This is both exciting and terrifying. We found new intelligent life.", "This is an HR nightmare", "You should talk to Carl in the bridge, He'll gladly take you back to your home planet.", "Head to the bridge and i'm sure we'll take you back to your home planet."]
     },
     {
       "Name": "alien2",
@@ -639,7 +640,7 @@
         }
       ],
       "Dialogue": "Ack Ack Ack Ack Ack",
-      "Alternate Dialogue": ["Heeeeeeeey","Hey, terribly sorry about the whole abducting you thing, while you're aboard feel free to get some food from the nutrient paste dispensary. I think it will be safe for humans.","I am surprised you figured out how to use the greenprints to make the translator.","The Intergalactic Federation of Taxonomic Regulations for Intelligent Life is going to have a field day with this", "You scared the sniglforks out of Phil in Observation, he grabbed his medical equipment and ran as fast as he could. HAHAHA, I cant believe he forgot his key card."]
+      "Alternate Dialogue": ["Heeeeeeeey","See Carl at the Bridge, He'll help you get home.","Hey, terribly sorry about the whole abducting you thing, while you're aboard feel free to get some food from the nutrient paste dispensary. I think it will be safe for humans.","I am surprised you figured out how to use the greenprints to make the translator.","The Intergalactic Federation of Taxonomic Regulations for Intelligent Life is going to have a field day with this", "You scared the sniglforks out of Phil in Observation, he grabbed his medical equipment and ran as fast as he could. HAHAHA, I cant believe he forgot his key card."]
     },
     {
       "Name": "alien3",
@@ -650,7 +651,7 @@
         }
       ],
       "Dialogue": "Ack Ack Ack Ack Ack",
-      "Alternate Dialogue": ["Hey, I guess we are going to have to get permission to re-reoute and get you home. Sorry about the mix-up.","Feel free to look around the ship while we head back towards earth, just stay out of anywhere that requires DG-16 Clearance on it, its written on the door, you can't miss it.", "I would avoid eating anything out of the vending machine for now, Phil didn't get to complete a scan of your digestive system."]
+      "Alternate Dialogue": ["Hey, I guess we are going to have to get permission to re-reoute and get you home. Sorry about the mix-up. Head to the Bridge to get started.","Feel free to look around the ship while we head back towards earth, just stay out of anywhere that requires DG-16 Clearance on it, its written on the door, you can't miss it.", "I would avoid eating anything out of the vending machine for now, Phil didn't get to complete a scan of your digestive system."]
     },
     {
       "Name": "alien4",
@@ -661,7 +662,7 @@
         }
       ],
       "Dialogue": "Ack Ack Ack Ack Ack",
-      "Alternate Dialogue": ["I wonder if they will give you the standard memory erase or something more thorough." , "Well, looks like we might have to contact some people about faking another Roswell"]
+      "Alternate Dialogue": ["I wonder if they will give you the standard memory erase or something more thorough." , "Well, looks like we might have to contact some people about faking another Roswell", "The bridge is the area you'll want to head towards to see about a ride home."]
     },
     {
       "Name": "alien5",
