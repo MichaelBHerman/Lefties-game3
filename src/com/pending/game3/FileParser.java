@@ -4,8 +4,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import javax.swing.*;
+import java.io.*;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,13 +26,16 @@ class FileParser {
         private static JSONObject jsonObject;
 
         //ctor
-        private FileParser(){
+        FileParser(){
         }
 
-        static FileParser loadFile(Path test1) throws FileNotFoundException {
+        FileParser loadFile() throws FileNotFoundException {
                 FileParser toReturn = new FileParser();
                 // created parser
-                Object obj = JSONValue.parse(new FileReader(String.valueOf(test1)));
+                InputStream inputStream = this.getClass().getResourceAsStream("/resources/test1.json");
+                InputStreamReader reader = new InputStreamReader((inputStream), StandardCharsets.UTF_8);
+                BufferedReader inputStreamReader = new BufferedReader(reader);
+                Object obj = JSONValue.parse(inputStreamReader);
 
                 if(obj == null) {
                         System.out.println("Selected file does not contain valid JSON data.");
@@ -52,13 +57,6 @@ class FileParser {
                         System.out.println("Base entity in selected file is not a JSON Object.");
                         return null;
                 }
-
-
-//
-//
-//
-//
-//
                 return toReturn;
         }
 
