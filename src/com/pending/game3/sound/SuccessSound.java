@@ -4,15 +4,15 @@ import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
 
-public class TalkSound {
+public class SuccessSound {
     private Clip audioClip;
 
-    public TalkSound() {
+    public SuccessSound() {
 
     }
 
     public void playSound() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        URL audioPath = this.getClass().getResource("/resources/aliensTalk.wav");
+        URL audioPath = this.getClass().getResource("/resources/mixkit-melodic-bonus-collect-1938.wav");
         assert audioPath != null;
         AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioPath);
         AudioFormat format = audioStream.getFormat();
