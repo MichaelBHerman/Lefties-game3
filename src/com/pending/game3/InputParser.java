@@ -1,6 +1,8 @@
 package com.pending.game3;
 
 import com.pending.game3.sound.ItemSound;
+import com.pending.game3.sound.TalkSound;
+import com.pending.game3.sound.WalkSound;
 import com.swing.panels.GamePanel;
 import com.swing.panels.InventoryPanel;
 
@@ -15,10 +17,14 @@ public class InputParser {
     private static ArrayList<String> selectedItemsList = new ArrayList<>();
     static Random random = new Random();
     private static ItemSound itemSound;
+    private static WalkSound walkSound;
+    private static TalkSound talkSound;
 
     static {
         try {
             itemSound = new ItemSound();
+            walkSound = new WalkSound();
+            talkSound = new TalkSound();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
@@ -86,7 +92,7 @@ public class InputParser {
             case TAKE:
                 if (Game3.getItems().containsKey(inputSplit[1])) {
                     Game3.getCurrentRoom().takeItem(inputSplit[1]);
-//                    itemSound.playSound();
+                    itemSound.playSound();
                     Game3.displayRoomGUI();
                     Game3.displayConsoleGUI();
                 } else {
@@ -130,10 +136,11 @@ public class InputParser {
         }
     }
 
-    private static void interact(String target) {
+    private static void interact(String target) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         //if the NPC exists and is in this room
         if(Game3.getNpcs().containsKey(target) && Game3.getCurrentRoom().getNpcs().contains(target)) {
             Npc npc = Game3.getNpcs().get(target);
+            talkSound.playSound();
             //if the NPC has the "Translator" tag
             if (npc.getFlags().containsKey("Random") && npc.getFlags().get("Random").contains("Translator")) {
                 List<String> translatorFlagData = npc.getFlags().get("Random");
@@ -186,7 +193,7 @@ public class InputParser {
         selectedList.clear();
     }
 
-    private static void goToRoom(String destination) {
+    private static void goToRoom(String destination) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         if (Game3.getRooms().containsKey(destination)) {
             Room destinationRoom = Game3.getRooms().get(destination);
             if (destinationRoom.getFlags().containsKey("Locked")) {
@@ -207,6 +214,7 @@ public class InputParser {
                 }
                 //then remove "Locked" flag, move to new room, and return true;
             } else { //move to destination room and confirm move completed.
+                walkSound.playSound();
                 Game3.setCurrentRoom(destinationRoom);
                 Game3.displayConsoleGUI();
                 updateMapGUI();

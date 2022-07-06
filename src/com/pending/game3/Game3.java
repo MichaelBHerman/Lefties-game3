@@ -37,7 +37,7 @@ public class Game3 {
     private HashMap<String, Room> rooms;
     private HashMap<String, Item> items;
     private HashMap<String, Npc> npcs;
-//    private final GameMusic gameMusic = new GameMusic();
+    private final GameMusic gameMusic = new GameMusic();
     public static MyFrame frame;
 
     //singleton
@@ -123,7 +123,12 @@ public class Game3 {
             System.out.println(line);
         }
         // mainLoop();
-//        gameMusic.playMusic();
+        try {
+            gameMusic.playMusic();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
         displayConsoleGUI();
         displayRoomGUI();
     }
