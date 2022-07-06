@@ -19,6 +19,8 @@ public class WalkSound {
         DataLine.Info info = new DataLine.Info(Clip.class, format);
         audioClip = (Clip) AudioSystem.getLine(info);
         audioClip.open(audioStream);
+        FloatControl gainControl = (FloatControl) audioClip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(-10.0f);
         audioClip.start();
     }
 
